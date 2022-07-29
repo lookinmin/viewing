@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MainHome());
@@ -11,8 +13,9 @@ class MainHome extends StatelessWidget {
       margin: EdgeInsets.only(top: 10),
       child: Column(
         children: [
+          //상단 이벤트 사진
           Flexible(
-            flex: 4,
+            flex: 3,
             child: Container(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: ClipRRect(
@@ -23,35 +26,12 @@ class MainHome extends StatelessWidget {
                   )),
             ),
           ),
+          //중간 방 리스트
           Flexible(
             flex: 4,
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 0, 5),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.near_me,
-                        color: Color.fromRGBO(255, 99, 99, 1),
-                      ),
-                      Text(
-                        '청주시 서원구 사창동',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    RoomInfo(),
-                    // RoomInfo(),
-                    // RoomInfo(),
-                  ],
-                ),
-              ],
-            ),
+            child: RoomList(address: "청주시 서원구 사창동"),
           ),
+          //hot
           Flexible(
             flex: 7,
             child: Container(color: Colors.green),
@@ -62,14 +42,63 @@ class MainHome extends StatelessWidget {
   }
 }
 
-class RoomInfo extends StatelessWidget {
+class RoomList extends StatefulWidget {
+  const RoomList({Key? key, required String address}) : super(key: key);
+
+  @override
+  State<RoomList> createState() => __RoomListState();
+}
+
+class __RoomListState extends State<RoomList> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(10, 0, 0, 5),
+          child: Row(
+            children: [
+              Icon(
+                Icons.near_me,
+                color: Color.fromRGBO(255, 99, 99, 1),
+              ),
+              Text(
+                'address',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            children: [
+              RoomInfo(),
+              RoomInfo(),
+              RoomInfo(),
+              RoomInfo(),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class RoomInfo extends StatefulWidget {
   const RoomInfo({Key? key}) : super(key: key);
 
+  @override
+  State<RoomInfo> createState() => _RoomInfo();
+}
+
+class _RoomInfo extends State<RoomInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+      margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
