@@ -1,7 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import './category/example.dart';
+import './mainpage//home.dart';
 
 void main() {
   runApp(const Viewing());
@@ -41,7 +40,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIdx = 0;
-  final _pages = const [SplashRoute(), Setting(), SplashRoute(), Setting()];
+  final _pages = const [MainHome(), Setting(), SplashRoute(), Setting()];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
 
@@ -99,13 +98,13 @@ class _HomeState extends State<Home> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.place_outlined,
+                  Icons.map_outlined,
                 ),
                 label: '지도',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.favorite_outline,
+                  Icons.edit_note_outlined,
                 ),
                 label: '게시판',
               ),
