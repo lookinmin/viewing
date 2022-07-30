@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(MainHome());
@@ -23,6 +21,7 @@ class MainHome extends StatelessWidget {
                   child: Image.asset(
                     'coffee.png',
                     fit: BoxFit.cover,
+                    width: 300,
                   )),
             ),
           ),
@@ -32,10 +31,7 @@ class MainHome extends StatelessWidget {
             child: RoomList(address: "청주시 서원구 사창동"),
           ),
           //hot
-          Flexible(
-            flex: 7,
-            child: Container(color: Colors.green),
-          )
+          Flexible(flex: 7, child: Board()),
         ],
       ),
     );
@@ -52,36 +48,39 @@ class RoomList extends StatefulWidget {
 class __RoomListState extends State<RoomList> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.fromLTRB(10, 0, 0, 5),
-          child: Row(
-            children: [
-              Icon(
-                Icons.near_me,
-                color: Color.fromRGBO(255, 99, 99, 1),
-              ),
-              Text(
-                'address',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )
-            ],
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.near_me,
+                  color: Color.fromRGBO(255, 99, 99, 1),
+                ),
+                Text(
+                  'address',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              RoomInfo(),
-              RoomInfo(),
-              RoomInfo(),
-              RoomInfo(),
-            ],
-          ),
-        )
-      ],
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              children: [
+                RoomInfo(),
+                RoomInfo(),
+                RoomInfo(),
+                RoomInfo(),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -206,6 +205,115 @@ class _RoomInfo extends State<RoomInfo> {
                   ),
                 ))
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class Board extends StatefulWidget {
+  const Board({Key? key}) : super(key: key);
+
+  @override
+  State<Board> createState() => _BoardState();
+}
+
+class _BoardState extends State<Board> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 10),
+          child: Row(
+            children: [
+              Icon(
+                Icons.near_me,
+                color: Color.fromRGBO(255, 99, 99, 1),
+              ),
+              Text(
+                'HOT 게시판',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [BoardList()],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class BoardList extends StatefulWidget {
+  const BoardList({Key? key}) : super(key: key);
+
+  @override
+  State<BoardList> createState() => _BoardListState();
+}
+
+class _BoardListState extends State<BoardList> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 242, 242, 242),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.9),
+              spreadRadius: 0,
+              blurRadius: 3,
+              offset: Offset(0, 7), // changes position of shadow
+            )
+          ]),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: SizedBox(
+          height: 65,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '22시 치킨 시키실 분',
+                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+              ),
+              Text('치킨 같이 시키실 분 구해요'),
+              Expanded(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right: 5),
+                      child: Icon(Icons.favorite,
+                          color: Color.fromRGBO(255, 99, 99, 1))),
+                  Container(
+                      margin: EdgeInsets.only(right: 20),
+                      child: Text(
+                        '10',
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(right: 5),
+                      child: Icon(
+                        Icons.sms,
+                        color: Colors.yellow,
+                      )),
+                  Text(
+                    '10',
+                    style: TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                ],
+              )),
+            ],
+          ),
         ),
       ),
     );
