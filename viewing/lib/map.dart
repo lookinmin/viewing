@@ -3,48 +3,107 @@ import 'package:flutter/material.dart';
 
 const String kakaoMapKey = '404f1420684b6d045bcf36049efc3842';
 
-class Map extends StatelessWidget {
+class Map extends StatefulWidget {
   const Map({Key? key}) : super(key: key);
 
+  @override
+  State<Map> createState() => _MapState();
+}
+
+class _MapState extends State<Map> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: KakaoMapView(
-          width: size.width,
-          height: 200,
-          kakaoMapKey: kakaoMapKey,
-          lat: 33.450701,
-          lng: 126.570667,
-          showZoomControl: true,
-          customOverlayStyle: '''<style>
-                  .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-    .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-    .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-    .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
-    .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-                  </style>''',
-          customOverlay: '''
-    var content = '<div class="customoverlay" onclick="temp()">' +
-        '    <span class="title">카카오!</span>' +
-        '</div>';
+      child: Stack(
+        children: [
+          Container(
+            child: KakaoMapView(
+              width: size.width,
+              height: size.height,
+              kakaoMapKey: kakaoMapKey,
+              lat: 33.450701,
+              lng: 126.570667,
+              showZoomControl: true,
+              customOverlayStyle: '''
+<style>
+.box {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            width: 160px;
+            height: 100px;
+            left:-80px;
+            top:-50px;
+            background: #FFFFFF;
+            border: 2px solid #FF6363;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            font-size : 12px
+        }
+        .address {
+            text-align: center;
+            border-bottom: 2px solid #FF6363;
+            width: 140px;
+            margin: 0px 10px;
+            flex-grow: 1;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 6;
+            justify-content: space-between;
+        }
+        .fee{
+            padding: 3px 8px ;
+            display: flex;
+            justify-content: space-between;
+        }   
+
+
+</style>
+                ''',
+              customOverlay: '''
+    var content = 
+    '<div class="box">'+
+        '<div class="address"><span class="title">개신동</span></div>'+
+        '<div class="content">'+
+            '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
+            '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
+            '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
+        '</div>'+
+    '</div>';
 
     var position = new kakao.maps.LatLng(33.450701, 126.570667);
 
     var customOverlay = new kakao.maps.CustomOverlay({
-        map: map,
-        position: position,
-        content: content,
-        yAnchor: 1
+              map: map,
+              position: position,
+              content: content,
+              yAnchor: 1
     });
     function temp() {
-        onTapMarker.postMessage('marker hjhjhjis tapped');
+              onTapMarker.postMessage('marker hjhjhjis tapped');
     }
-                  ''',
-          onTapMarker: (message) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(message.message)));
-          }),
+                ''',
+              onTapMarker: (message) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(message.message)));
+              },
+              zoomChanged: (message) {
+                print('current zoom level : ${message.message}');
+              },
+              boundaryUpdate: (message) {
+                print('current zoom level : ${message.message}');
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => {print("버튼 눌림")},
+            child: Text('버튼'),
+          ),
+        ],
+      ),
     );
   }
 }
