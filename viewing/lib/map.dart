@@ -13,11 +13,11 @@ class Map extends StatefulWidget {
 }
 
 class _MapState extends State<Map> {
-  String content = "개신동";
   WebViewController? _mapController;
   int zoom = 5;
-  int temp = 0;
+  bool flag = true;
   Position? user_pos;
+  int customZoom=3;
 
   Future<Position> getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -91,23 +91,22 @@ class _MapState extends State<Map> {
 </style>
                     ''',
               customOverlay: '''
-        var content = 
-        '<div class="box">'+
-            '<div class="address"><span class="title">${content}</span></div>'+
-            '<div class="content">'+
-                '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
-                '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
-                '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
-            '</div>'+
-        '</div>';
-
         var position = new kakao.maps.LatLng(36.624329, 127.457268);
         var overlays=[]
 
         function temp() {
           onTapMarker.postMessage('marker hjhjhjis tapped');
         }
-        function addMarker(position) {
+        function addOverlay(name,position) {
+          var content = 
+        '<div class="box">'+
+            '<div class="address"><span class="title">'+name+'</span></div>'+
+            '<div class="content">'+
+                '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
+                '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
+                '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
+            '</div>'+
+        '</div>';
           let customOverlay = new kakao.maps.CustomOverlay({
             position: position,
             content: content,
@@ -127,22 +126,83 @@ class _MapState extends State<Map> {
               zoomChanged: (message) {
                 print('current zoom level : ${message.message}');
                 zoom = int.parse(message.message.toString());
-                if (zoom >= 5 && zoom <= 7) {
-                } else {
-                  _mapController?.runJavascript(
-                      'overlays.map(tmp=> tmp.setMap(null));overlays=[];');
+                int pastZoom=customZoom;
+                switch (zoom){
+                  case 1:
+                  case 2:
+                  case 3:{
+                    customZoom=1;
+                    break;
+                  }
+                  case 4:{
+                    customZoom=2;
+                    break;
+                  }
+                  case 5:
+                  case 6:
+                  case 7:{
+                    customZoom=3;
+                    break;
+                  }
+                  case 8:
+                  case 9:{
+                    customZoom=4;
+                    break;
+                  }
+                  case 10:
+                  case 11:{
+                    customZoom=5;
+                    break;
+                  }
+                  case 12:{
+                    customZoom=6;
+                    break;
+                  }
+                  default:{
+                    customZoom=6;
+                    _mapController?.runJavascript(
+                              'map.setLevel(12, {animate: false})');
+                    break;
+                  }
                 }
+                if(customZoom!=pastZoom){
+                  if (customZoom==3) {
+                    _mapController?.runJavascript('''
+              overlays.map(tmp=> tmp.setMap(null));
+              overlays=[];
+              addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268));
+              addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182));
+              addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524));
+                ''');
+                  }
+                  else if(customZoom==4){
+                    _mapController?.runJavascript('''
+              overlays.map(tmp=> tmp.setMap(null));
+              overlays=[];
+              addOverlay('서원구',new kakao.maps.LatLng(36.5469, 127.4378));
+              addOverlay('흥덕구',new kakao.maps.LatLng(36.634850, 127.435109));
+              addOverlay('상당구',new kakao.maps.LatLng(36.643017, 127.520900));
+                ''');
+                  } 
+                  else if(customZoom==5){
+                    _mapController?.runJavascript('''
+              overlays.map(tmp=> tmp.setMap(null));
+              overlays=[];
+              addOverlay('청주시',new kakao.maps.LatLng(36.644103, 127.482231));
+              
+                ''');
+                  }
+                  else if(customZoom==6){
+
+                  }
+                }
+                
               },
               cameraIdle: (message) {
                 print('카메라 아이들 : ${message.message}');
                 if (zoom >= 5 && zoom <= 7) {
-                  _mapController?.runJavascript('''
-              addMarker(new kakao.maps.LatLng(36.624329, 127.457268));
-              addMarker(new kakao.maps.LatLng(36.620612, 127.435182));
-              addMarker(new kakao.maps.LatLng(36.635594, 127.441524));
-                ''');
+                 
                 }
-                temp++;
               },
             ),
           ),
@@ -180,6 +240,7 @@ class _MapState extends State<Map> {
                       child: IconButton(
                         icon: Icon(Icons.add, color: Color.fromARGB(255, 0, 0, 0)),
                         onPressed: () {
+                          
                           _mapController?.runJavascript(
                               'map.setLevel(map.getLevel() - 1, {animate: false})');
                         },
@@ -199,8 +260,10 @@ class _MapState extends State<Map> {
                         icon:
                             Icon(Icons.remove, color: Color.fromARGB(255, 0, 0, 0)),
                         onPressed: () {
-                          _mapController?.runJavascript(
+                          if (zoom < 13) {
+                            _mapController?.runJavascript(
                               'map.setLevel(map.getLevel() + 1, {animate: false})');
+                              }
                         },
                       ),
                     ),
