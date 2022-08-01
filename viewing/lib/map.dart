@@ -91,15 +91,14 @@ class _MapState extends State<Map> {
 </style>
                     ''',
               customOverlay: '''
-        var position = new kakao.maps.LatLng(36.624329, 127.457268);
         var overlays=[]
 
-        function temp() {
-          onTapMarker.postMessage('marker hjhjhjis tapped');
+        function temp(e) {
+          onTapMarker.postMessage('overlay '+e.id+' tapped');
         }
-        function addOverlay(name,position) {
+        function addOverlay(name,position,id) {
           var content = 
-        '<div class="box">'+
+        '<div id="'+id+'" class="box" onclick="temp(this)">'+
             '<div class="address"><span class="title">'+name+'</span></div>'+
             '<div class="content">'+
                 '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
@@ -170,25 +169,25 @@ class _MapState extends State<Map> {
                     _mapController?.runJavascript('''
               overlays.map(tmp=> tmp.setMap(null));
               overlays=[];
-              addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268));
-              addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182));
-              addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524));
+              addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268),1);
+              addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182),2);
+              addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524),3);
                 ''');
                   }
                   else if(customZoom==4){
                     _mapController?.runJavascript('''
               overlays.map(tmp=> tmp.setMap(null));
               overlays=[];
-              addOverlay('서원구',new kakao.maps.LatLng(36.5469, 127.4378));
-              addOverlay('흥덕구',new kakao.maps.LatLng(36.634850, 127.435109));
-              addOverlay('상당구',new kakao.maps.LatLng(36.643017, 127.520900));
+              addOverlay('서원구',new kakao.maps.LatLng(36.5469, 127.4378),4);
+              addOverlay('흥덕구',new kakao.maps.LatLng(36.634850, 127.435109),5);
+              addOverlay('상당구',new kakao.maps.LatLng(36.643017, 127.520900),6);
                 ''');
                   } 
                   else if(customZoom==5){
                     _mapController?.runJavascript('''
               overlays.map(tmp=> tmp.setMap(null));
               overlays=[];
-              addOverlay('청주시',new kakao.maps.LatLng(36.644103, 127.482231));
+              addOverlay('청주시',new kakao.maps.LatLng(36.644103, 127.482231),7);
               
                 ''');
                   }
