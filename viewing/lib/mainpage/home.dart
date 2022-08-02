@@ -247,13 +247,16 @@ class _RoomInfo extends State<RoomInfo> {
                           Flexible(
                               flex: 9,
                               child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text('보러가기',
-                                      textAlign: TextAlign.end,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(248, 180, 0, 1.0),
-                                          fontSize: 8)))),
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                    onTap: () => print('보러가기 클릭'),
+                                    child: Text('보러가기',
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                248, 180, 0, 1.0),
+                                            fontSize: 8))),
+                              )),
                           Flexible(
                               flex: 1,
                               child: Icon(
@@ -283,32 +286,35 @@ class Board extends StatefulWidget {
 class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Row(
-            children: [
-              Icon(
-                Icons.near_me,
-                color: Color.fromRGBO(255, 99, 99, 1),
-              ),
-              Text(
-                'HOT 게시판',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )
-            ],
+    return InkWell(
+      onTap: () => print('게시판 클릭'),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.near_me,
+                  color: Color.fromRGBO(255, 99, 99, 1),
+                ),
+                Text(
+                  'HOT 게시판',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: ListView.builder(
-              itemCount: widget.board.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (BuildContext context, int index) {
-                return BoardList(item: widget.board[index]);
-              }),
-        )
-      ],
+          Expanded(
+            child: ListView.builder(
+                itemCount: widget.board.length,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  return BoardList(item: widget.board[index]);
+                }),
+          )
+        ],
+      ),
     );
   }
 }
