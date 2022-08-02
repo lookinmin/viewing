@@ -1,34 +1,89 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MainHome());
 
+class Information {
+  final String buildingName;
+  final String deposit;
+  final String monthly;
+  final String manageFee;
+
+  Information(this.buildingName, this.deposit, this.monthly, this.manageFee);
+
+  String getBuildingName() {
+    return buildingName;
+  }
+
+  String getDeposit() {
+    return deposit;
+  }
+
+  String getMonthly() {
+    return monthly;
+  }
+
+  String getManageFee() {
+    return manageFee;
+  }
+}
+
 class MainHome extends StatelessWidget {
-  const MainHome({Key? key}) : super(key: key);
+  MainHome({Key? key}) : super(key: key);
+  List<String> eventImg = [
+    "coffee.png",
+    "coffee.png",
+    "coffee.png",
+    "coffee.png",
+    "coffee.png"
+  ];
+
+  final roomInfo = [
+    Information('도담1', "5,000,000", "300,000", "50,000"),
+    Information('도담2', "5,100,000", "310,000", "51,000"),
+    Information('도담3', "5,200,000", "320,000", "52,000"),
+    Information('도담4', "5,300,000", "330,000", "53,000"),
+    Information('도담5', "5,400,000", "340,000", "54,000"),
+    Information('도담6', "5,500,000", "350,000", "55,000"),
+    Information('도담7', "5,600,000", "360,000", "56,000"),
+    Information('도담8', "5,700,000", "370,000", "57,000")
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
-          //상단 이벤트 사진
+          //상단 이벤트 사진 -> 나중에 carousel로 바꾸기
           Flexible(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'coffee.png',
-                    fit: BoxFit.cover,
-                    width: 300,
-                  )),
-            ),
-          ),
+              flex: 3,
+              child: CarouselSlider(
+                  items: eventImg.map((e) {
+                    return Builder(builder: (BuildContext context) {
+                      return Container(
+                        // width: MediaQuery.of(context).size.width + 100,
+                        margin: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              e,
+                              fit: BoxFit.fill,
+                              width: 500,
+                            )),
+                      );
+                    });
+                  }).toList(),
+                  options: CarouselOptions(
+                      // autoPlay: true,
+                      // autoPlayInterval: Duration(seconds: 3),
+                      // autoPlayAnimationDuration: Duration(milliseconds: 1000),
+                      // autoPlayCurve: Curves.fastOutSlowIn,
+                      scrollDirection: Axis.horizontal))),
           //중간 방 리스트
           Flexible(
             flex: 4,
-            child: RoomList(address: "청주시 서원구 사창동"),
+            child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo),
           ),
           //hot
           Flexible(flex: 7, child: Board()),
@@ -39,7 +94,10 @@ class MainHome extends StatelessWidget {
 }
 
 class RoomList extends StatefulWidget {
-  const RoomList({Key? key, required String address}) : super(key: key);
+  RoomList({Key? key, required this.address, required this.roomInfo})
+      : super(key: key);
+  final address;
+  final roomInfo;
 
   @override
   State<RoomList> createState() => __RoomListState();
@@ -49,7 +107,7 @@ class __RoomListState extends State<RoomList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
           Container(
@@ -61,24 +119,19 @@ class __RoomListState extends State<RoomList> {
                   color: Color.fromRGBO(255, 99, 99, 1),
                 ),
                 Text(
-                  'address',
+                  widget.address,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
             ),
           ),
           Expanded(
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
-                RoomInfo(),
-                RoomInfo(),
-                RoomInfo(),
-                RoomInfo(),
-              ],
-            ),
-          )
+              child: ListView.builder(
+                  itemCount: widget.roomInfo.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return RoomInfo(item: widget.roomInfo[index]);
+                  }))
         ],
       ),
     );
@@ -86,7 +139,8 @@ class __RoomListState extends State<RoomList> {
 }
 
 class RoomInfo extends StatefulWidget {
-  const RoomInfo({Key? key}) : super(key: key);
+  const RoomInfo({Key? key, required this.item}) : super(key: key);
+  final item;
 
   @override
   State<RoomInfo> createState() => _RoomInfo();
@@ -131,7 +185,7 @@ class _RoomInfo extends State<RoomInfo> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Center(
-                          child: Text('개신동 충대도담',
+                          child: Text(widget.item.buildingName,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 99, 99, 1),
                                   fontWeight: FontWeight.w900,
@@ -148,7 +202,7 @@ class _RoomInfo extends State<RoomInfo> {
                           Flexible(
                               flex: 6,
                               child: Text(
-                                '3,000,000',
+                                widget.item.deposit,
                                 style: TextStyle(fontSize: 8),
                               ))
                         ],
@@ -162,7 +216,7 @@ class _RoomInfo extends State<RoomInfo> {
                                   Text('월세: ', style: TextStyle(fontSize: 8))),
                           Flexible(
                               flex: 6,
-                              child: Text('350,000',
+                              child: Text(widget.item.monthly,
                                   style: TextStyle(fontSize: 8)))
                         ],
                       ),
@@ -175,8 +229,8 @@ class _RoomInfo extends State<RoomInfo> {
                                   Text('관리비: ', style: TextStyle(fontSize: 8))),
                           Flexible(
                               flex: 6,
-                              child:
-                                  Text('50,000', style: TextStyle(fontSize: 8)))
+                              child: Text(widget.item.manageFee,
+                                  style: TextStyle(fontSize: 8)))
                         ],
                       ),
                       Row(

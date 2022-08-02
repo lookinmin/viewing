@@ -40,7 +40,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIdx = 0;
-  final _pages = const [MainHome(), Setting(), SplashRoute(), Setting()];
+  final _pages = [MainHome(), Setting(), SplashRoute(), Setting()];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
 
