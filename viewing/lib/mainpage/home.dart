@@ -1,31 +1,28 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MainHome());
-
-class Information {
+class BuilidingInfo {
+  final String image;
   final String buildingName;
   final String deposit;
   final String monthly;
   final String manageFee;
 
-  Information(this.buildingName, this.deposit, this.monthly, this.manageFee);
+  BuilidingInfo(this.image, this.buildingName, this.deposit, this.monthly,
+      this.manageFee);
+}
 
-  String getBuildingName() {
-    return buildingName;
-  }
+class BoardInfo {
+  final String title;
+  final String contents;
+  final int like;
+  final int comments;
 
-  String getDeposit() {
-    return deposit;
-  }
+  BoardInfo(this.title, this.contents, this.like, this.comments);
+}
 
-  String getMonthly() {
-    return monthly;
-  }
-
-  String getManageFee() {
-    return manageFee;
-  }
+void main() {
+  runApp(MainHome());
 }
 
 class MainHome extends StatelessWidget {
@@ -39,14 +36,25 @@ class MainHome extends StatelessWidget {
   ];
 
   final roomInfo = [
-    Information('도담1', "5,000,000", "300,000", "50,000"),
-    Information('도담2', "5,100,000", "310,000", "51,000"),
-    Information('도담3', "5,200,000", "320,000", "52,000"),
-    Information('도담4', "5,300,000", "330,000", "53,000"),
-    Information('도담5', "5,400,000", "340,000", "54,000"),
-    Information('도담6', "5,500,000", "350,000", "55,000"),
-    Information('도담7', "5,600,000", "360,000", "56,000"),
-    Information('도담8', "5,700,000", "370,000", "57,000")
+    BuilidingInfo('coffee.png', '도담2', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo('coffee.png', '도담3', "5,200,000", "320,000", "52,000"),
+    BuilidingInfo('coffee.png', '도담4', "5,300,000", "330,000", "53,000"),
+    BuilidingInfo('coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
+    BuilidingInfo('coffee.png', '도담5', "5,400,000", "340,000", "54,000"),
+    BuilidingInfo('coffee.png', '도담6', "5,500,000", "350,000", "55,000"),
+    BuilidingInfo('coffee.png', '도담7', "5,600,000", "360,000", "56,000"),
+    BuilidingInfo('coffee.png', '도담8', "5,700,000", "370,000", "57,000")
+  ];
+
+  final boardInfo = [
+    BoardInfo('17시 치킨 시키실 분', '치킨 같이 시키실 분 구해요', 11, 28),
+    BoardInfo('18시 피자 시키실 분', '피자 같이 시키실 분 구해요', 12, 27),
+    BoardInfo('19시 짜장면 시키실 분', '짜장면 같이 시키실 분 구해요', 13, 26),
+    BoardInfo('20시 부리또 시키실 분', '부리또 같이 시키실 분 구해요', 14, 25),
+    BoardInfo('21시 보쌈 시키실 분', '보쌈 같이 시키실 분 구해요', 15, 24),
+    BoardInfo('22시 국밥 시키실 분', '국밥 같이 시키실 분 구해요', 16, 23),
+    BoardInfo('23시 커피 시키실 분', '커피 같이 시키실 분 구해요', 17, 22),
+    BoardInfo('24시 떡볶이 시키실 분', '떡볶이 같이 시키실 분 구해요', 18, 20),
   ];
 
   @override
@@ -86,7 +94,7 @@ class MainHome extends StatelessWidget {
             child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo),
           ),
           //hot
-          Flexible(flex: 7, child: Board()),
+          Flexible(flex: 7, child: Board(board: boardInfo)),
         ],
       ),
     );
@@ -172,7 +180,7 @@ class _RoomInfo extends State<RoomInfo> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      'coffee.png',
+                      widget.item.image,
                       fit: BoxFit.cover,
                       width: 200,
                     ))),
@@ -266,8 +274,8 @@ class _RoomInfo extends State<RoomInfo> {
 }
 
 class Board extends StatefulWidget {
-  const Board({Key? key}) : super(key: key);
-
+  Board({Key? key, required this.board}) : super(key: key);
+  final board;
   @override
   State<Board> createState() => _BoardState();
 }
@@ -293,11 +301,12 @@ class _BoardState extends State<Board> {
           ),
         ),
         Expanded(
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: [BoardList()],
-          ),
+          child: ListView.builder(
+              itemCount: widget.board.length,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (BuildContext context, int index) {
+                return BoardList(item: widget.board[index]);
+              }),
         )
       ],
     );
@@ -305,8 +314,8 @@ class _BoardState extends State<Board> {
 }
 
 class BoardList extends StatefulWidget {
-  const BoardList({Key? key}) : super(key: key);
-
+  BoardList({Key? key, required this.item}) : super(key: key);
+  final item;
   @override
   State<BoardList> createState() => _BoardListState();
 }
@@ -336,10 +345,10 @@ class _BoardListState extends State<BoardList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '22시 치킨 시키실 분',
+                widget.item.title,
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
               ),
-              Text('치킨 같이 시키실 분 구해요'),
+              Text(widget.item.contents),
               Expanded(
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -351,7 +360,7 @@ class _BoardListState extends State<BoardList> {
                   Container(
                       margin: EdgeInsets.only(right: 20),
                       child: Text(
-                        '10',
+                        '${widget.item.like}',
                         style: TextStyle(fontWeight: FontWeight.w900),
                       )),
                   Container(
@@ -361,7 +370,7 @@ class _BoardListState extends State<BoardList> {
                         color: Colors.yellow,
                       )),
                   Text(
-                    '10',
+                    '${widget.item.comments}',
                     style: TextStyle(fontWeight: FontWeight.w900),
                   ),
                 ],
