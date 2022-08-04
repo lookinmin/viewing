@@ -17,7 +17,7 @@ class _SplashRoute extends State<SplashRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           child: Text('Move Main route'),
           onPressed: () {
             // 눌렀을 때 두 번째 route로 이동합니다.
