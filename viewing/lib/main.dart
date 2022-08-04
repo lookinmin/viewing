@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './category/example.dart';
 import './mainpage//home.dart';
 import 'map.dart';
+import './roomInfo/room.dart';
 
 void main() {
   runApp(const Viewing());
@@ -41,7 +42,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIdx = 0;
-  final _pages = const [MainHome(), Map(), SplashRoute(), Setting()];
+  final _pages = const [MainHome(), Map(), Room(), Setting()];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
 

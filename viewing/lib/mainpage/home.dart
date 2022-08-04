@@ -1,37 +1,100 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MainHome());
+class BuilidingInfo {
+  final String image;
+  final String buildingName;
+  final String deposit;
+  final String monthly;
+  final String manageFee;
+
+  BuilidingInfo(this.image, this.buildingName, this.deposit, this.monthly,
+      this.manageFee);
+}
+
+class BoardInfo {
+  final String title;
+  final String contents;
+  final int like;
+  final int comments;
+
+  BoardInfo(this.title, this.contents, this.like, this.comments);
+}
+
+void main() {
+  runApp(MainHome());
+}
 
 class MainHome extends StatelessWidget {
-  const MainHome({Key? key}) : super(key: key);
+  MainHome({Key? key}) : super(key: key);
+  List<String> eventImg = [
+    "coffee.png",
+    "coffee.png",
+    "coffee.png",
+    "coffee.png",
+    "coffee.png"
+  ];
+
+  final roomInfo = [
+    BuilidingInfo('coffee.png', '도담2', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo('coffee.png', '도담3', "5,200,000", "320,000", "52,000"),
+    BuilidingInfo('coffee.png', '도담4', "5,300,000", "330,000", "53,000"),
+    BuilidingInfo('coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
+    BuilidingInfo('coffee.png', '도담5', "5,400,000", "340,000", "54,000"),
+    BuilidingInfo('coffee.png', '도담6', "5,500,000", "350,000", "55,000"),
+    BuilidingInfo('coffee.png', '도담7', "5,600,000", "360,000", "56,000"),
+    BuilidingInfo('coffee.png', '도담8', "5,700,000", "370,000", "57,000")
+  ];
+
+  final boardInfo = [
+    BoardInfo('17시 치킨 시키실 분', '치킨 같이 시키실 분 구해요', 11, 28),
+    BoardInfo('18시 피자 시키실 분', '피자 같이 시키실 분 구해요', 12, 27),
+    BoardInfo('19시 짜장면 시키실 분', '짜장면 같이 시키실 분 구해요', 13, 26),
+    BoardInfo('20시 부리또 시키실 분', '부리또 같이 시키실 분 구해요', 14, 25),
+    BoardInfo('21시 보쌈 시키실 분', '보쌈 같이 시키실 분 구해요', 15, 24),
+    BoardInfo('22시 국밥 시키실 분', '국밥 같이 시키실 분 구해요', 16, 23),
+    BoardInfo('23시 커피 시키실 분', '커피 같이 시키실 분 구해요', 17, 22),
+    BoardInfo('24시 떡볶이 시키실 분', '떡볶이 같이 시키실 분 구해요', 18, 20),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
-          //상단 이벤트 사진
+          //상단 이벤트 사진 -> 나중에 carousel로 바꾸기
           Flexible(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'coffee.png',
-                    fit: BoxFit.cover,
-                    width: 300,
-                  )),
-            ),
-          ),
+              flex: 3,
+              child: CarouselSlider(
+                  items: eventImg.map((e) {
+                    return Builder(builder: (BuildContext context) {
+                      return Container(
+                        // width: MediaQuery.of(context).size.width + 100,
+                        margin: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              e,
+                              fit: BoxFit.fill,
+                              width: 500,
+                            )),
+                      );
+                    });
+                  }).toList(),
+                  options: CarouselOptions(
+                      // autoPlay: true,
+                      // autoPlayInterval: Duration(seconds: 3),
+                      // autoPlayAnimationDuration: Duration(milliseconds: 1000),
+                      // autoPlayCurve: Curves.fastOutSlowIn,
+                      scrollDirection: Axis.horizontal))),
           //중간 방 리스트
           Flexible(
             flex: 4,
-            child: RoomList(address: "청주시 서원구 사창동"),
+            child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo),
           ),
           //hot
-          Flexible(flex: 7, child: Board()),
+          Flexible(flex: 7, child: Board(board: boardInfo)),
         ],
       ),
     );
@@ -39,7 +102,10 @@ class MainHome extends StatelessWidget {
 }
 
 class RoomList extends StatefulWidget {
-  const RoomList({Key? key, required String address}) : super(key: key);
+  RoomList({Key? key, required this.address, required this.roomInfo})
+      : super(key: key);
+  final address;
+  final roomInfo;
 
   @override
   State<RoomList> createState() => __RoomListState();
@@ -49,7 +115,7 @@ class __RoomListState extends State<RoomList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
           Container(
@@ -61,24 +127,19 @@ class __RoomListState extends State<RoomList> {
                   color: Color.fromRGBO(255, 99, 99, 1),
                 ),
                 Text(
-                  'address',
+                  widget.address,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
             ),
           ),
           Expanded(
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
-                RoomInfo(),
-                RoomInfo(),
-                RoomInfo(),
-                RoomInfo(),
-              ],
-            ),
-          )
+              child: ListView.builder(
+                  itemCount: widget.roomInfo.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return RoomInfo(item: widget.roomInfo[index]);
+                  }))
         ],
       ),
     );
@@ -86,7 +147,8 @@ class __RoomListState extends State<RoomList> {
 }
 
 class RoomInfo extends StatefulWidget {
-  const RoomInfo({Key? key}) : super(key: key);
+  const RoomInfo({Key? key, required this.item}) : super(key: key);
+  final item;
 
   @override
   State<RoomInfo> createState() => _RoomInfo();
@@ -118,7 +180,7 @@ class _RoomInfo extends State<RoomInfo> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      'coffee.png',
+                      widget.item.image,
                       fit: BoxFit.cover,
                       width: 200,
                     ))),
@@ -131,7 +193,7 @@ class _RoomInfo extends State<RoomInfo> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Center(
-                          child: Text('개신동 충대도담',
+                          child: Text(widget.item.buildingName,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 99, 99, 1),
                                   fontWeight: FontWeight.w900,
@@ -148,7 +210,7 @@ class _RoomInfo extends State<RoomInfo> {
                           Flexible(
                               flex: 6,
                               child: Text(
-                                '3,000,000',
+                                widget.item.deposit,
                                 style: TextStyle(fontSize: 8),
                               ))
                         ],
@@ -162,7 +224,7 @@ class _RoomInfo extends State<RoomInfo> {
                                   Text('월세: ', style: TextStyle(fontSize: 8))),
                           Flexible(
                               flex: 6,
-                              child: Text('350,000',
+                              child: Text(widget.item.monthly,
                                   style: TextStyle(fontSize: 8)))
                         ],
                       ),
@@ -175,8 +237,8 @@ class _RoomInfo extends State<RoomInfo> {
                                   Text('관리비: ', style: TextStyle(fontSize: 8))),
                           Flexible(
                               flex: 6,
-                              child:
-                                  Text('50,000', style: TextStyle(fontSize: 8)))
+                              child: Text(widget.item.manageFee,
+                                  style: TextStyle(fontSize: 8)))
                         ],
                       ),
                       Row(
@@ -185,13 +247,16 @@ class _RoomInfo extends State<RoomInfo> {
                           Flexible(
                               flex: 9,
                               child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text('보러가기',
-                                      textAlign: TextAlign.end,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(248, 180, 0, 1.0),
-                                          fontSize: 8)))),
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                    onTap: () => print('보러가기 클릭'),
+                                    child: Text('보러가기',
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                248, 180, 0, 1.0),
+                                            fontSize: 8))),
+                              )),
                           Flexible(
                               flex: 1,
                               child: Icon(
@@ -212,8 +277,8 @@ class _RoomInfo extends State<RoomInfo> {
 }
 
 class Board extends StatefulWidget {
-  const Board({Key? key}) : super(key: key);
-
+  Board({Key? key, required this.board}) : super(key: key);
+  final board;
   @override
   State<Board> createState() => _BoardState();
 }
@@ -221,38 +286,42 @@ class Board extends StatefulWidget {
 class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Row(
-            children: [
-              Icon(
-                Icons.near_me,
-                color: Color.fromRGBO(255, 99, 99, 1),
-              ),
-              Text(
-                'HOT 게시판',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )
-            ],
+    return InkWell(
+      onTap: () => print('게시판 클릭'),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.near_me,
+                  color: Color.fromRGBO(255, 99, 99, 1),
+                ),
+                Text(
+                  'HOT 게시판',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: [BoardList()],
-          ),
-        )
-      ],
+          Expanded(
+            child: ListView.builder(
+                itemCount: widget.board.length,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  return BoardList(item: widget.board[index]);
+                }),
+          )
+        ],
+      ),
     );
   }
 }
 
 class BoardList extends StatefulWidget {
-  const BoardList({Key? key}) : super(key: key);
-
+  BoardList({Key? key, required this.item}) : super(key: key);
+  final item;
   @override
   State<BoardList> createState() => _BoardListState();
 }
@@ -282,10 +351,10 @@ class _BoardListState extends State<BoardList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '22시 치킨 시키실 분',
+                widget.item.title,
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
               ),
-              Text('치킨 같이 시키실 분 구해요'),
+              Text(widget.item.contents),
               Expanded(
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -297,7 +366,7 @@ class _BoardListState extends State<BoardList> {
                   Container(
                       margin: EdgeInsets.only(right: 20),
                       child: Text(
-                        '10',
+                        '${widget.item.like}',
                         style: TextStyle(fontWeight: FontWeight.w900),
                       )),
                   Container(
@@ -307,7 +376,7 @@ class _BoardListState extends State<BoardList> {
                         color: Colors.yellow,
                       )),
                   Text(
-                    '10',
+                    '${widget.item.comments}',
                     style: TextStyle(fontWeight: FontWeight.w900),
                   ),
                 ],
