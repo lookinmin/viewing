@@ -17,70 +17,68 @@ class Room extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 1500,
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                  height: 200,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                    padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ))),
-                    child: CarouselSlider(
-                      items: roomImg.map((e) {
-                        return Builder(builder: (BuildContext context) {
-                          return Container(
-                            // width: MediaQuery.of(context).size.width + 100,
-                            margin: EdgeInsets.symmetric(horizontal: 30.0),
-                            width: double.infinity,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                e,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          );
-                        });
-                      }).toList(),
-                      options: CarouselOptions(
-                          autoPlay: false,
-                          scrollDirection: Axis.horizontal,
-                          height: 200),
-                    ),
-                  )),
-              Container(
-                height: 190,
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          Container(
+              height: 200,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
                   color: Colors.grey,
                   width: 2.0,
                 ))),
-                child: RoomGrade(
-                    address: "개신동 충대로 1 13번길",
-                    roomName: "개신동 해오름빌",
-                    grade: "2"),
-              ),
-              Container(
-                height: 130,
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 2.0,
-                ))),
-                child: CheckList(),
-              )
-            ],
+                child: CarouselSlider(
+                  items: roomImg.map((e) {
+                    return Builder(builder: (BuildContext context) {
+                      return Container(
+                        // width: MediaQuery.of(context).size.width + 100,
+                        margin: EdgeInsets.symmetric(horizontal: 30.0),
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            e,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      );
+                    });
+                  }).toList(),
+                  options: CarouselOptions(
+                      autoPlay: false,
+                      scrollDirection: Axis.horizontal,
+                      height: 200),
+                ),
+              )),
+          Container(
+            height: 190,
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+              color: Colors.grey,
+              width: 2.0,
+            ))),
+            child: RoomGrade(
+                address: "개신동 충대로 1 13번길", roomName: "개신동 해오름빌", grade: "2"),
           ),
-        ));
+          Container(
+            height: 130,
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+              color: Colors.grey,
+              width: 2.0,
+            ))),
+            child: CheckList(),
+          )
+        ],
+      ),
+    ));
   }
 }
 
@@ -102,6 +100,18 @@ class RoomGrade extends StatefulWidget {
 class CheckList extends StatefulWidget {
   @override
   State<CheckList> createState() => _CheckList();
+}
+
+class RoomReviews extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _RoomReview();
+}
+
+class _RoomReview extends State<RoomReviews> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 
 class _CheckList extends State<CheckList> {
