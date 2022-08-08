@@ -88,45 +88,7 @@ class _HomeState extends State<Home> {
               )
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              showModalBottomSheet<void>(
-                context: context,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide.none,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
-                builder: (BuildContext context) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: Column(
-                      children: <Widget>[
-                        //상단 x 버튼
-                        Row(
-                          children: [
-                            Expanded(child: Container()),
-                            IconButton(
-                              icon: Icon(
-                                Icons.close_rounded,
-                              ),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ).then((value) {
-                setState(() {});
-              });
-            },
-            backgroundColor: Color.fromRGBO(255, 99, 99, 1),
-            child: const Icon(
-              Icons.edit_note_outlined,
-            ),
-          ),
+          floatingActionButton: writingButton(context),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIdx,
             type: BottomNavigationBarType.fixed,
@@ -168,6 +130,92 @@ class _HomeState extends State<Home> {
                 TextStyle(color: Color.fromRGBO(255, 99, 99, 1)),
           ),
         ));
+  }
+
+  FloatingActionButton writingButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showModalBottomSheet<void>(
+          context: context,
+          backgroundColor: Color.fromARGB(255, 31, 31, 31),
+          shape: RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+          builder: (BuildContext context) {
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+              child: Column(
+                children: <Widget>[
+                  //상단 x 버튼
+                  Row(
+                    children: [
+                      Expanded(child: Container()),
+                      IconButton(
+                        icon: Icon(
+                          Icons.close_rounded,
+                          color: Color.fromRGBO(255, 99, 99, 1),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                  Flexible(
+                      flex: 5,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Color.fromRGBO(255, 99, 99, 1)),
+                                top: BorderSide(
+                                    color: Color.fromRGBO(255, 99, 99, 1),
+                                    width: 2))),
+                        child: Center(
+                          child: Text(
+                            '게시판 글쓰기',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color.fromRGBO(255, 99, 99, 1)),
+                          ),
+                        ),
+                      )),
+                  Flexible(
+                      flex: 5,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color.fromRGBO(255, 99, 99, 1)),
+                                bottom: BorderSide(
+                                    color: Color.fromRGBO(255, 99, 99, 1),
+                                    width: 2))),
+                        child: Center(
+                          child: Text(
+                            '방정보 글쓰기',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color.fromRGBO(255, 99, 99, 1)),
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+            );
+          },
+        ).then((value) {
+          setState(() {});
+        });
+      },
+      backgroundColor: Color.fromRGBO(255, 99, 99, 1),
+      child: const Icon(
+        Icons.edit_note_outlined,
+        color: Colors.white,
+      ),
+    );
   }
 }
 
