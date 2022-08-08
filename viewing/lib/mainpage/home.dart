@@ -324,12 +324,19 @@ class _BoardState extends State<Board> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: widget.board.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return BoardList(item: widget.board[index]);
-                }),
+            // child: ListView.builder(
+            //     itemCount: widget.board.length,
+            //     scrollDirection: Axis.vertical,
+            //     itemBuilder: (BuildContext context, int index) {
+            //       return BoardList(item: widget.board[index]);
+            //     }),
+            child: Column(
+              children: [
+                BoardList(item: widget.board[0]),
+                BoardList(item: widget.board[1]),
+                BoardList(item: widget.board[2])
+              ],
+            ),
           )
         ],
       ),
@@ -349,7 +356,7 @@ class _BoardListState extends State<BoardList> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       decoration: BoxDecoration(
           color: Color.fromARGB(255, 242, 242, 242),
           borderRadius: BorderRadius.circular(20),

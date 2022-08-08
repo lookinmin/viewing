@@ -162,46 +162,10 @@ class _HomeState extends State<Home> {
                   ),
                   Flexible(
                       flex: 5,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    color: Color.fromRGBO(255, 99, 99, 1)),
-                                top: BorderSide(
-                                    color: Color.fromRGBO(255, 99, 99, 1),
-                                    width: 2))),
-                        child: Center(
-                          child: Text(
-                            '게시판 글쓰기',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 16,
-                                color: Color.fromRGBO(255, 99, 99, 1)),
-                          ),
-                        ),
-                      )),
+                      child: writingPage(context, title: "게시판 글쓰기", num: 1)),
                   Flexible(
                       flex: 5,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                top: BorderSide(
-                                    color: Color.fromRGBO(255, 99, 99, 1)),
-                                bottom: BorderSide(
-                                    color: Color.fromRGBO(255, 99, 99, 1),
-                                    width: 2))),
-                        child: Center(
-                          child: Text(
-                            '방정보 글쓰기',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 16,
-                                color: Color.fromRGBO(255, 99, 99, 1)),
-                          ),
-                        ),
-                      )),
+                      child: writingPage(context, title: "방정보 글쓰기", num: 2)),
                 ],
               ),
             );
@@ -215,6 +179,37 @@ class _HomeState extends State<Home> {
         Icons.edit_note_outlined,
         color: Colors.white,
       ),
+    );
+  }
+
+  InkWell writingPage(BuildContext context,
+      {required String title, required int num}) {
+    return InkWell(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            border: Border(
+                top: BorderSide(
+                    color: Color.fromRGBO(255, 99, 99, 1), width: 2))),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 16,
+                color: Color.fromRGBO(255, 99, 99, 1)),
+          ),
+        ),
+      ),
+      onTap: () {
+        if (num == 1) {
+          //게시판 글쓰기
+          print(title);
+        } else if (num == 2) {
+          //방정보 글쓰기
+          print(title);
+        }
+      },
     );
   }
 }
