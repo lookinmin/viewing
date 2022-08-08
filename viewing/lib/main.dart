@@ -42,7 +42,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIdx = 0;
-  final _pages = [MainHome(), Map(), Room(), BoardPage()];
+  final _pages = [
+    MainHome(),
+    // Map(),
+    Room(),
+    Room(), BoardPage()
+  ];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
 
@@ -82,6 +87,45 @@ class _HomeState extends State<Home> {
                 ),
               )
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide.none,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: Column(
+                      children: <Widget>[
+                        //상단 x 버튼
+                        Row(
+                          children: [
+                            Expanded(child: Container()),
+                            IconButton(
+                              icon: Icon(
+                                Icons.close_rounded,
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ).then((value) {
+                setState(() {});
+              });
+            },
+            backgroundColor: Color.fromRGBO(255, 99, 99, 1),
+            child: const Icon(
+              Icons.edit_note_outlined,
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIdx,
