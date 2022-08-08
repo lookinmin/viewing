@@ -50,11 +50,6 @@ class MainHome extends StatelessWidget {
     BoardInfo('17시 치킨 시키실 분', '치킨 같이 시키실 분 구해요', 11, 28),
     BoardInfo('18시 피자 시키실 분', '피자 같이 시키실 분 구해요', 12, 27),
     BoardInfo('19시 짜장면 시키실 분', '짜장면 같이 시키실 분 구해요', 13, 26),
-    // BoardInfo('20시 부리또 시키실 분', '부리또 같이 시키실 분 구해요', 14, 25),
-    // BoardInfo('21시 보쌈 시키실 분', '보쌈 같이 시키실 분 구해요', 15, 24),
-    // BoardInfo('22시 국밥 시키실 분', '국밥 같이 시키실 분 구해요', 16, 23),
-    // BoardInfo('23시 커피 시키실 분', '커피 같이 시키실 분 구해요', 17, 22),
-    // BoardInfo('24시 떡볶이 시키실 분', '떡볶이 같이 시키실 분 구해요', 18, 20),
   ];
 
   @override
@@ -72,7 +67,6 @@ class MainHome extends StatelessWidget {
               items: eventImg.map((e) {
                 return Builder(builder: (BuildContext context) {
                   return Container(
-                    // width: MediaQuery.of(context).size.width + 100,
                     margin: EdgeInsets.symmetric(horizontal: 20.0),
                     width: double.infinity,
                     child: ClipRRect(

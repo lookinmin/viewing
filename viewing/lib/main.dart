@@ -3,6 +3,8 @@ import './mainpage//home.dart';
 import 'map.dart';
 import './roomInfo/room.dart';
 import './board/board.dart';
+import './writing/writingroom.dart';
+import './writing/writingboard.dart';
 
 void main() {
   runApp(const Viewing());
@@ -88,7 +90,7 @@ class _HomeState extends State<Home> {
               )
             ],
           ),
-          floatingActionButton: writingButton(context),
+          floatingActionButton: floatingButton(context),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIdx,
             type: BottomNavigationBarType.fixed,
@@ -132,7 +134,7 @@ class _HomeState extends State<Home> {
         ));
   }
 
-  FloatingActionButton writingButton(BuildContext context) {
+  FloatingActionButton floatingButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet<void>(
@@ -160,12 +162,8 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
-                  Flexible(
-                      flex: 5,
-                      child: writingPage(context, title: "게시판 글쓰기", num: 1)),
-                  Flexible(
-                      flex: 5,
-                      child: writingPage(context, title: "방정보 글쓰기", num: 2)),
+                  Flexible(flex: 5, child: writingPage(context, num: 1)),
+                  Flexible(flex: 5, child: writingPage(context, num: 2)),
                 ],
               ),
             );
@@ -182,8 +180,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  InkWell writingPage(BuildContext context,
-      {required String title, required int num}) {
+  InkWell writingPage(BuildContext context, {required int num}) {
     return InkWell(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -193,7 +190,7 @@ class _HomeState extends State<Home> {
                     color: Color.fromRGBO(255, 99, 99, 1), width: 2))),
         child: Center(
           child: Text(
-            title,
+            num == 1 ? "게시판 글쓰기" : "방정보 글쓰기",
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 16,
@@ -204,10 +201,12 @@ class _HomeState extends State<Home> {
       onTap: () {
         if (num == 1) {
           //게시판 글쓰기
-          print(title);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => WritingBoard()));
         } else if (num == 2) {
           //방정보 글쓰기
-          print(title);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => WritingRoom()));
         }
       },
     );
