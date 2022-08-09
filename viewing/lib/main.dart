@@ -5,6 +5,7 @@ import './roomInfo/room.dart';
 import './board/board.dart';
 import './writing/writingroom.dart';
 import './writing/writingboard.dart';
+import './mypage/mypage.dart';
 
 void main() {
   runApp(const Viewing());
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
     // Map(),
     Map(),
     BoardPage(),
-    BoardPage()
+    MyPage()
   ];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
