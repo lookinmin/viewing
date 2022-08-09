@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
-              currentIdx != 2
+              (currentIdx != 2 && currentIdx != 3)
                   ? Flexible(
                       flex: 1, fit: FlexFit.tight, child: AddressSearch())
                   : Container(),
