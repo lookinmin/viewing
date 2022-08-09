@@ -47,8 +47,7 @@ class _HomeState extends State<Home> {
   final _pages = [
     MainHome(),
     // Map(),
-    BoardPage(),
-    BoardPage(),
+    Map(),
     BoardPage(),
     BoardPage()
   ];
@@ -74,7 +73,7 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
-              currentIdx != 3
+              currentIdx != 2
                   ? Flexible(
                       flex: 1, fit: FlexFit.tight, child: AddressSearch())
                   : Container(),
