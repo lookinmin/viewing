@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './search.dart';
 
 void main() {
   runApp(const BoardPage());
@@ -22,10 +23,18 @@ class BoardPage extends StatelessWidget {
         leading: Container(), //Appbar의 뒤로가기 버튼 지우기
         centerTitle: true, // 글자 가운데 정렬
         elevation: 0, // 그림자 제거
+        actions:[
+          IconButton(icon:Icon(Icons.search,color:Colors.grey),
+          onPressed:(){
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder:(context)=>SearchPage()));
+          }),
+        ]
       ),
       body: Column(
         children: [
-          Flexible(flex: 2, child: BoardSearch()),
+          Flexible(flex:1,child:DropBox()),
           Flexible(flex: 1, child: Hashtag()),
           Flexible(flex: 9, child: Board())
         ],
@@ -34,54 +43,53 @@ class BoardPage extends StatelessWidget {
   }
 }
 
-class BoardSearch extends StatelessWidget {
-  const BoardSearch({Key? key}) : super(key: key);
+class DropBox extends StatelessWidget{
+  const DropBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.4),
-                      spreadRadius: 0,
-                      blurRadius: 2,
-                      offset: Offset(0, 7), // changes position of shadow
-                    )
-                  ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: '검색할 태그를 입력 해주세요',
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                      child: Icon(
-                    Icons.search,
-                    color: Color.fromRGBO(248, 180, 0, 1.0),
-                  ))
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
+        width: double.infinity,
+        padding:EdgeInsets.fromLTRB(0, 0, 10, 5),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children:[
+            Container(child:Dropdown(),)
+          ]
+        )
     );
+  }
+}
+
+class Dropdown extends StatefulWidget{
+  const Dropdown({Key? key}) : super(key: key);
+
+  @override
+  _DropdownState createState()=>_DropdownState();
+}
+
+class _DropdownState extends State<Dropdown>{
+  // const Dropbox({Key? key}) : super(key: key);
+  List<String> dropdownList = ['최근리뷰순','추천순','댓글순'];
+  String selectedDropdown = '최근리뷰순';
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(
+        value: selectedDropdown,
+        items:dropdownList.map(
+          (String item){
+            return DropdownMenuItem<String>(
+              value: item,
+              child:Text('$item'),
+              );
+          }).toList(),
+          onChanged:(dynamic value){
+            setState((){
+              selectedDropdown = value;
+            });
+        }
+      );
   }
 }
 
@@ -224,7 +232,8 @@ class Board extends StatelessWidget {
                       ))
                     ]),
               );
-            }));
+            })
+          );
   }
 }
 
