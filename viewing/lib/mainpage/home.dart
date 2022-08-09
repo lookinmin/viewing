@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:viewing/roomInfo/room.dart';
 
 class BuilidingInfo {
   final String image;
@@ -260,7 +261,10 @@ class _RoomInfo extends State<RoomInfo> {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
-                                    onTap: () => print('보러가기 클릭'),
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Room())),
                                     child: Text('보러가기',
                                         textAlign: TextAlign.end,
                                         style: TextStyle(

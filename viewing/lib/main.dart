@@ -47,8 +47,10 @@ class _HomeState extends State<Home> {
   final _pages = [
     MainHome(),
     // Map(),
-    Room(),
-    Room(), BoardPage()
+    BoardPage(),
+    BoardPage(),
+    BoardPage(),
+    BoardPage()
   ];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
@@ -72,7 +74,10 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
-              Flexible(flex: 1, fit: FlexFit.tight, child: AddressSearch()),
+              currentIdx != 3
+                  ? Flexible(
+                      flex: 1, fit: FlexFit.tight, child: AddressSearch())
+                  : Container(),
               Expanded(
                 flex: 8,
                 child: IndexedStack(
