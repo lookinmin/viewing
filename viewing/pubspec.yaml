@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   kakaomap_webview: ^0.6.2
+  http: ^0.13.5
   percent_indicator: ^4.0.1
 
   # The following adds the Cupertino Icons font to your application.
