@@ -429,8 +429,8 @@ Widget Review(int num, var date, var name, var pic) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(10, 5, 5, 10),
-              height: 120,
+              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+              width: 150,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Image.asset(
@@ -599,8 +599,8 @@ Widget txtForRoom() {
     child: Column(
       children: [
         Container(
-          width: 230,
-          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+          width: 190,
+          margin: EdgeInsets.fromLTRB(7, 0, 0, 7),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -611,7 +611,7 @@ Widget txtForRoom() {
           ),
         ),
         Container(
-          width: 230,
+          width: 190,
           height: 80,
           child: Row(
             children: [
