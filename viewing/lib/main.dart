@@ -3,6 +3,8 @@ import './mainpage//home.dart';
 import 'map.dart';
 import './roomInfo/room.dart';
 import './board/board.dart';
+import './writing/writingroom.dart';
+import './writing/writingboard.dart';
 
 void main() {
   runApp(const Viewing());
@@ -42,7 +44,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIdx = 0;
-  final _pages = [MainHome(), Map(), Room(), BoardPage()];
+  final _pages = [
+    MainHome(),
+    // Map(),
+    BoardPage(),
+    BoardPage(),
+    BoardPage(),
+    BoardPage()
+  ];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
 
@@ -65,7 +74,10 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
-              Flexible(flex: 1, fit: FlexFit.tight, child: AddressSearch()),
+              currentIdx != 3
+                  ? Flexible(
+                      flex: 1, fit: FlexFit.tight, child: AddressSearch())
+                  : Container(),
               Expanded(
                 flex: 8,
                 child: IndexedStack(
@@ -83,6 +95,7 @@ class _HomeState extends State<Home> {
               )
             ],
           ),
+          floatingActionButton: floatingButton(context),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIdx,
             type: BottomNavigationBarType.fixed,
@@ -124,6 +137,84 @@ class _HomeState extends State<Home> {
                 TextStyle(color: Color.fromRGBO(255, 99, 99, 1)),
           ),
         ));
+  }
+
+  FloatingActionButton floatingButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showModalBottomSheet<void>(
+          context: context,
+          backgroundColor: Color.fromARGB(255, 31, 31, 31),
+          shape: RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+          builder: (BuildContext context) {
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+              child: Column(
+                children: <Widget>[
+                  //상단 x 버튼
+                  Row(
+                    children: [
+                      Expanded(child: Container()),
+                      IconButton(
+                        icon: Icon(
+                          Icons.close_rounded,
+                          color: Color.fromRGBO(255, 99, 99, 1),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                  Flexible(flex: 5, child: writingPage(context, num: 1)),
+                  Flexible(flex: 5, child: writingPage(context, num: 2)),
+                ],
+              ),
+            );
+          },
+        ).then((value) {
+          setState(() {});
+        });
+      },
+      backgroundColor: Color.fromRGBO(255, 99, 99, 1),
+      child: const Icon(
+        Icons.edit_note_outlined,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  InkWell writingPage(BuildContext context, {required int num}) {
+    return InkWell(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            border: Border(
+                top: BorderSide(
+                    color: Color.fromRGBO(255, 99, 99, 1), width: 2))),
+        child: Center(
+          child: Text(
+            num == 1 ? "게시판 글쓰기" : "방정보 글쓰기",
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 16,
+                color: Color.fromRGBO(255, 99, 99, 1)),
+          ),
+        ),
+      ),
+      onTap: () {
+        if (num == 1) {
+          //게시판 글쓰기
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => WritingBoard()));
+        } else if (num == 2) {
+          //방정보 글쓰기
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => WritingRoom()));
+        }
+      },
+    );
   }
 }
 

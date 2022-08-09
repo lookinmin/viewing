@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:viewing/roomInfo/room.dart';
 
 class BuilidingInfo {
   final String image;
@@ -36,9 +37,9 @@ class MainHome extends StatelessWidget {
   ];
 
   final roomInfo = [
-    BuilidingInfo('coffee.png', '도담2', "5,100,000", "310,000", "51,000"),
-    BuilidingInfo('coffee.png', '도담3', "5,200,000", "320,000", "52,000"),
-    BuilidingInfo('coffee.png', '도담4', "5,300,000", "330,000", "53,000"),
+    BuilidingInfo('coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo('coffee.png', '양지빌', "5,200,000", "320,000", "52,000"),
+    BuilidingInfo('coffee.png', '보성빌', "5,300,000", "330,000", "53,000"),
     BuilidingInfo('coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
     BuilidingInfo('coffee.png', '도담5', "5,400,000", "340,000", "54,000"),
     BuilidingInfo('coffee.png', '도담6', "5,500,000", "350,000", "55,000"),
@@ -50,11 +51,6 @@ class MainHome extends StatelessWidget {
     BoardInfo('17시 치킨 시키실 분', '치킨 같이 시키실 분 구해요', 11, 28),
     BoardInfo('18시 피자 시키실 분', '피자 같이 시키실 분 구해요', 12, 27),
     BoardInfo('19시 짜장면 시키실 분', '짜장면 같이 시키실 분 구해요', 13, 26),
-    BoardInfo('20시 부리또 시키실 분', '부리또 같이 시키실 분 구해요', 14, 25),
-    BoardInfo('21시 보쌈 시키실 분', '보쌈 같이 시키실 분 구해요', 15, 24),
-    BoardInfo('22시 국밥 시키실 분', '국밥 같이 시키실 분 구해요', 16, 23),
-    BoardInfo('23시 커피 시키실 분', '커피 같이 시키실 분 구해요', 17, 22),
-    BoardInfo('24시 떡볶이 시키실 분', '떡볶이 같이 시키실 분 구해요', 18, 20),
   ];
 
   @override
@@ -64,30 +60,32 @@ class MainHome extends StatelessWidget {
       child: Column(
         children: [
           //상단 이벤트 사진 -> 나중에 carousel로 바꾸기
-          Flexible(
-              flex: 3,
-              child: CarouselSlider(
-                  items: eventImg.map((e) {
-                    return Builder(builder: (BuildContext context) {
-                      return Container(
-                        // width: MediaQuery.of(context).size.width + 100,
-                        margin: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              e,
-                              fit: BoxFit.fill,
-                              width: 500,
-                            )),
-                      );
-                    });
-                  }).toList(),
-                  options: CarouselOptions(
-                      // autoPlay: true,
-                      // autoPlayInterval: Duration(seconds: 3),
-                      // autoPlayAnimationDuration: Duration(milliseconds: 1000),
-                      // autoPlayCurve: Curves.fastOutSlowIn,
-                      scrollDirection: Axis.horizontal))),
+          Container(
+            height: 150,
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+            child: CarouselSlider(
+              items: eventImg.map((e) {
+                return Builder(builder: (BuildContext context) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20.0),
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        e,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  );
+                });
+              }).toList(),
+              options: CarouselOptions(
+                  autoPlay: false,
+                  scrollDirection: Axis.horizontal,
+                  height: 150),
+            ),
+          ),
           //중간 방 리스트
           Flexible(
             flex: 4,
@@ -197,7 +195,7 @@ class _RoomInfo extends State<RoomInfo> {
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 99, 99, 1),
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 10))),
+                                  fontSize: 13))),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -205,13 +203,15 @@ class _RoomInfo extends State<RoomInfo> {
                               flex: 4,
                               child: Text(
                                 '보증금: ',
-                                style: TextStyle(fontSize: 8),
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w700),
                               )),
                           Flexible(
                               flex: 6,
                               child: Text(
                                 widget.item.deposit,
-                                style: TextStyle(fontSize: 8),
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w700),
                               ))
                         ],
                       ),
@@ -220,12 +220,18 @@ class _RoomInfo extends State<RoomInfo> {
                         children: [
                           Flexible(
                               flex: 4,
-                              child:
-                                  Text('월세: ', style: TextStyle(fontSize: 8))),
+                              child: Text(
+                                '월세: ',
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w700),
+                              )),
                           Flexible(
                               flex: 6,
-                              child: Text(widget.item.monthly,
-                                  style: TextStyle(fontSize: 8)))
+                              child: Text(
+                                widget.item.monthly,
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w700),
+                              ))
                         ],
                       ),
                       Row(
@@ -233,12 +239,18 @@ class _RoomInfo extends State<RoomInfo> {
                         children: [
                           Flexible(
                               flex: 4,
-                              child:
-                                  Text('관리비: ', style: TextStyle(fontSize: 8))),
+                              child: Text(
+                                '관리비: ',
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w700),
+                              )),
                           Flexible(
                               flex: 6,
-                              child: Text(widget.item.manageFee,
-                                  style: TextStyle(fontSize: 8)))
+                              child: Text(
+                                widget.item.manageFee,
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w700),
+                              ))
                         ],
                       ),
                       Row(
@@ -249,13 +261,17 @@ class _RoomInfo extends State<RoomInfo> {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
-                                    onTap: () => print('보러가기 클릭'),
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Room())),
                                     child: Text('보러가기',
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                             color: Color.fromRGBO(
                                                 248, 180, 0, 1.0),
-                                            fontSize: 8))),
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w700))),
                               )),
                           Flexible(
                               flex: 1,
@@ -306,12 +322,19 @@ class _BoardState extends State<Board> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: widget.board.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return BoardList(item: widget.board[index]);
-                }),
+            // child: ListView.builder(
+            //     itemCount: widget.board.length,
+            //     scrollDirection: Axis.vertical,
+            //     itemBuilder: (BuildContext context, int index) {
+            //       return BoardList(item: widget.board[index]);
+            //     }),
+            child: Column(
+              children: [
+                BoardList(item: widget.board[0]),
+                BoardList(item: widget.board[1]),
+                BoardList(item: widget.board[2])
+              ],
+            ),
           )
         ],
       ),
@@ -331,7 +354,7 @@ class _BoardListState extends State<BoardList> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       decoration: BoxDecoration(
           color: Color.fromARGB(255, 242, 242, 242),
           borderRadius: BorderRadius.circular(20),
