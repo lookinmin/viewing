@@ -391,7 +391,7 @@ Widget barGraph(var grade) {
       ),
       SizedBox(
         width: 5,
-        child: Text((grade * 10).toString(),
+        child: Text(((grade * 10).truncate()).toString(),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
       ),
     ],
