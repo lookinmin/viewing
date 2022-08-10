@@ -17,6 +17,33 @@ class WritingRoom extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         )),
       ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+              height: 150,
+              color: Colors.amberAccent,
+            ),
+            Container(
+              height: 150,
+              color: Colors.blueAccent,
+            ),
+            Container(
+              height: 150,
+              color: Colors.redAccent,
+            ),
+            Container(
+              height: 150,
+              color: Colors.greenAccent,
+            ),
+            Container(
+              height: 150,
+              color: Colors.cyanAccent,
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(20),
         child: ElevatedButton(
