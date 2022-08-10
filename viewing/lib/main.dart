@@ -45,13 +45,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIdx = 0;
-  final _pages = [
-    MainHome(),
-    // Map(),
-    Map(),
-    BoardPage(),
-    MyPage()
-  ];
+  final _pages = [MainHome(), Map(), BoardPage(), MyPage()];
 
   late List<GlobalKey<NavigatorState>> _navigatorKeyList;
 
@@ -95,7 +89,8 @@ class _HomeState extends State<Home> {
               )
             ],
           ),
-          floatingActionButton: floatingButton(context),
+          floatingActionButton:
+              currentIdx == 0 ? floatingButton(context) : Container(),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIdx,
             type: BottomNavigationBarType.fixed,
