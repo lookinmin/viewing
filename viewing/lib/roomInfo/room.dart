@@ -9,78 +9,80 @@ void main() {
 class Room extends StatelessWidget {
   Room({Key? key}) : super(key: key);
   List<String> roomImg = [
-    "images/room1.jpg",
-    "images/room2.jpg",
-    "images/room3.jpg",
-    "images/room4.jpg",
-    "images/room5.jpg",
+    "assets/images/room1.jpg",
+    "assets/images/room2.jpg",
+    "assets/images/room3.jpg",
+    "assets/images/room4.jpg",
+    "assets/images/room5.jpg",
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          Container(
-              height: 200,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 2.0,
-                ))),
-                child: CarouselSlider(
-                  items: roomImg.map((e) {
-                    return Builder(builder: (BuildContext context) {
-                      return Container(
-                        // width: MediaQuery.of(context).size.width + 100,
-                        margin: EdgeInsets.symmetric(horizontal: 30.0),
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            e,
-                            fit: BoxFit.fill,
+    return Scaffold(
+      body: Container(
+          child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+                height: 200,
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                    color: Colors.grey,
+                    width: 2.0,
+                  ))),
+                  child: CarouselSlider(
+                    items: roomImg.map((e) {
+                      return Builder(builder: (BuildContext context) {
+                        return Container(
+                          // width: MediaQuery.of(context).size.width + 100,
+                          margin: EdgeInsets.symmetric(horizontal: 30.0),
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              e,
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                        ),
-                      );
-                    });
-                  }).toList(),
-                  options: CarouselOptions(
-                      autoPlay: false,
-                      scrollDirection: Axis.horizontal,
-                      height: 200),
-                ),
-              )),
-          Container(
-            height: 190,
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.grey,
-              width: 2.0,
-            ))),
-            child: RoomGrade(
-                address: "개신동 충대로 1 13번길", roomName: "개신동 해오름빌", grade: "2"),
-          ),
-          Container(
-            height: 130,
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.grey,
-              width: 2.0,
-            ))),
-            child: CheckList(),
-          ),
-          RoomReviews(),
-        ],
-      ),
-    ));
+                        );
+                      });
+                    }).toList(),
+                    options: CarouselOptions(
+                        autoPlay: false,
+                        scrollDirection: Axis.horizontal,
+                        height: 200),
+                  ),
+                )),
+            Container(
+              height: 190,
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: Colors.grey,
+                width: 2.0,
+              ))),
+              child: RoomGrade(
+                  address: "개신동 충대로 1 13번길", roomName: "개신동 해오름빌", grade: "2"),
+            ),
+            Container(
+              height: 130,
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: Colors.grey,
+                width: 2.0,
+              ))),
+              child: CheckList(),
+            ),
+            RoomReviews(),
+          ],
+        ),
+      )),
+    );
   }
 }
 
@@ -148,7 +150,7 @@ class _RoomReview extends State<RoomReviews> {
               3,
               "2022.09.17",
               "익명",
-              "images/room1.jpg",
+              "assets/images/room1.jpg",
             )
         ],
       ),
@@ -355,22 +357,22 @@ Widget switchImg(String grade) {
   int num = int.parse(grade);
   if (num < 1) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("images/rating.png"));
+        width: 100, height: 100, child: Image.asset("assets/images/rating.png"));
   } else if (num <= 2 && num > 1) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("images/rating.png"));
+        width: 100, height: 100, child: Image.asset("assets/images/rating.png"));
   } else if (num <= 3 && num > 2) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("images/rating.png"));
+        width: 100, height: 100, child: Image.asset("assets/images/rating.png"));
   } else if (num <= 4 && num > 3) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("images/star.png"));
+        width: 100, height: 100, child: Image.asset("assets/images/star.png"));
   } else if (num <= 5 && num > 4) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("images/star.png"));
+        width: 100, height: 100, child: Image.asset("assets/images/star.png"));
   } else {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("images/star.png"));
+        width: 100, height: 100, child: Image.asset("assets/images/star.png"));
   }
 }
 
