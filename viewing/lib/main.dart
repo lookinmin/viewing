@@ -6,6 +6,7 @@ import './board/board.dart';
 import './writing/writingroom.dart';
 import './writing/writingboard.dart';
 import './mypage/mypage.dart';
+import './startpage/splash_screen.dart';
 
 void main() {
   runApp(const Viewing());
@@ -18,7 +19,10 @@ class Viewing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      initialRoute: '/',
+      routes: {'/': (context) => Splash()},
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +35,7 @@ class Viewing extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      //home: const Home(),
     );
   }
 }
