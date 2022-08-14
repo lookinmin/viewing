@@ -17,65 +17,57 @@ class ChipItem {
   Icon icon;
   String string;
   int num;
+  bool clicked = false;
   ChipItem(this.color, this.icon, this.string, this.num);
 }
 
 class _RoomReviewThirdState extends State<RoomReviewThird> {
-  // List chipSelect = <Color>[
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red
-  // ];
-
-  List chipSelect = [
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '없음', 0),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '주차', 1),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '대중교통', 2),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '공원산책', 3),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '치안', 4),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '경비실', 5),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '건물관리', 6),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '분리수거', 7),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '환기', 8),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '방습', 9),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '단열', 10),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '반려동물 키우기', 11),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '방충', 12),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '방음', 13),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '엘레베이터', 14),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '소음', 15),
+  List chipGood = [
+    ChipItem(Colors.black, Icon(Icons.close), '없음', 0),
+    ChipItem(Colors.black, Icon(Icons.directions_car), '주차', 1),
+    ChipItem(Colors.black, Icon(Icons.commute), '대중교통', 2),
+    ChipItem(Colors.black, Icon(Icons.nature_people), '공원산책', 3),
+    ChipItem(Colors.black, Icon(Icons.local_police), '치안', 4),
+    ChipItem(Colors.black, Icon(Icons.security), '경비실', 5),
+    ChipItem(Colors.black, Icon(Icons.construction), '건물관리', 6),
+    ChipItem(Colors.black, Icon(Icons.recycling), '분리수거', 7),
+    ChipItem(Colors.black, Icon(Icons.air), '환기', 8),
+    ChipItem(Colors.black, Icon(Icons.water_drop), '결로', 9),
+    ChipItem(Colors.black, Icon(Icons.fireplace), '단열', 10),
+    ChipItem(Colors.black, Icon(Icons.pets), '반려동물 키우기', 11),
+    ChipItem(Colors.black, Icon(Icons.bug_report), '방충', 12),
+    ChipItem(Colors.black, Icon(Icons.hearing_disabled), '층간소음', 13),
+    ChipItem(Colors.black, Icon(Icons.elevator), '엘레베이터', 14),
+    ChipItem(Colors.black, Icon(Icons.hearing), '주변소음', 15),
     ChipItem(Colors.black, Icon(Icons.bus_alert), '평지', 16),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '편의시설', 17),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '상가', 18),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '학군', 19),
+    ChipItem(Colors.black, Icon(Icons.local_convenience_store), '편의시설', 17),
+    ChipItem(Colors.black, Icon(Icons.storefront), '상가', 18),
+    ChipItem(Colors.black, Icon(Icons.school), '학군', 19),
   ];
+  List chipBad = [
+    ChipItem(Colors.black, Icon(Icons.close), '없음', 0),
+    ChipItem(Colors.black, Icon(Icons.directions_car), '주차', 1),
+    ChipItem(Colors.black, Icon(Icons.commute), '대중교통', 2),
+    ChipItem(Colors.black, Icon(Icons.nature_people), '공원산책', 3),
+    ChipItem(Colors.black, Icon(Icons.local_police), '치안', 4),
+    ChipItem(Colors.black, Icon(Icons.security), '경비실', 5),
+    ChipItem(Colors.black, Icon(Icons.construction), '건물관리', 6),
+    ChipItem(Colors.black, Icon(Icons.recycling), '분리수거', 7),
+    ChipItem(Colors.black, Icon(Icons.air), '환기', 8),
+    ChipItem(Colors.black, Icon(Icons.water_drop), '결로', 9),
+    ChipItem(Colors.black, Icon(Icons.fireplace), '단열', 10),
+    ChipItem(Colors.black, Icon(Icons.pets), '반려동물 키우기', 11),
+    ChipItem(Colors.black, Icon(Icons.bug_report), '방충', 12),
+    ChipItem(Colors.black, Icon(Icons.hearing_disabled), '층간소음', 13),
+    ChipItem(Colors.black, Icon(Icons.elevator), '엘레베이터', 14),
+    ChipItem(Colors.black, Icon(Icons.hearing), '주변소음', 15),
+    ChipItem(Colors.black, Icon(Icons.bus_alert), '평지', 16),
+    ChipItem(Colors.black, Icon(Icons.local_convenience_store), '편의시설', 17),
+    ChipItem(Colors.black, Icon(Icons.storefront), '상가', 18),
+    ChipItem(Colors.black, Icon(Icons.school), '학군', 19),
+  ];
+  int cntGood = 0;
+  int cntBad = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,8 +126,10 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
                 ],
               ),
             ),
-            good(context),
-            goodKeywords()
+            writeReview(context, '장점'),
+            selectKeywords('장점', chipGood),
+            writeReview(context, "단점"),
+            selectKeywords("단점", chipBad)
           ],
         ),
       ),
@@ -153,89 +147,92 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
     );
   }
 
-  Column goodKeywords() {
-    return Column(
-      children: [
-        Container(
-            margin: EdgeInsets.only(bottom: 10),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              '장점 키워드를 선택해 주세요 (최대 8개)',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15),
-            )),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
+  Container selectKeywords(String s, List chipGood) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          Container(
               margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  choiceChip(chipSelect[0]),
-                  choiceChip(chipSelect[1]),
-                  choiceChip(chipSelect[2]),
-                  choiceChip(chipSelect[3]),
-                ],
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '$s 키워드를 선택해 주세요 (최대 8개)',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15),
+              )),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    choiceChip(chipGood[0], s),
+                    choiceChip(chipGood[1], s),
+                    choiceChip(chipGood[2], s),
+                    choiceChip(chipGood[3], s),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  choiceChip(chipSelect[4]),
-                  choiceChip(chipSelect[5]),
-                  choiceChip(chipSelect[6]),
-                  choiceChip(chipSelect[7]),
-                ],
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    choiceChip(chipGood[4], s),
+                    choiceChip(chipGood[5], s),
+                    choiceChip(chipGood[6], s),
+                    choiceChip(chipGood[7], s),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  choiceChip(chipSelect[8]),
-                  choiceChip(chipSelect[9]),
-                  choiceChip(chipSelect[10]),
-                  choiceChip(chipSelect[11]),
-                ],
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    choiceChip(chipGood[8], s),
+                    choiceChip(chipGood[9], s),
+                    choiceChip(chipGood[10], s),
+                    choiceChip(chipGood[11], s),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  choiceChip(chipSelect[12]),
-                  choiceChip(chipSelect[13]),
-                  choiceChip(chipSelect[14]),
-                  choiceChip(chipSelect[15]),
-                ],
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    choiceChip(chipGood[12], s),
+                    choiceChip(chipGood[13], s),
+                    choiceChip(chipGood[14], s),
+                    choiceChip(chipGood[15], s),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  choiceChip(chipSelect[16]),
-                  choiceChip(chipSelect[17]),
-                  choiceChip(chipSelect[18]),
-                  choiceChip(chipSelect[19]),
-                ],
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    choiceChip(chipGood[16], s),
+                    choiceChip(chipGood[17], s),
+                    choiceChip(chipGood[18], s),
+                    choiceChip(chipGood[19], s),
+                  ],
+                ),
               ),
-            ),
-          ],
-        )
-      ],
+            ],
+          )
+        ],
+      ),
     );
   }
 
-  ChoiceChip choiceChip(chipSelect) {
+  ChoiceChip choiceChip(chipSelect, String s) {
     return ChoiceChip(
       avatar: chipSelect.icon,
       label: Text(
@@ -257,7 +254,7 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
     );
   }
 
-  Container good(BuildContext context) {
+  Container writeReview(BuildContext context, String s) {
     return Container(
       height: 200,
       margin: EdgeInsets.only(bottom: 20),
@@ -267,7 +264,7 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
-              '장점 (50자 이상)',
+              '$s (50자 이상)',
               style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
             ),
           ),
@@ -286,7 +283,7 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
                   focusedBorder: InputBorder.none, //검색 아이콘 추가
                   contentPadding:
                       EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
-                  hintText: '우리 집의 장점을 이야기해주세요'),
+                  hintText: '우리 집의 $s을 이야기해주세요'),
             ),
           ),
         ],
