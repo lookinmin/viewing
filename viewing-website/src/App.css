@@ -1,38 +1,696 @@
-.App {
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+@font-face {
+  font-family: 'LeferiPoint-BlackA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.home{
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.menu{
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  right: 50px;
+  font-family: 'GmarketSansMedium';
+  top: 40px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  list-style-type: none;
+}
+
+li {
+  padding: 6px 0;
+  
+}
+
+li:nth-child(1){
+  -webkit-animation: slide-in-top 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-top 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+li:nth-child(2){
+  -webkit-animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+li:nth-child(3){
+  -webkit-animation: slide-in-top 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-top 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+a {
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  color: #FAF5E4;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+
+}
+
+a::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+
+a:hover {
+  color: #FAF5E4;
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.toDownload{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding-right: 2rem;
+  background-color: #FF6363;
+  border-radius: 50px;
+  cursor: pointer;
+
+  -webkit-animation: bounce-in-right 2s both;
+	        animation: bounce-in-right 2s both;
+}
+
+.toDownload h2{
+  color: white;
+  font-family: 'yg-jalnan';
+  font-size: 1.8rem;
+}
+
+#goPS{
+  margin-left: 1rem;
+}
+
+.mainPage{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  height: 1100px;
+  background-image: url("../public/img/mockUp.jpg");
+  background-size:cover;
+}
+
+#logo{
+  justify-self: start;
+  align-self: flex-start;
+  margin: 0 !important;
+  padding-left: 3rem;
+  font-size: 3rem;
+  padding-top: 2rem;
+  position: fixed;
+  cursor: pointer;
+}
+
+.white{
+  color: #FAF5E4 !important;
+  -webkit-transition-duration:0.4s;
+  -webkit-transition-timing-function:ease;
+  transition-duration:0.4s;
+  transition-timing-function:ease;
+  font-family: 'LeferiPoint-BlackA';
+}
+
+.orange{
+  color: #FF6363 !important;
+  -webkit-transition-duration:0.4s;
+  -webkit-transition-timing-function:ease;
+  transition-duration:0.4s;
+  transition-timing-function:ease;
+}
+
+.top{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+  -webkit-animation: slide-in-bck-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bck-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.mainPage h2{
+  color: #FF6363;
+  font-family: 'LeferiPoint-BlackA';
+  font-size: 5rem;
+  margin-bottom: 30px !important;
+  margin-top: 0 !important;
+  margin-left: 4rem;
+}
+
+.txtsBox{
+  display: flex;
+  flex-flow: row nowrap;
+  font-family: 'yg-jalnan';
+  font-size: 2.5rem;
+  justify-content: center;
+  margin-top: 8rem;
+}
+
+
+#y2{
+  padding-top: 5rem;
+}
+
+.itemsList{
+  display: flex;
+  flex-flow: row wrap;
+  width: 98vw;
+  justify-content: space-evenly;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
+
+.itemsList .items{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.itemsList .items h2{
+  position: relative;
+  left: 100px;
+  font-family: 'yg-jalnan';
+  font-size: 1.6rem;
+
+}
+
+.box{
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  background-color: #ffb7b7;
+  border-radius: 40px;
+}
+
+.box .icons{
+  position: absolute;
+  top: 30px;
+  left: 18px;
+}
+
+
+.exOne{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  width: max-content;
+  margin-left: 30%;
+}
+
+.homeImg{
+  visibility: hidden;
+  border-radius: 40px;
+}
+
+.exOne h2{
+  font-family: 'GmarketSansMedium';
+  font-size: 2.4rem;
+}
+
+.exOne h3{
+  font-family: 'GmarketSansMedium';
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.t1{
+  color: #FF6363;
+  visibility: hidden;
+}
+
+.t2{
+  color: #FF6363;
+}
+
+
+/*-------------for Footer-----------*/
+
+.footer{
+  display: flex;
+  flex-flow: column wrap;
+  background-color: #ffd4d4;
+  padding-top: 3rem;
+  padding-left: 20rem;
+  padding-bottom: 1rem;
+  margin-top: 10rem;
+}
+
+.footer h2{
+  font-family: 'GmarketSansMedium';
+  font-size: 1.5rem;
+  color: rgb(80, 70, 70);
+}
+
+.pageIcons{
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 1rem;
+
+}
+
+.pageIcons .icons{
+  margin: 0 3rem 0 0;
+  cursor: pointer;
+}
+
+.footerLogo{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 55%;
+}
+
+
+.txts{
+  display: flex;
+  flex-flow: row wrap;
+  font-family: 'Pretendard-Regular';
+  font-size: 1.1rem;
+}
+
+.txts .TT{
+  font-family: 'GmarketSansMedium';
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.div2{
+  margin-left: 4rem;
+}
+
+.div3{
+  margin-left: 4rem;
+}
+
+/*------------------------------------------ABOUT-------------------------------------------------*/
+
+.men1{
+  height: 1050px;
+  background-image: url("../public/img/pic1.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutTxt{
+  font-family: 'GmarketSansMedium';
+  font-size: 2.5rem;
+  color: rgb(250, 170, 170);
+  display: flex;
+  flex-flow: column nowrap;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.men2{
+  height: 1050px;
+  background-image: url("../public/img/pic2.jpg");
+  background-size: cover;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.men3{
+  height: 1050px;
+  background-image: url("../public/img/pic3.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.men4{
+  height: 1050px;
+  background-image: url("../public/img/pic4.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+/*--------------------------------animation KeyFrame------------------------------------------*/
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-8-7 15:58:14
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation bounce-in-right
+ * ----------------------------------------
+ */
+ @-webkit-keyframes bounce-in-right {
+  0% {
+    -webkit-transform: translateX(600px);
+            transform: translateX(600px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  38% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateX(68px);
+            transform: translateX(68px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateX(32px);
+            transform: translateX(32px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@keyframes bounce-in-right {
+  0% {
+    -webkit-transform: translateX(600px);
+            transform: translateX(600px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateX(68px);
+            transform: translateX(68px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateX(32px);
+            transform: translateX(32px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-8-11 15:39:57
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-bck-bottom
+ * ----------------------------------------
+ */
+ @-webkit-keyframes slide-in-bck-bottom {
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+            transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bck-bottom {
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+            transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-8-11 15:42:41
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-top
+ * ----------------------------------------
+ */
+ @-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-8-11 15:47:28
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation bounce-in-top
+ * ----------------------------------------
+ */
+ @-webkit-keyframes bounce-in-top {
+  0% {
+    -webkit-transform: translateY(-500px);
+            transform: translateY(-500px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateY(-28px);
+            transform: translateY(-28px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@keyframes bounce-in-top {
+  0% {
+    -webkit-transform: translateY(-500px);
+            transform: translateY(-500px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateY(-28px);
+            transform: translateY(-28px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
   }
 }
