@@ -29,11 +29,9 @@ void main() {
 class MainHome extends StatelessWidget {
   MainHome({Key? key}) : super(key: key);
   List<String> eventImg = [
-    "coffee.png",
-    "coffee.png",
-    "coffee.png",
-    "coffee.png",
-    "coffee.png"
+    "/images/event1.png",
+    "/images/event2.png",
+    "/images/event3.png",
   ];
 
   final roomInfo = [
