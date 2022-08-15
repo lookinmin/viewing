@@ -7,8 +7,10 @@ import './writing/writingroom.dart';
 import './writing/writingboard.dart';
 import './mypage/mypage.dart';
 import './startpage/splash_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle( statusBarColor: Color.fromARGB(200, 255, 255, 255)));
   runApp(const Viewing());
 }
 
@@ -69,6 +71,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
     return WillPopScope(
         onWillPop: () async {
           return !(await _navigatorKeyList[currentIdx]
@@ -78,6 +81,10 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
+              
+              SizedBox(
+                        height: (currentIdx != 2 && currentIdx != 3)?statusBarHeight:0,
+                      ),
               (currentIdx != 2 && currentIdx != 3)
                   ? Flexible(
                       flex: 1, fit: FlexFit.tight, child: AddressSearch())
