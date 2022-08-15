@@ -32,17 +32,22 @@ class MainHome extends StatelessWidget {
     "/images/event1.png",
     "/images/event2.png",
     "/images/event3.png",
+    "assets/coffee.png",
+    "assets/coffee.png",
+    "assets/coffee.png",
+    "assets/coffee.png",
+    "assets/coffee.png"
   ];
 
   final roomInfo = [
-    BuilidingInfo('coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
-    BuilidingInfo('coffee.png', '양지빌', "5,200,000", "320,000", "52,000"),
-    BuilidingInfo('coffee.png', '보성빌', "5,300,000", "330,000", "53,000"),
-    BuilidingInfo('coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
-    BuilidingInfo('coffee.png', '도담5', "5,400,000", "340,000", "54,000"),
-    BuilidingInfo('coffee.png', '도담6', "5,500,000", "350,000", "55,000"),
-    BuilidingInfo('coffee.png', '도담7', "5,600,000", "360,000", "56,000"),
-    BuilidingInfo('coffee.png', '도담8', "5,700,000", "370,000", "57,000")
+    BuilidingInfo('assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo('assets/coffee.png', '양지빌', "5,200,000", "320,000", "52,000"),
+    BuilidingInfo('assets/coffee.png', '보성빌', "5,300,000", "330,000", "53,000"),
+    BuilidingInfo('assets/coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
+    BuilidingInfo('assets/coffee.png', '도담5', "5,400,000", "340,000", "54,000"),
+    BuilidingInfo('assets/coffee.png', '도담6', "5,500,000", "350,000", "55,000"),
+    BuilidingInfo('assets/coffee.png', '도담7', "5,600,000", "360,000", "56,000"),
+    BuilidingInfo('assets/coffee.png', '도담8', "5,700,000", "370,000", "57,000")
   ];
 
   final boardInfo = [
@@ -259,10 +264,13 @@ class _RoomInfo extends State<RoomInfo> {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
-                                    onTap: () => Navigator.push(
-                                        context,
+                                    onTap: () {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .push(
                                         MaterialPageRoute(
-                                            builder: (context) => Room())),
+                                            builder: (context) => Room()),
+                                      );
+                                    },
                                     child: Text('보러가기',
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
