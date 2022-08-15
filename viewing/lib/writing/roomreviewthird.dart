@@ -4,13 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-
-class RoomReviewThird extends StatefulWidget {
-  const RoomReviewThird({Key? key}) : super(key: key);
-
-  @override
-  State<RoomReviewThird> createState() => _RoomReviewThirdState();
-}
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ChipItem {
   Color color;
@@ -21,53 +15,174 @@ class ChipItem {
   ChipItem(this.color, this.icon, this.string, this.num);
 }
 
+class RoomReviewThird extends StatefulWidget {
+  const RoomReviewThird({Key? key}) : super(key: key);
+
+  @override
+  State<RoomReviewThird> createState() => _RoomReviewThirdState();
+}
+
 class _RoomReviewThirdState extends State<RoomReviewThird> {
   List chipGood = [
-    ChipItem(Colors.black, Icon(Icons.close), '없음', 0),
-    ChipItem(Colors.black, Icon(Icons.directions_car), '주차', 1),
-    ChipItem(Colors.black, Icon(Icons.commute), '대중교통', 2),
-    ChipItem(Colors.black, Icon(Icons.nature_people), '공원산책', 3),
-    ChipItem(Colors.black, Icon(Icons.local_police), '치안', 4),
-    ChipItem(Colors.black, Icon(Icons.security), '경비실', 5),
-    ChipItem(Colors.black, Icon(Icons.construction), '건물관리', 6),
-    ChipItem(Colors.black, Icon(Icons.recycling), '분리수거', 7),
-    ChipItem(Colors.black, Icon(Icons.air), '환기', 8),
-    ChipItem(Colors.black, Icon(Icons.water_drop), '결로', 9),
-    ChipItem(Colors.black, Icon(Icons.fireplace), '단열', 10),
-    ChipItem(Colors.black, Icon(Icons.pets), '반려동물 키우기', 11),
-    ChipItem(Colors.black, Icon(Icons.bug_report), '방충', 12),
-    ChipItem(Colors.black, Icon(Icons.hearing_disabled), '층간소음', 13),
-    ChipItem(Colors.black, Icon(Icons.elevator), '엘레베이터', 14),
-    ChipItem(Colors.black, Icon(Icons.hearing), '주변소음', 15),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '평지', 16),
-    ChipItem(Colors.black, Icon(Icons.local_convenience_store), '편의시설', 17),
-    ChipItem(Colors.black, Icon(Icons.storefront), '상가', 18),
-    ChipItem(Colors.black, Icon(Icons.school), '학군', 19),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.close), '없음', 0),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.directions_car),
+        '주차',
+        1),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.commute), '대중교통', 2),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.nature_people),
+        '공원산책',
+        3),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.local_police),
+        '치안',
+        4),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.security), '경비실', 5),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.construction),
+        '건물관리',
+        6),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.recycling),
+        '분리수거',
+        7),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.air), '환기', 8),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.water_drop), '결로', 9),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.fireplace), '단열', 10),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.pets),
+        '반려동물 키우기',
+        11),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.bug_report),
+        '방충',
+        12),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.hearing_disabled),
+        '층간소음',
+        13),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.elevator),
+        '엘레베이터',
+        14),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.hearing), '주변소음', 15),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.bus_alert), '평지', 16),
+    ChipItem(
+        Colors.black,
+        Icon(
+            color: Color.fromRGBO(248, 180, 0, 1),
+            Icons.local_convenience_store),
+        '편의시설',
+        17),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.storefront),
+        '상가',
+        18),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.school), '학군', 19),
   ];
   List chipBad = [
-    ChipItem(Colors.black, Icon(Icons.close), '없음', 0),
-    ChipItem(Colors.black, Icon(Icons.directions_car), '주차', 1),
-    ChipItem(Colors.black, Icon(Icons.commute), '대중교통', 2),
-    ChipItem(Colors.black, Icon(Icons.nature_people), '공원산책', 3),
-    ChipItem(Colors.black, Icon(Icons.local_police), '치안', 4),
-    ChipItem(Colors.black, Icon(Icons.security), '경비실', 5),
-    ChipItem(Colors.black, Icon(Icons.construction), '건물관리', 6),
-    ChipItem(Colors.black, Icon(Icons.recycling), '분리수거', 7),
-    ChipItem(Colors.black, Icon(Icons.air), '환기', 8),
-    ChipItem(Colors.black, Icon(Icons.water_drop), '결로', 9),
-    ChipItem(Colors.black, Icon(Icons.fireplace), '단열', 10),
-    ChipItem(Colors.black, Icon(Icons.pets), '반려동물 키우기', 11),
-    ChipItem(Colors.black, Icon(Icons.bug_report), '방충', 12),
-    ChipItem(Colors.black, Icon(Icons.hearing_disabled), '층간소음', 13),
-    ChipItem(Colors.black, Icon(Icons.elevator), '엘레베이터', 14),
-    ChipItem(Colors.black, Icon(Icons.hearing), '주변소음', 15),
-    ChipItem(Colors.black, Icon(Icons.bus_alert), '평지', 16),
-    ChipItem(Colors.black, Icon(Icons.local_convenience_store), '편의시설', 17),
-    ChipItem(Colors.black, Icon(Icons.storefront), '상가', 18),
-    ChipItem(Colors.black, Icon(Icons.school), '학군', 19),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.close), '없음', 0),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.directions_car),
+        '주차',
+        1),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.commute), '대중교통', 2),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.nature_people),
+        '공원산책',
+        3),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.local_police),
+        '치안',
+        4),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.security), '경비실', 5),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.construction),
+        '건물관리',
+        6),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.recycling),
+        '분리수거',
+        7),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.air), '환기', 8),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.water_drop), '결로', 9),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.fireplace), '단열', 10),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.pets),
+        '반려동물 키우기',
+        11),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.bug_report),
+        '방충',
+        12),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.hearing_disabled),
+        '층간소음',
+        13),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.elevator),
+        '엘레베이터',
+        14),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.hearing), '주변소음', 15),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.bus_alert), '평지', 16),
+    ChipItem(
+        Colors.black,
+        Icon(
+            color: Color.fromRGBO(248, 180, 0, 1),
+            Icons.local_convenience_store),
+        '편의시설',
+        17),
+    ChipItem(
+        Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.storefront),
+        '상가',
+        18),
+    ChipItem(Colors.black,
+        Icon(color: Color.fromRGBO(248, 180, 0, 1), Icons.school), '학군', 19),
   ];
+
   int cntGood = 0;
   int cntBad = 0;
+
+  String text = "보통이에요";
+  Icon icon = Icon(Icons.sentiment_neutral, color: Colors.yellow);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,16 +248,158 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(20),
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromRGBO(255, 99, 99, 1),
+      bottomNavigationBar: bottomModal(context),
+    );
+  }
+
+  Container bottomModal(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromRGBO(255, 99, 99, 1),
+          ),
+          onPressed: () {
+            showModalBottomSheet<void>(
+              context: context,
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  side: BorderSide.none,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
+              builder: (BuildContext context) {
+                return StatefulBuilder(
+                    builder: (BuildContext context, setState) => SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.35,
+                          child: Column(
+                            children: <Widget>[
+                              //상단 x 버튼
+                              Flexible(
+                                flex: 1,
+                                child: Row(
+                                  children: [
+                                    Expanded(child: Container()),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.close_rounded,
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: Text(
+                                  '훌륭해요!\n당신이 생각하는 이 곳의 만족도는?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ),
+                              Flexible(
+                                flex: 4,
+                                child: ratingBox(context, setState),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color.fromRGBO(255, 99, 99, 1),
+                                      ),
+                                      onPressed: () {
+                                        print('btnClick');
+                                      },
+                                      child: Text('확인')),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ));
+              },
+            ).then((value) {
+              setState(() {});
+            });
+          },
+          child: Text('다음')),
+    );
+  }
+
+  Container ratingBox(BuildContext context, StateSetter setState) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      decoration: BoxDecoration(
+          color: Color(0xfffaf5e4), borderRadius: BorderRadius.circular(15)),
+      alignment: Alignment.topCenter,
+      child: Column(
+        children: [
+          Flexible(
+            flex: 3,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: RatingBar.builder(
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  setState(() {
+                    if (rating <= 1) {
+                      text = "최악이에요";
+                      icon = Icon(
+                        Icons.sentiment_very_dissatisfied,
+                        color: Colors.black,
+                      );
+                    } else if (rating <= 2) {
+                      text = "별로예요";
+                      icon =
+                          Icon(Icons.sentiment_dissatisfied, color: Colors.red);
+                    } else if (rating <= 3) {
+                      text = "보통이에요";
+                      icon =
+                          Icon(Icons.sentiment_neutral, color: Colors.yellow);
+                    } else if (rating <= 4) {
+                      text = "만족해요";
+                      icon =
+                          Icon(Icons.sentiment_satisfied, color: Colors.green);
+                    } else {
+                      text = "아주 좋아요";
+                      icon = Icon(
+                        Icons.sentiment_very_satisfied,
+                        color: Colors.blue,
+                      );
+                    }
+                  });
+                },
+              ),
             ),
-            onPressed: () {
-              print('btnClick');
-            },
-            child: Text('다음')),
+          ),
+          Flexible(
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(right: 5), child: Text(text)),
+                      icon
+                    ]),
+              )),
+        ],
       ),
     );
   }
@@ -156,7 +413,7 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
               margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.centerLeft,
               child: Text(
-                '$s 키워드를 선택해 주세요 (최대 8개)',
+                '$s 키워드를 선택해 주세요',
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
