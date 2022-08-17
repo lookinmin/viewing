@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './search.dart';
+import './post.dart';
 
 void main() {
   runApp(const BoardPage());
@@ -135,7 +136,13 @@ class Board extends StatelessWidget {
         child: ListView.builder(
             itemCount: boardsList.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
+              return InkWell(
+                onTap:(){
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder:(context)=>PostPage()));
+                },
+                child:Container(
                 // 게시글 하나
                 margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -231,7 +238,7 @@ class Board extends StatelessWidget {
                         ],
                       ))
                     ]),
-              );
+              ));
             })
           );
   }
@@ -239,7 +246,7 @@ class Board extends StatelessWidget {
 
 Widget logo() {
   return Image.asset(
-    'assets/images/mark.jpg',
+    'images/mark.jpg',
   );
 }
 
