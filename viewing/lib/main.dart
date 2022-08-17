@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:viewing/writing/roomreviewfirst.dart';
 import './mainpage//home.dart';
 import 'map.dart';
 import './roomInfo/room.dart';
 import './board/board.dart';
-import './writing/writingroom.dart';
+import './writing/roomreviewfirst.dart';
 import './writing/writingboard.dart';
 import './mypage/mypage.dart';
 import './startpage/splash_screen.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle( statusBarColor: Color.fromARGB(200, 255, 255, 255)));
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Color.fromARGB(200, 255, 255, 255)));
   runApp(const Viewing());
 }
 
@@ -75,10 +77,10 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
-              
               SizedBox(
-                        height: (currentIdx != 2 && currentIdx != 3)?statusBarHeight:0,
-                      ),
+                height:
+                    (currentIdx != 2 && currentIdx != 3) ? statusBarHeight : 0,
+              ),
               (currentIdx != 2 && currentIdx != 3)
                   ? Flexible(
                       flex: 1, fit: FlexFit.tight, child: AddressSearch())
