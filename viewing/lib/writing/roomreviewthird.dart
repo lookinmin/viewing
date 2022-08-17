@@ -503,10 +503,15 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
       selectedColor: Color.fromRGBO(255, 99, 99, 1),
       onSelected: (bool value) {
         setState(() {
-          chipSelect.color =
-              value ? Colors.lightBlue : Color.fromRGBO(255, 99, 99, 1);
+          chipSelect.clicked = !chipSelect.clicked;
+          chipSelect.color = chipSelect.clicked
+              ? Colors.lightBlue
+              : Color.fromRGBO(255, 99, 99, 1);
+
+          print(chipSelect.clicked);
         });
       },
+      //지금 clicked가 true이면 cntgood++, false이면 cntbad-- -> 이걸 장점 단점일 때 나눠서 생각
       selected: chipSelect.color == Colors.lightBlue,
     );
   }
