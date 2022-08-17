@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viewing/writing/roomreviewsecond.dart';
 
 void main() => runApp(WritingRoom());
 
@@ -51,7 +52,8 @@ class _WritingRoomState extends State<WritingRoom> {
               primary: Color.fromRGBO(255, 99, 99, 1),
             ),
             onPressed: () {
-              print('btnClick');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RoomReviewSecond()));
             },
             child: Text('다음')),
       ),
@@ -116,59 +118,56 @@ class _WritingRoomState extends State<WritingRoom> {
     );
   }
 
-  Container residenceFloor(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 20),
-            child: Text(
-              '거주층',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
-            ),
+  Column residenceFloor(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: Text(
+            '거주층',
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
           ),
-          Container(
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 221, 221),
-                  borderRadius: BorderRadius.circular(8)),
-              padding: EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width,
-              child: DropdownButton(
-                isExpanded: true,
-                icon: Align(
-                  alignment: Alignment.centerRight,
-                  child: Icon(Icons.keyboard_arrow_down),
-                ),
-                underline: SizedBox.shrink(),
-                value: _selectedFloor,
-                items: _floorList.map((value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Container(
-                        padding: EdgeInsets.only(bottom: 10),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            border: Border(
-                          bottom: BorderSide(
-                              width: 1.0,
-                              color: Color.fromARGB(255, 191, 190, 190)),
-                        )),
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 16),
-                        )),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedFloor = value.toString();
-                  });
-                },
-              )),
-        ],
-      ),
+        ),
+        Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 221, 221, 221),
+                borderRadius: BorderRadius.circular(8)),
+            padding: EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width,
+            child: DropdownButton(
+              isExpanded: true,
+              icon: Align(
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.keyboard_arrow_down),
+              ),
+              underline: SizedBox.shrink(),
+              value: _selectedFloor,
+              items: _floorList.map((value) {
+                return DropdownMenuItem(
+                  value: value,
+                  child: Container(
+                      padding: EdgeInsets.only(bottom: 10),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(
+                            width: 1.0,
+                            color: Color.fromARGB(255, 191, 190, 190)),
+                      )),
+                      child: Text(
+                        value,
+                        style: TextStyle(fontSize: 16),
+                      )),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _selectedFloor = value.toString();
+                });
+              },
+            )),
+      ],
     );
   }
 

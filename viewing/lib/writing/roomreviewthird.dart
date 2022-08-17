@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:viewing/writing/roomreviewfourth.dart';
 
 class ChipItem {
   Color color;
@@ -313,7 +314,11 @@ class _RoomReviewThirdState extends State<RoomReviewThird> {
                                         primary: Color.fromRGBO(255, 99, 99, 1),
                                       ),
                                       onPressed: () {
-                                        print('btnClick');
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RoomReviewFourth()));
                                       },
                                       child: Text('확인')),
                                 ),

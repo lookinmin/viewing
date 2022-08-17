@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:viewing/writing/roomreviewthird.dart';
 
 class RoomReviewSecond extends StatefulWidget {
   const RoomReviewSecond({Key? key}) : super(key: key);
@@ -63,7 +64,8 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
               primary: Color.fromRGBO(255, 99, 99, 1),
             ),
             onPressed: () {
-              print('btnClick');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RoomReviewThird()));
             },
             child: Text('다음')),
       ),
