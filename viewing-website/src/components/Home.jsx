@@ -58,7 +58,7 @@ export const Home = () => {
 
       <div className="toDownload">
         <img src="./img/viewingLogo.png" alt="fing" height="60px" id='downImg'/>
-        <h2>Viewing 설치</h2>
+        <h2>Download</h2>
         <img id='goPS' src="./img/playstore.png" alt="fing" height="30px"/>
       </div>
 
