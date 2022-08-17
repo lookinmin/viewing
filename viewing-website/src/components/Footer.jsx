@@ -30,7 +30,8 @@ export const Footer = () => {
         <img className='icons' src="./img/github.png" onClick={() => move(4)} alt="fing insta" height="40px"/>
       </div>
       <div className="footerLogo">
-        <h2>Viewing : Review + viewing. 리뷰를 보다.</h2>
+        <h2>Viewing : Review + Viewing.</h2>
+        <h2>리뷰를 보다.</h2>
       </div>
 
       <div className="txts">

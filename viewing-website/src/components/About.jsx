@@ -60,36 +60,48 @@ export const About = () => {
 
   const scr = new Scroll();
 
-  const moveTop = () => {                                   //로고 누르면 최상단으로 이동하는 코드
-    window.scrollTo({top: 0, behavior : "smooth"});
+  function scrollToTop(){
+    //스크롤 속도를 빠르게 하려면 이동 간격 시간을 줄이거나, 이동 크기 픽셀을 늘리면 됩니다.
+    let between = 16; // 이동 간격 시간
+    let scroll = window.setInterval(function() {
+      let pos = window.pageYOffset;
+      let step = 20; // 이동 크기 픽셀
+      if ( pos > 0 ) {
+          window.scrollTo( 0, pos - step );
+      } else {
+          window.clearInterval( scroll );
+      }
+    }, between);
   }
 
   return (
     <div className='aboutDiv' onScroll={scr.handleScroll()}>
-      <h2 id='logo' onClick={() => moveTop()} className="white">Fing</h2>
+      <h2 id='logo' onClick={() => scrollToTop()} className="grey">Viewing</h2>
       <div className="men1" >
         <Menu/>
         <div className="aboutTxt" id='target1' >
-          <h2>페스티벌이 있는 모든 곳에</h2>
-          <h2 className='t2'>Fing : Festival - ing</h2>
+          <h2>실 거주자들의 <span className='t2'>찐</span> 거주후기를 보다.</h2>
+          <h2 className='t2'>Viewing : Review + Viewing</h2>
         </div>
       </div>
       <div className="men2" >
-        <div className="aboutTxt" id='target2'>
-          <h2><span className='t2'>Fing</span>은 여러분과 함께 성장합니다.</h2>
-          <h2>더욱 많은 페스티벌을 <span className='t2'>Fing</span>에 담겠습니다.</h2>
+        <div className="aboutTxt1" id='target2'>
+          <h2><span className='t2'>Viewing</span>은 여러분과 함께 성장합니다.</h2>
+          <h2>더욱 많은 리뷰들로 <span className='t2'>Viewing</span>을 도와주세요.</h2>
         </div>
       </div>
       <div className="men3">
-        <div className="aboutTxt" id='target3'>
-          <h2>당신의 페스티벌?<span className='t2'> Fing</span>과 함께</h2>
-          <h2>페스티벌 공유 & 홍보 역시 <span className='t2'> Fing</span></h2>
+        <div className="aboutTxt2" id='target3'>
+          <h2>설레이는 자취생활, 새로운 지역에서 홀로서기.</h2>
+          <h2><span className='t2'>Viewing</span>이 힘이 되어드립니다.</h2>
         </div>
       </div>
       <div className="men4" >
-        <div className="aboutTxt" id='target4'>
-          <h2><span className='t2'>Fing</span>은 Tour API 4.0과 함께 합니다.</h2>
-          <h2>페스티벌이 있는 곳엔? 역시 <span className='t2'>Fing</span></h2>
+        <div className="aboutTxt3" id='target4'>
+          <h2><span className='t2'>Viewing</span>은 제 10회 K-해커톤과 함께합니다.</h2>
+          <h2>충청권 팀.<span className='t2'> 핑퐁</span></h2>
+        </div>
+        <div className="aboutTxt4">
           <a href='https://kr.freepik.com/psd/wall'>Wall psd는 rawpixel.com - kr.freepik.com가 제작함</a>
         </div>
       </div>

@@ -90,7 +90,7 @@ a::after {
   left: 0;
   width: 100%;
   height: 3px;
-  background: #3498db;
+  background: #FF6363;
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.5s;
@@ -112,19 +112,26 @@ a:hover::after {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  padding-right: 2rem;
+  padding-right: 1.5rem;
   background-color: #FF6363;
   border-radius: 50px;
   cursor: pointer;
-
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   -webkit-animation: bounce-in-right 2s both;
 	        animation: bounce-in-right 2s both;
+  
 }
-
+#downImg{
+  border-radius: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .toDownload h2{
   color: white;
   font-family: 'yg-jalnan';
   font-size: 1.8rem;
+  margin: 0 !important;
 }
 
 #goPS{
@@ -275,29 +282,35 @@ a:hover::after {
 }
 
 
+
+
 /*-------------for Footer-----------*/
 
 .footer{
   display: flex;
   flex-flow: column wrap;
-  background-color: #ffd4d4;
-  padding-top: 3rem;
+  background-color: #838383;
+  padding-top: 5rem;
   padding-left: 20rem;
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
   margin-top: 10rem;
+  color: #FAF5E4;
 }
 
 .footer h2{
   font-family: 'GmarketSansMedium';
   font-size: 1.5rem;
-  color: rgb(80, 70, 70);
+  color: #FF6363;
+}
+
+.footerLogo h2:nth-child(2){
+  margin: 0 !important;
 }
 
 .pageIcons{
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 1rem;
-
 }
 
 .pageIcons .icons{
@@ -307,10 +320,12 @@ a:hover::after {
 
 .footerLogo{
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: space-between;
   width: 55%;
 }
+
+
 
 
 .txts{
@@ -336,50 +351,108 @@ a:hover::after {
 
 /*------------------------------------------ABOUT-------------------------------------------------*/
 
+
+.grey{
+  color: #FF6363 !important;
+  -webkit-transition-duration:0.4s;
+  -webkit-transition-timing-function:ease;
+  transition-duration:0.4s;
+  transition-timing-function:ease;
+  font-family: 'LeferiPoint-BlackA';
+}
+
 .men1{
   height: 1050px;
-  background-image: url("../public/img/pic1.jpg");
+  background-image: url("../public/img/img1.jpg");
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.aboutTxt{
-  font-family: 'GmarketSansMedium';
-  font-size: 2.5rem;
-  color: rgb(250, 170, 170);
-  display: flex;
-  flex-flow: column nowrap;
-  text-align: center;
-}
-
 .men2{
   height: 1050px;
-  background-image: url("../public/img/pic2.jpg");
+  background-image: url("../public/img/img2.jpg");
   background-size: cover;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .men3{
   height: 1050px;
-  background-image: url("../public/img/pic3.jpg");
+  background-image: url("../public/img/img3.jpg");
   background-size: cover;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .men4{
   height: 1050px;
-  background-image: url("../public/img/pic4.jpg");
+  background-image: url("../public/img/img4.jpg");
   background-size: cover;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
+
+.aboutTxt{
+  font-family: 'GmarketSansMedium';
+  font-size: 2.5rem;
+  color: rgb(63, 63, 63);
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+  line-height: 1.0em;
+}
+.aboutTxt1{
+  font-family: 'GmarketSansMedium';
+  font-size: 2.5rem;
+  color: rgb(63, 63, 63);
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 9rem;
+  text-align: center;
+  line-height: 1.0em;
+}
+.aboutTxt2{
+  font-family: 'GmarketSansMedium';
+  font-size: 2.5rem;
+  color: rgb(63, 63, 63);
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 10rem;
+  margin-left: 10rem;
+  line-height: 1.0em;
+}
+.aboutTxt3{
+  font-family: 'GmarketSansMedium';
+  font-size: 2.5rem;
+  color: rgb(63, 63, 63);
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: right;
+  margin-top: 10rem;
+  margin-right: 6rem;
+  line-height: 1.0em;
+}
+
+.aboutTxt4{
+  font-family: 'GmarketSansMedium';
+  font-size: 1.5rem;
+  color: rgb(63, 63, 63);
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: right;
+  margin-top: 30rem;
+  margin-right: 6rem;
+  line-height: 1.0em;
+}
+
+
+
 
 
 

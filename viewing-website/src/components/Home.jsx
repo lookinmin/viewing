@@ -48,7 +48,7 @@ export const Home = () => {
       <div className='mainPage'>
         <h2 id='logo' onClick={() => moveTop()} className={scrollPosition < 1000 ? "white" : "orange"}>Viewing</h2>
         <div className="top">
-          <h2>당신의 새로운 집</h2>
+          <h2>당신의 새로운 집,</h2>
           <h2>Viewing과 함께<MdHomeFilled size="70"/></h2>
           
         </div>
@@ -57,14 +57,14 @@ export const Home = () => {
       <Menu/>
 
       <div className="toDownload">
-        <img src="./img/fingLogo.png" alt="fing" height="70px"/>
-        <h2>viewing 설치</h2>
+        <img src="./img/viewingLogo.png" alt="fing" height="60px" id='downImg'/>
+        <h2>Viewing 설치</h2>
         <img id='goPS' src="./img/playstore.png" alt="fing" height="30px"/>
       </div>
 
       <div className="txtsBox">
-        <h2 id='y1'>설레이는 자취생활</h2>
-        <h2 id='y2'><span className='t1' ref={target1}>Viewing<MdHomeFilled size="60" color= '#FF6363'/></span>으로부터</h2>
+        <h2 id='y1'>설레이는 자취생활,</h2>
+        <h2 id='y2'><span className='t1' ref={target1}>Viewing<MdHomeFilled size="60" color= '#FF6363'/></span>으로부터.</h2>
       </div>
 
       <div className="itemsList">
@@ -90,9 +90,9 @@ export const Home = () => {
 
       <div className="exOne">
         <div className="txtBox">
-          <h2>페스티벌이 열리는 모든곳에</h2>
-          <h3>페스티벌에 대한 정보는</h3>
-          <h3><span className='t1' ref={target2}>Fing</span>과 함께</h3>
+          <h2>집 구하기 막막할 때</h2>
+          <h3>찐 거주리뷰는</h3>
+          <h3><span className='t1' ref={target2}>Viewing</span>과 함께</h3>
         </div>
         <img className='homeImg' ref={img1} src="./img/pic1.jpg" height="500px" alt="" />
       </div>
@@ -100,18 +100,18 @@ export const Home = () => {
       
       <div className="exOne">
         <div className="txtBox">
-          <h2>지역 소상공인들을 위한</h2>
-          <h3>상생하는 페스티벌은</h3>
-          <h3><span className='t1' ref={target3}>Fing</span>과 함께</h3>
+          <h2>사회 초년생들을 위한</h2>
+          <h3>설레이는 자취생활은</h3>
+          <h3><span className='t1' ref={target3}>Viewing</span>과 함께</h3>
         </div>
         <img className='homeImg' ref={img2} src="./img/pic2.jpg" height="500px" alt="" />
       </div>
 
       <div className="exOne">
         <div className="txtBox">
-          <h2>페스티벌만 보고 갈거야?</h2>
-          <h3>근처 놀거리 먹거리 역시</h3>
-          <h3><span className='t1' ref={target4}>Fing</span>과 함께</h3>
+          <h2>평균 보증금, 월세를 한 눈에</h2>
+          <h3>지역별로 나누어</h3>
+          <h3><span className='t1' ref={target4}>Viewing</span>과 함께</h3>
         </div>
         <img className='homeImg' ref={img3} src="./img/pic3.jpg" height="500px" alt="" />
       </div>
@@ -120,9 +120,5 @@ export const Home = () => {
      <Footer></Footer>
 
     </div>
-
-    
-    
-
   )
 }
