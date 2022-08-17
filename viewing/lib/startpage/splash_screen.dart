@@ -32,7 +32,7 @@ class _SplashState extends State<Splash> {
           children: [
             SizedBox(height: screenHeight * 0.22),
             Image.asset(
-              '/images/logo2-5white.png', //종원아 경로 assets부터 하니까 이미지오류떠 힝
+              'assets/images/logo2-5white.png', //종원아 경로 assets부터 하니까 이미지오류떠 힝-> 해결
               height: screenWidth * 0.5,
               width: screenHeight * 0.5,
             ),

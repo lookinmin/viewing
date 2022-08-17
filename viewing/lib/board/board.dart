@@ -239,7 +239,7 @@ class Board extends StatelessWidget {
 
 Widget logo() {
   return Image.asset(
-    'images/mark.jpg',
+    'assets/images/mark.jpg',
   );
 }
 

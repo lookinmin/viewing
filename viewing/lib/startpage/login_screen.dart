@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Home()));
                   },
-                  child: Image.asset('/images/kakao_login_large_Kor.png'),
+                  child: Image.asset('assets/images/kakao_login_large_Kor.png'),
                 ),
                 SizedBox(
                   height: screenHeight * 0.03,

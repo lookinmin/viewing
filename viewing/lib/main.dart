@@ -9,10 +9,9 @@ import './writing/writingboard.dart';
 import './mypage/mypage.dart';
 import './startpage/splash_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:kpostal/kpostal.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Color.fromARGB(200, 255, 255, 255)));
   runApp(const Viewing());
 }
 
@@ -22,6 +21,9 @@ class Viewing extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // 투명색
+    ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -86,7 +88,7 @@ class _HomeState extends State<Home> {
                       flex: 1, fit: FlexFit.tight, child: AddressSearch())
                   : Container(),
               Expanded(
-                flex: 8,
+                flex: 10,
                 child: IndexedStack(
                   index: currentIdx,
                   children: _pages.map((page) {
@@ -152,7 +154,7 @@ class _HomeState extends State<Home> {
       onPressed: () {
         showModalBottomSheet<void>(
           context: context,
-          backgroundColor: Color.fromARGB(255, 31, 31, 31),
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
               side: BorderSide.none,
               borderRadius: BorderRadius.only(
@@ -246,15 +248,9 @@ class AddressSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-        color: Colors.grey,
-        width: 2.0,
-      ))),
+      height: 50,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -270,11 +266,19 @@ class AddressSearch extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Flexible(
             flex: 8,
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: '검색할 주소를 입력하세요',
-              ),
+            child: TextButton(
+              onPressed: () async {
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => KpostalView(
+                        callback: (Kpostal result) {
+                          print(result.address);
+                        },
+                      ),
+                    ));
+              },
+              child: Text('검색할 주소를 입력하세요',style: TextStyle(color: Colors.grey),),
             ),
           ),
           Expanded(
