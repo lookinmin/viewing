@@ -364,6 +364,7 @@ class _MapState extends State<Map> {
                     child: Container(
                       height: 150,
                       margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.fromLTRB(40, 25, 40, 25),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20), //모서리를 둥글게
                           border: Border.all(color: Colors.black12, width: 3),
@@ -371,35 +372,104 @@ class _MapState extends State<Map> {
                       child: Row(
                         children: [
                           Flexible(
-                            flex: 6,
+                            flex: 2,
                             fit: FlexFit.tight,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('별점 5.8'),
-                                Text('6개의 리뷰'),
-                                Text('편의점이 가장 가까운 곳!')
+                                Container(
+                                  //color: Colors.red,
+                                  child: Text("충대도담",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 7),
+                                  //color: Colors.blue,
+                                  child: Text("충청북도 청주시 서원구 성봉로 242번길 31-21",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        //fontWeight: FontWeight.w800,
+                                        color: Colors.grey,
+                                      )),
+                                ),
+                                Text("충청북도 청주시 서원구 개신도 262-8",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      //fontWeight: FontWeight.w800,
+                                      color: Colors.grey,
+                                    )),
                               ],
                             ),
                           ),
-                          Spacer(
-                            flex: 1,
-                          ),
                           Flexible(
-                              flex: 9,
                               fit: FlexFit.tight,
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('노네임빌'),
-                                  Text('충북 청주시 서원구 나도동 몰라')
+                                  Row(
+                                    children: [
+                                      Text(
+                                        ' 3.0',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        ' (리뷰10)',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Color.fromARGB(
+                                                255, 255, 154, 59)),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(child: setStar(3)),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 20),
+                                    child: Row(
+                                      //mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          flex: 9,
+                                          child: InkWell(
+                                              onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Room())),
+                                              child: Text(' 클릭해서 리뷰보기',
+                                                  textAlign: TextAlign.end,
+                                                  style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        255, 99, 99, 1),
+                                                    fontSize: 13,
+                                                  ))),
+                                        ),
+                                        Flexible(
+                                            flex: 1,
+                                            child: Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 8,
+                                              color: Color.fromRGBO(
+                                                  255, 99, 99, 1),
+                                            ))
+                                      ],
+                                    ),
+                                  )
                                 ],
                               )),
                         ],
                       ),
                     ),
+
+
+
+
                   ),
                 ),
               ),
@@ -420,4 +490,113 @@ dynamic json() async {
 
   var json = jsonDecode(uriResponse.body);
   return json;
+}
+
+
+Widget setStar(int num) {
+  //평균별점 int로 받아서 노란별로 띄우기 응애
+  if (num == 1) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Colors.grey),
+                Icon(Icons.star, color: Colors.grey),
+                Icon(Icons.star, color: Colors.grey),
+                Icon(Icons.star, color: Colors.grey),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
+  if (num == 2) {
+    return Row(
+      children: [
+        Icon(
+          Icons.sentiment_dissatisfied,
+          color: Color.fromARGB(255, 255, 154, 59),
+          size: 50,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Colors.grey),
+                Icon(Icons.star, color: Colors.grey),
+                Icon(Icons.star, color: Colors.grey),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
+  if (num == 3) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Colors.grey),
+                Icon(Icons.star, color: Colors.grey),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
+  if (num == 4) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Colors.grey),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  } else {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+                Icon(Icons.star, color: Color.fromARGB(255, 255, 154, 59)),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
 }
