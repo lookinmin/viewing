@@ -375,7 +375,7 @@ class _BoardListState extends State<BoardList> {
       child: Container(
         padding: EdgeInsets.all(10),
         child: SizedBox(
-          height: 65,
+          height: 60,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
