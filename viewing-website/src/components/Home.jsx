@@ -1,12 +1,11 @@
 import { Footer } from './Footer'
 import { Menu } from './Menu'
-import { MdRoom, MdHomeFilled, MdOutlineAttachMoney } from 'react-icons/md';
+import { MdHomeFilled } from 'react-icons/md';
 import styles from './Home.module.css';
 import React, { useRef, useState, useEffect } from 'react';
 import { useIntersectionObserver } from './useIntersectionObserver.ts';
-import { IoAnalyticsOutline,IoPartlySunnyOutline, IoClipboardOutline } from "react-icons/io5";
+import { IoClipboardOutline,IoLogoGooglePlaystore } from "react-icons/io5";
 import { GiMoneyStack, GiPaperClip } from "react-icons/gi";
-import { GrClipboard } from "react-icons/gr";
 
 
 
@@ -37,7 +36,7 @@ export const Home = () => {
   useIntersectionObserver(target2, styles.animation);
   useIntersectionObserver(target3, styles.animation);
   useIntersectionObserver(target4, styles.animation);
-
+  //<MdHomeFilled size="70" color='#FF6363'/>
   useIntersectionObserver(img1, styles.imgAni);
   useIntersectionObserver(img2, styles.imgAni);
   useIntersectionObserver(img3, styles.imgAni);
@@ -49,7 +48,7 @@ export const Home = () => {
         <h2 id='logo' onClick={() => moveTop()} className={scrollPosition < 1000 ? "white" : "orange"}>Viewing</h2>
         <div className="top">
           <h2>당신의 새로운 집,</h2>
-          <h2>Viewing과 함께<MdHomeFilled size="70"/></h2>
+          <h2><span className='t2'>뷰잉(Viewing)</span>과 함께</h2>
           
         </div>
       </div>
@@ -58,8 +57,8 @@ export const Home = () => {
 
       <div className="toDownload">
         <img src="./img/viewingLogo.png" alt="fing" height="60px" id='downImg'/>
-        <h2>Download</h2>
-        <img id='goPS' src="./img/playstore.png" alt="fing" height="30px"/>
+        <h2 id='yyy'>Download</h2>
+        <IoLogoGooglePlaystore color='#FAF5E4' size={30}/>
       </div>
 
       <div className="txtsBox">

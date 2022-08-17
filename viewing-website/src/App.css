@@ -159,6 +159,10 @@ a:hover::after {
   cursor: pointer;
 }
 
+#yyy{
+  padding-right: 10px;
+}
+
 .white{
   color: #FAF5E4 !important;
   -webkit-transition-duration:0.4s;
@@ -180,11 +184,16 @@ a:hover::after {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
+
   position: absolute;
   top: 30%;
-  line-height: 10em;
+  line-height: 6em;
   -webkit-animation: slide-in-bck-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: slide-in-bck-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.top h2{
+  color : rgb(63, 63, 63) !important;
 }
 
 .mainPage h2{
@@ -313,6 +322,10 @@ a:hover::after {
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 1rem;
+  width: 15vw;
+  align-items: baseline;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .pageIcons .icons{
