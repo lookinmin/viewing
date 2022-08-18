@@ -21,69 +21,72 @@ class Room extends StatelessWidget {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.fromLTRB(0, statusBarHeight, 0, 0),
-          child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Container(
-                height: 200,
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                    color: Colors.grey,
-                    width: 2.0,
-                  ))),
-                  child: CarouselSlider(
-                    items: roomImg.map((e) {
-                      return Builder(builder: (BuildContext context) {
-                        return Container(
-                          // width: MediaQuery.of(context).size.width + 100,
-                          margin: EdgeInsets.symmetric(horizontal: 30.0),
-                          width: double.infinity,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              e,
-                              fit: BoxFit.fill,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Container(
+                  height: 200,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                    padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 2.0,
+                    ))),
+                    child: CarouselSlider(
+                      items: roomImg.map((e) {
+                        return Builder(builder: (BuildContext context) {
+                          return Container(
+                            // width: MediaQuery.of(context).size.width + 100,
+                            margin: EdgeInsets.symmetric(horizontal: 30.0),
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                e,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                          ),
-                        );
-                      });
-                    }).toList(),
-                    options: CarouselOptions(
-                        autoPlay: false,
-                        scrollDirection: Axis.horizontal,
-                        height: 200),
-                  ),
-                )),
-            Container(
-              height: 190,
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.grey,
-                width: 2.0,
-              ))),
-              child: RoomGrade(
-                  address: "개신동 충대로 1 13번길", roomName: "개신동 해오름빌", grade: "2"),
-            ),
-            Container(
-              height: 130,
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.grey,
-                width: 2.0,
-              ))),
-              child: CheckList(),
-            ),
-            RoomReviews(),
-          ],
+                          );
+                        });
+                      }).toList(),
+                      options: CarouselOptions(
+                          autoPlay: false,
+                          scrollDirection: Axis.horizontal,
+                          height: 200),
+                    ),
+                  )),
+              Container(
+                height: 190,
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                  color: Colors.grey,
+                  width: 2.0,
+                ))),
+                child: RoomGrade(
+                    address: "개신동 충대로 1 13번길",
+                    roomName: "개신동 해오름빌",
+                    grade: "2"),
+              ),
+              Container(
+                height: 130,
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                  color: Colors.grey,
+                  width: 2.0,
+                ))),
+                child: CheckList(),
+              ),
+              RoomReviews(),
+            ],
+          ),
         ),
-      ),),
+      ),
     );
   }
 }
@@ -288,7 +291,7 @@ class _RoomGrade extends State<RoomGrade> {
                 Icon(Icons.where_to_vote),
                 Text(
                   widget.address,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 14),
                 ),
               ],
             ),
@@ -359,13 +362,19 @@ Widget switchImg(String grade) {
   int num = int.parse(grade);
   if (num < 1) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("assets/images/rating.png"));
+        width: 100,
+        height: 100,
+        child: Image.asset("assets/images/rating.png"));
   } else if (num <= 2 && num > 1) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("assets/images/rating.png"));
+        width: 100,
+        height: 100,
+        child: Image.asset("assets/images/rating.png"));
   } else if (num <= 3 && num > 2) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("assets/images/rating.png"));
+        width: 100,
+        height: 100,
+        child: Image.asset("assets/images/rating.png"));
   } else if (num <= 4 && num > 3) {
     return SizedBox(
         width: 100, height: 100, child: Image.asset("assets/images/star.png"));
@@ -403,14 +412,21 @@ Widget barGraph(var grade) {
 }
 
 Widget Review(int num, var date, var name, var pic) {
+  List<String> roomImg = [
+    "assets/images/room1.jpg",
+    "assets/images/room2.jpg",
+    "assets/images/room3.jpg",
+    "assets/images/room4.jpg",
+    "assets/images/room5.jpg",
+  ];
   return Container(
     padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-    margin: EdgeInsets.fromLTRB(13, 0, 13, 0),
+    margin: EdgeInsets.fromLTRB(11, 0, 11, 0),
     decoration: BoxDecoration(
         border: Border(
             bottom: BorderSide(
       color: Colors.grey,
-      width: 1.0,
+      width: 1.5,
     ))),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -420,28 +436,56 @@ Widget Review(int num, var date, var name, var pic) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             setEmoji(num, name),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 8, 5, 0),
-              child: Text(
-                date,
-                style: TextStyle(fontSize: 14),
-              ),
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-              width: 150,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Image.asset(
-                  pic,
-                  fit: BoxFit.fill,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
+                child: Text(
+                  date,
+                  style: TextStyle(fontSize: 14),
                 ),
               ),
+              Container(
+                width: 190,
+                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    chosenTxt("남향"),
+                    chosenTxt("저층"),
+                    chosenTxt("500/35"),
+                  ],
+                ),
+              ),
+            ]),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CarouselSlider(
+              items: roomImg.map((e) {
+                return Builder(builder: (BuildContext context) {
+                  return Container(
+                    // width: MediaQuery.of(context).size.width + 100,
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        e,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  );
+                });
+              }).toList(),
+              options: CarouselOptions(
+                  autoPlay: false,
+                  scrollDirection: Axis.horizontal,
+                  height: 200),
             ),
             txtForRoom()
           ],
@@ -458,7 +502,7 @@ Widget setEmoji(int num, var name) {
         Icon(
           Icons.sentiment_very_dissatisfied,
           color: Color.fromARGB(255, 255, 154, 59),
-          size: 50,
+          size: 55,
         ),
         Column(
           children: [
@@ -473,7 +517,7 @@ Widget setEmoji(int num, var name) {
             ),
             Text(
               name,
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 14),
             )
           ],
         )
@@ -486,7 +530,7 @@ Widget setEmoji(int num, var name) {
         Icon(
           Icons.sentiment_dissatisfied,
           color: Color.fromARGB(255, 255, 154, 59),
-          size: 50,
+          size: 55,
         ),
         Column(
           children: [
@@ -501,7 +545,7 @@ Widget setEmoji(int num, var name) {
             ),
             Text(
               name,
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 14),
             )
           ],
         )
@@ -514,7 +558,7 @@ Widget setEmoji(int num, var name) {
         Icon(
           Icons.sentiment_satisfied,
           color: Color.fromARGB(255, 255, 154, 59),
-          size: 50,
+          size: 55,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,7 +576,7 @@ Widget setEmoji(int num, var name) {
               padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
               child: Text(
                 name,
-                style: TextStyle(fontSize: 13),
+                style: TextStyle(fontSize: 14),
               ),
             )
           ],
@@ -546,7 +590,7 @@ Widget setEmoji(int num, var name) {
         Icon(
           Icons.sentiment_satisfied_alt,
           color: Color.fromARGB(255, 255, 154, 59),
-          size: 50,
+          size: 55,
         ),
         Column(
           children: [
@@ -561,7 +605,7 @@ Widget setEmoji(int num, var name) {
             ),
             Text(
               name,
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 14),
             )
           ],
         )
@@ -573,7 +617,7 @@ Widget setEmoji(int num, var name) {
         Icon(
           Icons.sentiment_very_satisfied,
           color: Color.fromARGB(255, 255, 154, 59),
-          size: 50,
+          size: 55,
         ),
         Column(
           children: [
@@ -588,7 +632,7 @@ Widget setEmoji(int num, var name) {
             ),
             Text(
               name,
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 14),
             )
           ],
         )
@@ -599,40 +643,37 @@ Widget setEmoji(int num, var name) {
 
 Widget txtForRoom() {
   return Container(
-    margin: EdgeInsets.fromLTRB(0, 0, 13, 0),
+    margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: 190,
-          margin: EdgeInsets.fromLTRB(7, 0, 0, 7),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              chosenTxt("남향"),
-              chosenTxt("저층"),
-              chosenTxt("500/35"),
-            ],
+        Text(
+          '장점',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.red
           ),
         ),
-        Container(
-          width: 190,
-          height: 80,
-          child: Row(
-            children: [
-              Flexible(
-                child: RichText(
-                  overflow: TextOverflow.fade,
-                  strutStyle: StrutStyle(fontSize: 13.0),
-                  text: TextSpan(
-                      text:
-                          '신축이라 깨끗하고 좋은데 쓰레기 관리가 너무 안돼요ㅜㅜ 여름이 되니까 악취가 심한편입니다. 냄새 예민하신분들은 고려하셔야 할 것 같아요! 집 사이즈는 작지만 가구상태나 도배는 깨끗하고 좋아요!',
-                      style: TextStyle(
-                          color: Colors.black, height: 1.4, fontSize: 12.0)),
-                ),
-              ),
-            ],
+        SizedBox(height: 15,),
+        Text(
+          '신축이라 깨끗하고 좋은데 가구상태나 도배는 깨끗하고 좋아요!'
+        ),
+        Divider(
+          height: 20,
+          color: Colors.grey,
+        ),
+        Text(
+          '단점',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue
           ),
-        )
+        ),SizedBox(height: 15,),
+        Text(
+          '쓰레기 관리가 너무 안돼요ㅜㅜ 여름이 되니까 악취가 심한편입니다. 냄새 예민하신분들은 고려하셔야 할 것 같아요! 집 사이즈는 작지만'
+        ),
       ],
     ),
   );
