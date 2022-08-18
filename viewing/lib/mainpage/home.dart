@@ -40,7 +40,8 @@ class MainHome extends StatelessWidget {
   ];
 
   final roomInfo = [
-    BuilidingInfo('assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo(
+        'assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
     BuilidingInfo('assets/coffee.png', '양지빌', "5,200,000", "320,000", "52,000"),
     BuilidingInfo('assets/coffee.png', '보성빌', "5,300,000", "330,000", "53,000"),
     BuilidingInfo('assets/coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
@@ -92,7 +93,9 @@ class MainHome extends StatelessWidget {
           //중간 방 리스트
           Flexible(
             flex: 4,
-            child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo),
+            child: Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo)),
           ),
           //hot
           Flexible(flex: 7, child: Board(board: boardInfo)),
@@ -167,14 +170,8 @@ class _RoomInfo extends State<RoomInfo> {
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.9),
-                  spreadRadius: 0,
-                  blurRadius: 3,
-                  offset: Offset(0, 7), // changes position of shadow
-                )
-              ]),
+              border: Border.all(
+                  width: 1, color: Color.fromARGB(255, 204, 204, 204))),
           child: SizedBox(
             width: 240,
             child: Row(
@@ -369,16 +366,9 @@ class _BoardListState extends State<BoardList> {
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 242, 242, 242),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.9),
-              spreadRadius: 0,
-              blurRadius: 3,
-              offset: Offset(0, 7), // changes position of shadow
-            )
-          ]),
+        color: Color.fromARGB(255, 242, 242, 242),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Container(
         padding: EdgeInsets.all(10),
         child: SizedBox(
