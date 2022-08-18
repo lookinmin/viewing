@@ -40,7 +40,8 @@ class MainHome extends StatelessWidget {
   ];
 
   final roomInfo = [
-    BuilidingInfo('assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo(
+        'assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
     BuilidingInfo('assets/coffee.png', '양지빌', "5,200,000", "320,000", "52,000"),
     BuilidingInfo('assets/coffee.png', '보성빌', "5,300,000", "330,000", "53,000"),
     BuilidingInfo('assets/coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
@@ -159,8 +160,11 @@ class _RoomInfo extends State<RoomInfo> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Room())),
+        onTap: () {
+          Navigator.of(context, rootNavigator: true).push(
+            MaterialPageRoute(builder: (context) => Room()),
+          );
+        },
         child: Container(
           padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
           margin: EdgeInsets.all(10),
@@ -265,36 +269,30 @@ class _RoomInfo extends State<RoomInfo> {
                                   ))
                             ],
                           ),
-                          InkWell(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Room())),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                    flex: 9,
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Text('보러가기',
-                                          textAlign: TextAlign.end,
-                                          style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  248, 180, 0, 1.0),
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w700)),
-                                    )),
-                                Flexible(
-                                    flex: 1,
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 8,
-                                      color: Color.fromRGBO(248, 180, 0, 1.0),
-                                    ))
-                              ],
-                            ),
-                          )
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                  flex: 9,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text('보러가기',
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                248, 180, 0, 1.0),
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w700)),
+                                  )),
+                              Flexible(
+                                  flex: 1,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 8,
+                                    color: Color.fromRGBO(248, 180, 0, 1.0),
+                                  ))
+                            ],
+                          ),
                         ],
                       ),
                     ))

@@ -17,8 +17,10 @@ class Room extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.fromLTRB(0, statusBarHeight, 0, 0),
           child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -81,7 +83,7 @@ class Room extends StatelessWidget {
             RoomReviews(),
           ],
         ),
-      )),
+      ),),
     );
   }
 }
