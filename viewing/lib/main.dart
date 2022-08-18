@@ -23,6 +23,7 @@ class Viewing extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // 투명색
+      statusBarIconBrightness:Brightness.dark 
     ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -272,6 +273,8 @@ class AddressSearch extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (_) => KpostalView(
+                        useLocalServer: true,
+                        localPort: 7001,
                         callback: (Kpostal result) {
                           print(result.address);
                         },
