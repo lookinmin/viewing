@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viewing/writing/roomreviewsecond.dart';
 
 void main() => runApp(WritingRoom());
 
@@ -9,16 +10,21 @@ class WritingRoom extends StatefulWidget {
   State<WritingRoom> createState() => _WritingRoomState();
 }
 
+class HouseDir {
+  String string;
+  bool clicked = false;
+  HouseDir(this.string);
+}
+
 class _WritingRoomState extends State<WritingRoom> {
   final List<String> _yearList = [
-    '2022년까지',
-    '2023년까지',
-    '2024년까지',
-    '2025년까지',
-    '2026년까지',
-    '2027년까지'
+    '1년 이하',
+    '2년 이하',
+    '3년 이하',
+    '4년 이하',
+    '5년 이하',
   ];
-  String _selectedYear = '2022년까지';
+  String _selectedYear = '1년 이하';
 
   final List<String> _floorList = [
     '저층',
@@ -26,6 +32,21 @@ class _WritingRoomState extends State<WritingRoom> {
     '고층',
   ];
   String _selectedFloor = '저층';
+
+  List houseDir = [
+    HouseDir('동'),
+    HouseDir('서'),
+    HouseDir('남'),
+    HouseDir('북'),
+  ];
+
+  List typeClick = <bool>[false, false];
+
+  int dirCnt = 0;
+
+  final depositTxt = TextEditingController();
+  final monthlyTxt = TextEditingController();
+  final manageFeeTxt = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +72,8 @@ class _WritingRoomState extends State<WritingRoom> {
               primary: Color.fromRGBO(255, 99, 99, 1),
             ),
             onPressed: () {
-              print('btnClick');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RoomReviewSecond()));
             },
             child: Text('다음')),
       ),
@@ -75,44 +97,174 @@ class _WritingRoomState extends State<WritingRoom> {
         residenceType(context),
         residencePeriod(context),
         residenceFloor(context),
+        residenceDir(context),
+        deposit(context),
+        monthly(context),
         managementFee(context)
       ],
     );
   }
 
-  Container managementFee(BuildContext context) {
+  Container monthly(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
-              '관리비',
+              '월세/전세/매매',
               style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
             ),
           ),
           Container(
-            height: 100,
             decoration: BoxDecoration(
                 color: Color.fromARGB(255, 221, 221, 221),
                 borderRadius: BorderRadius.circular(8)),
             padding: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
             child: TextField(
-              maxLines: 5,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none, //검색 아이콘 추가
-                  contentPadding:
-                      EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
-                  hintText:
-                      '집품: 102동 기준 공용 관리비 15만원 정도예요. 부대 시설 비용 다 포함입니다~. 전기세는 여름에 에어컨을 종일 틀고 20만원 정도 나왔어요.'),
+              decoration: InputDecoration(hintText: '월세 30만원냈어요~'),
+              controller: monthlyTxt,
+              maxLines: 1,
             ),
-          ),
+          )
         ],
       ),
+    );
+  }
+
+  Container deposit(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              '보증금',
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 221, 221, 221),
+                borderRadius: BorderRadius.circular(8)),
+            padding: EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: '보증금 300만원냈어요~',
+                border: InputBorder.none,
+                contentPadding:
+                    EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
+              ),
+              controller: depositTxt,
+              maxLines: 1,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container residenceDir(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              '집 방향',
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 221, 221, 221),
+                borderRadius: BorderRadius.circular(8)),
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    dirCheckBox(houseDir[0]),
+                    dirCheckBox(houseDir[1]),
+                    dirCheckBox(houseDir[2]),
+                    dirCheckBox(houseDir[3]),
+                  ],
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  margin: EdgeInsets.only(top: 5),
+                  child: Text(
+                    '예시) 집이 남동향이라면 동과 남에 체크해주세요',
+                    style: TextStyle(color: Colors.blue, fontSize: 10),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Row dirCheckBox(houseDir) {
+    return Row(
+      children: [
+        Text(houseDir.string),
+        Checkbox(
+          value: houseDir.clicked,
+          onChanged: (value) {
+            setState(() {
+              houseDir.clicked = !houseDir.clicked;
+              houseDir.clicked ? dirCnt++ : dirCnt--;
+            });
+          },
+          activeColor: Color.fromRGBO(255, 99, 99, 1),
+        ),
+      ],
+    );
+  }
+
+  Column managementFee(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: Text(
+            '관리비',
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+          ),
+        ),
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 221, 221, 221),
+              borderRadius: BorderRadius.circular(8)),
+          padding: EdgeInsets.all(10),
+          width: MediaQuery.of(context).size.width,
+          child: TextField(
+            maxLines: 5,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding:
+                    EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
+                hintText:
+                    '102동 기준 공용 관리비 15만원 정도예요. 부대 시설 비용 다 포함입니다~. 전기세는 여름에 에어컨을 종일 틀고 20만원 정도 나왔어요.'),
+            controller: manageFeeTxt,
+          ),
+        ),
+      ],
     );
   }
 
@@ -250,21 +402,43 @@ class _WritingRoomState extends State<WritingRoom> {
                   margin: EdgeInsets.only(right: 10),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                          onPrimary:
+                              !typeClick[0] ? Colors.black : Colors.white,
                           fixedSize: Size(
                               MediaQuery.of(context).size.width / 2 - 40, 50),
-                          primary: Color.fromRGBO(255, 99, 99, 1)),
-                      onPressed: () {},
-                      child: Text('아파트/오피스텔')),
+                          primary: !typeClick[0]
+                              ? Colors.white
+                              : Color.fromRGBO(255, 99, 99, 1)),
+                      onPressed: () {
+                        setState(() {
+                          typeClick[0] = !typeClick[0];
+                          if (typeClick[1]) {
+                            typeClick[1] = false;
+                          }
+                        });
+                      },
+                      child: Text('아파트/빌라/주택')),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: EdgeInsets.only(right: 10),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                          onPrimary:
+                              !typeClick[1] ? Colors.black : Colors.white,
                           fixedSize: Size(
                               MediaQuery.of(context).size.width / 2 - 40, 50),
-                          primary: Color.fromRGBO(255, 99, 99, 1)),
-                      onPressed: () {},
-                      child: Text('원룸/빌라/주택', style: TextStyle(fontSize: 16))),
+                          primary: !typeClick[1]
+                              ? Colors.white
+                              : Color.fromRGBO(255, 99, 99, 1)),
+                      onPressed: () {
+                        setState(() {
+                          typeClick[1] = !typeClick[1];
+                          if (typeClick[0]) {
+                            typeClick[0] = false;
+                          }
+                        });
+                      },
+                      child: Text('원룸/투룸/오피스텔')),
                 ),
               ],
             ),
