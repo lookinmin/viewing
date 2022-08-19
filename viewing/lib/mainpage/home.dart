@@ -143,7 +143,7 @@ class __likeLocateState extends State<likeLocation> {
                     ),
                   ),
                   Text(
-                    "내 관심지역 : " + widget.address,
+                    "관심지역 : " + widget.address,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
@@ -190,7 +190,7 @@ class __RoomListState extends State<RoomList> {
                   ),
                 ),
                 Text(
-                  "현재 내 주변 : " + widget.address,
+                  "내 주변 : " + widget.address,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
