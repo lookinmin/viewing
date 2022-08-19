@@ -38,38 +38,7 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
             ratingBar(),
             goodOrBad(context, '장점', goodText),
             goodOrBad(context, '단점', badText),
-            SizedBox(
-              height: 200,
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      '사진을 올려주세요(선택)',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
-                    ),
-                  ),
-                  DottedBorder(
-                    borderType: BorderType.RRect,
-                    radius: Radius.circular(8),
-                    strokeWidth: 3,
-                    color: Color.fromARGB(255, 221, 221, 221),
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      child: Center(
-                          child: Icon(
-                        Icons.add_a_photo,
-                        size: 40,
-                        color: Colors.blue,
-                      )),
-                    ),
-                  ),
-                ],
-              ),
-            )
+            uploadPic()
           ],
         ),
       ),
@@ -84,6 +53,40 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
                   context, MaterialPageRoute(builder: (context) => Home()));
             },
             child: Text('작성완료')),
+      ),
+    );
+  }
+
+  SizedBox uploadPic() {
+    return SizedBox(
+      height: 200,
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              '사진을 올려주세요(선택)',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+            ),
+          ),
+          DottedBorder(
+            borderType: BorderType.RRect,
+            radius: Radius.circular(8),
+            strokeWidth: 3,
+            color: Color.fromARGB(255, 221, 221, 221),
+            child: Container(
+              height: 150,
+              width: 150,
+              child: Center(
+                  child: Icon(
+                Icons.add_a_photo,
+                size: 40,
+                color: Colors.blue,
+              )),
+            ),
+          ),
+        ],
       ),
     );
   }
