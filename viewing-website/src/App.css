@@ -322,7 +322,7 @@ a:hover::after {
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 1rem;
-  width: 15vw;
+  width: 300px;
   align-items: baseline;
   justify-content: space-between;
   cursor: pointer;
