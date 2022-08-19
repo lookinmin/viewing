@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:viewing/mypage/recent.dart';
-import 'dart:ui';
+import 'package:viewing/mypage/modify.dart';
+import 'package:viewing/mypage/regionsetting.dart';
+import 'package:viewing/mypage/mypost.dart';
 
 void main() => runApp(const MyPage());
 
@@ -10,10 +11,13 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => MyPageState(),
-        '/recent': (context) => recent()
+        '/ModifyInfo': (context) => ModifyInfo(),
+        '/RegionSetting': (context) => RegionSetting(),
+        '/myPost': (context) => myPost()
       },
     );
   }
@@ -42,9 +46,12 @@ class _MyPageState extends State<MyPageState> {
               color: Colors.black,
             ),
           ),
-          elevation: 1.0,
-          toolbarHeight: 50.0,
+          centerTitle: false,
+          automaticallyImplyLeading: false, //뒤로가기버튼없애기
+          leading: null,
           backgroundColor: Colors.white,
+          elevation: 1.0, // 그림자 제거
+          toolbarHeight: 50.0,
         ),
         body: Container(
           padding: EdgeInsets.all(3),
@@ -70,7 +77,7 @@ class _MyPageState extends State<MyPageState> {
                       iconColor: Colors.white,
                       leading: Icon(Icons.account_circle, size: 40),
                       title: Text(
-                        "상금주세요님",
+                        "자취새내기님",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text("s2eung1@naver.com"),
@@ -93,7 +100,7 @@ class _MyPageState extends State<MyPageState> {
                     title: Text('회원정보 수정'),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
-                      Navigator.pushNamed(context, '/recent');
+                      Navigator.pushNamed(context, '/ModifyInfo');
                     },
                   ),
                   ListTile(
@@ -103,17 +110,7 @@ class _MyPageState extends State<MyPageState> {
                     title: Text('관심 지역 설정'),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
-                      //Navigator.pushNamed(context, routeName);
-                    },
-                  ),
-                  ListTile(
-                    //dense: true,
-                    minLeadingWidth: 0,
-                    leading: Icon(Icons.youtube_searched_for, size: 17),
-                    title: Text('최근 본 방정보'),
-                    trailing: Icon(Icons.chevron_right),
-                    onTap: () {
-                      //Navigator.pushNamed(context, routeName);
+                      Navigator.pushNamed(context, '/RegionSetting');
                     },
                   ),
                   ListTile(
@@ -121,6 +118,16 @@ class _MyPageState extends State<MyPageState> {
                     minLeadingWidth: 0,
                     leading: Icon(Icons.edit_outlined, size: 17),
                     title: Text('내가 쓴 게시글'),
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/myPost');
+                    },
+                  ),
+                  ListTile(
+                    //dense: true,
+                    minLeadingWidth: 0,
+                    leading: Icon(Icons.youtube_searched_for, size: 17),
+                    title: Text('최근 본 방정보'),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
                       //Navigator.pushNamed(context, routeName);
@@ -200,9 +207,13 @@ class _MyPageState extends State<MyPageState> {
                     dense: true,
                     minLeadingWidth: 0,
                     leading: Icon(Icons.verified_user_outlined, size: 17),
-                    title: Text('앱 버전'),
-                    //trailing: Icon(Icons.add),
-                    onTap: () {},
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('앱 버전'),
+                        Text('v1.2(최신버전)', style: TextStyle(color: Colors.grey))
+                      ],
+                    ),
                   ),
                   ListTile(
                     dense: true,
