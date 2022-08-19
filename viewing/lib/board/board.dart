@@ -13,84 +13,127 @@ class BoardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Viewing 게시판",
-          style: TextStyle(
+          title: const Text(
+            "게시판",
+            style: TextStyle(
+              fontSize: 18.0,
+              letterSpacing: 1.0,
+              fontWeight: FontWeight.bold,
               color: Colors.black,
-              letterSpacing: 2.0,
-              fontWeight: FontWeight.w700),
-        ),
-        backgroundColor: Colors.white,
-        leading: Container(), //Appbar의 뒤로가기 버튼 지우기
-        centerTitle: true, // 글자 가운데 정렬
-        elevation: 0, // 그림자 제거
-        actions:[
-          IconButton(icon:Icon(Icons.search,color:Colors.grey),
-          onPressed:(){
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder:(context)=>SearchPage()));
-          }),
-        ]
-      ),
-      body: Column(
-        children: [
-          Flexible(flex:1,child:DropBox()),
-          Flexible(flex: 1, child: Hashtag()),
-          Flexible(flex: 9, child: Board())
-        ],
-      ),
+            ),
+          ),
+          automaticallyImplyLeading: false,
+          leading: null,
+          backgroundColor: Colors.white,
+          elevation: 1.0, // 그림자 제거
+          toolbarHeight: 50.0,
+          actions: [
+            IconButton(
+                icon: Icon(Icons.search, color: Colors.grey),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SearchPage()));
+                }),
+            IconButton(
+                icon: Icon(Icons.more_vert, color: Colors.grey),
+                onPressed: () {
+                  // 정렬 BottomSheet
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                            height: 200,
+                            color: Color(0xFF737373),
+                            child: Container(
+                                padding: EdgeInsets.zero,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30),
+                                    )),
+                                child: Column(children: [
+                                  // X 버튼
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 10, 0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            icon: Icon(Icons.close,
+                                                color: Colors.grey))
+                                      ],
+                                    ),
+                                  ),
+                                  // 정렬
+                                  Divider(
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        print("최근 리뷰순");
+                                      },
+                                      child: Container(
+                                        color: Colors.white,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          '최근 리뷰순',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )),
+                                  Divider(
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        print("추천순");
+                                      },
+                                      child: Container(
+                                        color: Colors.white,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          '추천순',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )),
+                                  Divider(
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        print("댓글순");
+                                      },
+                                      child: Container(
+                                        color: Colors.white,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          '댓글순',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )),
+                                ])));
+                      });
+                }),
+          ]),
+      body: Board(),
     );
-  }
-}
-
-class DropBox extends StatelessWidget{
-  const DropBox({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        padding:EdgeInsets.fromLTRB(0, 0, 10, 5),
-        child:Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children:[
-            Container(child:Dropdown(),)
-          ]
-        )
-    );
-  }
-}
-
-class Dropdown extends StatefulWidget{
-  const Dropdown({Key? key}) : super(key: key);
-
-  @override
-  _DropdownState createState()=>_DropdownState();
-}
-
-class _DropdownState extends State<Dropdown>{
-  // const Dropbox({Key? key}) : super(key: key);
-  List<String> dropdownList = ['최근리뷰순','추천순','댓글순'];
-  String selectedDropdown = '최근리뷰순';
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton(
-        value: selectedDropdown,
-        items:dropdownList.map(
-          (String item){
-            return DropdownMenuItem<String>(
-              value: item,
-              child:Text('$item'),
-              );
-          }).toList(),
-          onChanged:(dynamic value){
-            setState((){
-              selectedDropdown = value;
-            });
-        }
-      );
   }
 }
 
@@ -101,14 +144,15 @@ class Hashtag extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+        height:60,
+        margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: hashtaglist.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
                 margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(250, 245, 228, 1.0),
                   borderRadius: BorderRadius.circular(15),
@@ -116,7 +160,6 @@ class Hashtag extends StatelessWidget {
                 child: Text(hashtaglist[index],
                     style: TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.w800,
                       color: Color.fromRGBO(255, 99, 99, 1.0),
                     )));
           },
@@ -130,120 +173,102 @@ class Board extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        height: double.infinity,
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-        child: ListView.builder(
-            itemCount: boardsList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap:(){
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder:(context)=>PostPage()));
-                },
-                child:Container(
-                // 게시글 하나
-                margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(99, 99, 99, 0.05),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(boardsList[index].name,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.grey,
-                                )),
-                            Text(boardsList[index].date,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.grey,
-                                )),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Text(boardsList[index].title,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                            )),
-                      ),
-                      Container(
-                          child: Row(
-                        children: [
-                          Icon(
-                            Icons.subdirectory_arrow_right,
-                            size: 15.0,
-                          ),
-                          Container(
-                              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text(boardsList[index].content,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey,
-                                  )))
-                        ],
-                      )),
-                      Container(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                              child: Row(
-                            children: [
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.pink[400],
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: Text(boardsList[index].heartnum,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    )),
-                              )
-                            ],
-                          )),
-                          Container(
-                              margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.wechat,
-                                    color: Colors.yellow[600],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: Text(boardsList[index].reviewnum,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                        )),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ))
-                    ]),
-              ));
-            })
-          );
+      color:Colors.white,
+      width:double.infinity,
+      height:double.infinity,
+      child:SingleChildScrollView(
+        child:Column(
+          children: [
+            // 해시태그
+            Hashtag(),
+            Divider(thickness:1,indent: 10,endIndent: 10,),
+            // 게시글
+            for(int i=0;i<boardsList.length;i++)
+              BoardContent(name:boardsList[i].name,title:boardsList[i].title,content:boardsList[i].content,heartnum:boardsList[i].heartnum,reviewnum:boardsList[i].reviewnum,date:boardsList[i].date),
+          ],
+        )
+      )
+    );
   }
 }
 
+class BoardContent extends StatelessWidget {
+  const BoardContent({Key? key, required String this.name, required String this.title, required String this.content, required int this.heartnum, required int this.reviewnum, required String this.date}) : super(key: key);
+  final name;
+  final title;
+  final content;
+  final heartnum;
+  final reviewnum;
+  final date;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap:(){
+        Navigator.push(context,MaterialPageRoute(builder:(context)=>PostPage()));
+      },
+      child:Container(
+        margin:EdgeInsets.fromLTRB(15, 5, 15, 10),
+        padding:EdgeInsets.fromLTRB(15,10,15,10),
+        // height:150,
+        decoration:BoxDecoration(
+          color:Color.fromRGBO(99,99,99,0.05),
+          borderRadius:BorderRadius.circular(15),
+        ),
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            Container(
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                  Text(name,style:TextStyle(
+                    fontSize:13,
+                    color:Colors.grey,
+                  )),
+                  Text(date,style:TextStyle(
+                    fontSize:13,
+                    color:Colors.grey,
+                  ))
+                ]
+              )
+            ),
+            Padding(padding: EdgeInsets.only(top: 10),
+            child:Text(title,style:TextStyle(
+              fontSize:16,
+              fontWeight:FontWeight.bold,
+            )),),
+            Padding(padding: EdgeInsets.only(top:5),
+            child:Text(content,style:TextStyle(
+              fontSize:15,
+              color:Colors.grey,
+            ))),
+            Container(
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children:[
+                  Container(
+                    child:Row(
+                      children:[
+                        Icon(Icons.favorite,color:Colors.pink[400],size:15,),
+                        Container(margin:EdgeInsets.fromLTRB(5,0,10,0),
+                        child:Text(heartnum.toString(),style:TextStyle(fontSize:13))),
+                        Icon(Icons.wechat,color:Colors.yellow[600]),
+                        Container(margin:EdgeInsets.fromLTRB(5,0,0,0),
+                        child:Text(reviewnum.toString(),style:TextStyle(fontSize:13))),
+                      ]
+                    ),
+                  )
+                ]
+              ),
+            )
+          ]
+        )
+
+      )
+    );
+  }
+}
 Widget logo() {
   return Image.asset(
     'images/mark.jpg',
@@ -256,17 +281,20 @@ class BoardModel {
   final String name;
   final String title;
   final String content;
-  final String heartnum;
-  final String reviewnum;
+  final int heartnum;
+  final int reviewnum;
   final String date;
 }
 
 const boardsList = [
-  BoardModel("익명", "개신동 이사할만한 원룸 추천", "월세 30미만 집", "1", "2", "2022.06.17"),
-  BoardModel("익명", "이 벌레 뭔지 아시는분...", "집에 벌레가 나왔어요...", "0", "5", "2022.06.19"),
-  BoardModel("익명", "22시 치킨 시키실분", "치킨 같이 시키실 분", "10", "17", "2022.06.18"),
-  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", "13", "11", "2022.06.20"),
-  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", "13", "11", "2022.06.20"),
+  BoardModel("익명", "개신동 이사할만한 원룸 추천", "월세 30미만 집", 1, 2, "2022.06.17"),
+  BoardModel("익명", "이 벌레 뭔지 아시는분...", "집에 벌레가 나왔어요...aslkdjf;alsdjf;lsajd;fㄴ미아러;민아ㅓㄹ;ㅣㄴ멍ㄹ;ㅣ어;", 0, 5, "2022.06.19"),
+  BoardModel("익명", "22시 치킨 시키실분", "치킨 같이 시키실 분", 10, 17, "2022.06.18"),
+  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", 13, 11, "2022.06.20"),
+  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", 13, 11, "2022.06.20"),
+  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", 13, 11, "2022.06.20"),
+  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", 13, 11, "2022.06.20"),
+  BoardModel("익명", "햇반 나눔 가능하신 분", "개신동 햇반 하나만", 13, 11, "2022.06.20"),
 ];
 
 const hashtaglist = ["# 치킨", "# 배달", "# 햇반", "# 산책", "# 공동구매", "# 바퀴벌레"];
