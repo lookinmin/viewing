@@ -377,7 +377,7 @@ class _MapState extends State<Map> {
                                 Container(
                                   //color: Colors.red,
                                   child: Text(
-                                    "충대도담",
+                                    "다솜빌",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w800,
@@ -388,7 +388,7 @@ class _MapState extends State<Map> {
                                   height: 15,
                                 ),
                                 Text(
-                                  "충북 청주시 서원구 성봉로 242번길 31-21",
+                                  "충북 청주시 흥덕구 풍산로178번길 35",
                                   style: TextStyle(
                                       fontSize: 14,
                                       //fontWeight: FontWeight.w800,
@@ -399,7 +399,7 @@ class _MapState extends State<Map> {
                                   height: 7,
                                 ),
                                 Text(
-                                  "충북 청주시 서원구 개신도 262-8",
+                                  "충북 청주시 흥덕구 복대동 1893",
                                   style: TextStyle(
                                       fontSize: 14,
                                       //fontWeight: FontWeight.w800,
@@ -420,13 +420,13 @@ class _MapState extends State<Map> {
                                   Row(
                                     children: [
                                       Text(
-                                        ' 3.0',
+                                        ' 4.0',
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        ' (리뷰10)',
+                                        ' (리뷰3)',
                                         style: TextStyle(
                                             fontSize: 13,
                                             color: Color.fromARGB(
@@ -434,7 +434,7 @@ class _MapState extends State<Map> {
                                       ),
                                     ],
                                   ),
-                                  Container(child: setStar(3)),
+                                  Container(child: setStar(4)),
                                   Container(
                                     margin: EdgeInsets.only(top: 20),
                                     child: Row(
