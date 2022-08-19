@@ -94,14 +94,14 @@ class Post extends StatelessWidget {
               ),
             ),
             title:Text('익명'),
-            subtitle:Text(time())
+            subtitle:Text("22/08/19-21:38:11")
           ),
           // 제목
           Container(
             padding:EdgeInsets.fromLTRB(20, 5, 20, 5),
             width:double.infinity,
             child:Text(
-              "제목이 들어갈고임제목젬곧ㅈ곰곡",
+              "같이 볼링치러 가실 분~",
               style:TextStyle(fontWeight:FontWeight.bold),
               textAlign:TextAlign.start,
               textScaleFactor: 1.3,
@@ -112,7 +112,7 @@ class Post extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
             child:Align(
               alignment:Alignment.topLeft,
-              child:Text("내용들어갈거임"),
+              child:Text("같이 볼링치러 가실 대학생 친구 구해요~ 저는 보통 100정도 나옵니다 !"),
             )
           ),
           // 좋아요, 리뷰
@@ -129,7 +129,7 @@ class Post extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                  child: Text("하트개수",
+                  child: Text("1",
                     style: TextStyle(
                       fontSize: 13,
                   )),
@@ -141,7 +141,7 @@ class Post extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                  child: Text("리뷰개수",
+                  child: Text("2",
                     style: TextStyle(
                       fontSize: 13,
                   )),
@@ -186,12 +186,8 @@ class Post extends StatelessWidget {
               Column(
                 children:[
                   // 댓글 잇는만큼 받아와서 띄우기
-                  Review(),
-                  Review(),
-                  Review(),
-                  Review(),
-                  Review(),
-                  Review(),
+                  Review(name:'익명',content:'저 볼링 못치는데 괜찮을까요...?',time:'22/08/19-21:40:04'),
+                  Review(name:'익명',content:'어디쪽 사세요!? 저 볼링 치고 싶어요!',time:'22/08/19-21:42:26'),
                 ],
               ),
               SizedBox(height:50),

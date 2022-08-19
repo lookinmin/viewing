@@ -2,8 +2,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class Review extends StatelessWidget {
-  const Review({Key? key}) : super(key: key);
-
+  const Review({Key? key, required String this.name, required String this.content, required String this.time}) : super(key: key);
+  final name;
+  final content;
+  final time;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -11,7 +13,7 @@ class Review extends StatelessWidget {
         ListTile(
           dense:true,
           leading:CircleAvatar(
-              backgroundColor:Colors.white,
+              backgroundColor:Color.fromRGBO(0, 0, 0, 0),
               child:CircleAvatar(
                 radius: 15,
                 backgroundColor:Colors.grey[200],
@@ -22,12 +24,12 @@ class Review extends StatelessWidget {
                 ),
               ),
             ),
-            title:Text('익명'),
-            subtitle:Text(time()),
-            trailing: IconButton(
-              // 나중에 댓글 삭제하기
-              onPressed: null, 
-              icon: Icon(Icons.close),)
+            title:Text(name),
+            subtitle:Text(time),
+            // trailing: IconButton(
+            //   // 나중에 댓글 삭제하기
+            //   onPressed: null, 
+            //   icon: Icon(Icons.close),)
         ),
         Container(
           padding:EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -35,7 +37,7 @@ class Review extends StatelessWidget {
             mainAxisAlignment:MainAxisAlignment.start,
             children:[
               Text(
-                '댓글임니당 댓글댓글댓글',
+                content,
                 style:TextStyle(
                   fontSize: 15,
                   color: Colors.black,
