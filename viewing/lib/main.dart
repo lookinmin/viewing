@@ -6,8 +6,11 @@ import './board/board.dart';
 import './writing/writingroom.dart';
 import './writing/writingboard.dart';
 import './mypage/mypage.dart';
+import './startpage/splash_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle( statusBarColor: Color.fromARGB(200, 255, 255, 255)));
   runApp(const Viewing());
 }
 
@@ -18,7 +21,10 @@ class Viewing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      initialRoute: '/',
+      routes: {'/': (context) => Splash()},
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +37,7 @@ class Viewing extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      //home: const Home(),
     );
   }
 }
@@ -59,6 +65,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
     return WillPopScope(
         onWillPop: () async {
           return !(await _navigatorKeyList[currentIdx]
@@ -68,6 +75,10 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           body: Column(
             children: [
+              
+              SizedBox(
+                        height: (currentIdx != 2 && currentIdx != 3)?statusBarHeight:0,
+                      ),
               (currentIdx != 2 && currentIdx != 3)
                   ? Flexible(
                       flex: 1, fit: FlexFit.tight, child: AddressSearch())
