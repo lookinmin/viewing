@@ -9,11 +9,9 @@ void main() {
 class Room extends StatelessWidget {
   Room({Key? key}) : super(key: key);
   List<String> roomImg = [
-    "assets/images/room1.jpg",
-    "assets/images/room2.jpg",
-    "assets/images/room3.jpg",
-    "assets/images/room4.jpg",
-    "assets/images/room5.jpg",
+    "assets/images/room1_1.jpg",
+    "assets/images/room1_2.jpg",
+    "assets/images/room1_3.jpg",
   ];
   @override
   Widget build(BuildContext context) {
@@ -26,22 +24,15 @@ class Room extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                  height: 200,
+                  height: 220,
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                    padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ))),
+                    margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                     child: CarouselSlider(
                       items: roomImg.map((e) {
                         return Builder(builder: (BuildContext context) {
                           return Container(
                             // width: MediaQuery.of(context).size.width + 100,
-                            margin: EdgeInsets.symmetric(horizontal: 30.0),
                             width: double.infinity,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
@@ -56,32 +47,24 @@ class Room extends StatelessWidget {
                       options: CarouselOptions(
                           autoPlay: false,
                           scrollDirection: Axis.horizontal,
+                          viewportFraction:0.8,
+                          enlargeCenterPage: true,
                           height: 200),
                     ),
                   )),
+                  Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
+
               Container(
-                height: 190,
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 2.0,
-                ))),
+                height: 185,
                 child: RoomGrade(
-                    address: "개신동 충대로 1 13번길",
-                    roomName: "개신동 해오름빌",
-                    grade: "2"),
-              ),
+                    address: "흥덕구 풍산로178번길 35",
+                    roomName: "개신동 다솜빌",
+                    grade: "4"),
+              ),Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
               Container(
                 height: 130,
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 2.0,
-                ))),
                 child: CheckList(),
-              ),
+              ),Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
               RoomReviews(),
             ],
           ),
@@ -128,14 +111,8 @@ class _RoomReview extends State<RoomReviews> {
         children: [
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.grey,
-              width: 2.0,
-            ))),
             height: 45,
-            padding: EdgeInsets.fromLTRB(18, 3, 260, 0),
+            padding: EdgeInsets.fromLTRB(18, 0, 260, 0),
             child: DropdownButton(
               value: _selectedValue,
               items: _valueList.map(
@@ -149,13 +126,40 @@ class _RoomReview extends State<RoomReviews> {
                 });
               },
             ),
-          ),
-          for (int i = 0; i < 3; i++)
-            Review(
-              3,
-              "2022.09.17",
+          ),Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
+          Review(
+              4,
+              "2022.08.19",
               "익명",
-              "assets/images/room1.jpg",
+              ["assets/images/room1_1.jpg"],
+              "남향",
+              "저층",
+              "300/30",
+              "신축이라 가구상태나 도배가 깨끗하고 좋아요, 여름에 습하지 않아서 좋아요",
+              "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~"
+            ),
+          Review(
+              5,
+              "2022.07.27",
+              "익명",
+              ["assets/images/room1_2.jpg",
+              "assets/images/room1_3.jpg"],
+              "남향",
+              "중층",
+              "400/25",
+              "방을 구할때 화장실이 쾌적한지를 제일 중요시하는데 화장실이 깔끔하게 잘되어 있고 습하지도 않아서 좋아요",
+              "아주 만족하고 살고 있지만 단점이라고 굳이 말하자면 방안이 조용할때 옆방 소리가 조금 들린다는거 뿐이에요~"
+            ),
+          Review(
+              3,
+              "2022.06.17",
+              "익명",
+              [],
+              "북향",
+              "저층",
+              "300/27",
+              "집주인분이 착하시고 주변에 편의점이나 버스정류장이 가까운게 좋아요",
+              "대로가 가까워서 창문을 열면 차소리가 많이 들려요 북향이라서 그런지 여름에는 조금 습하네요"
             )
         ],
       ),
@@ -181,10 +185,10 @@ class _CheckList extends State<CheckList> {
               ),
             ),
             Container(
-              width: 200,
+              width: 150,
               margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
                     Icons.check,
@@ -193,7 +197,7 @@ class _CheckList extends State<CheckList> {
                   Icon(Icons.close, color: Colors.grey),
                   Icon(
                     Icons.question_mark,
-                    color: Colors.grey,
+                    color: Colors.yellow,
                   )
                 ],
               ),
@@ -212,16 +216,16 @@ class _CheckList extends State<CheckList> {
               ),
             ),
             Container(
-              width: 200,
+              width: 150,
               margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
                     Icons.check,
                     color: Colors.grey,
                   ),
-                  Icon(Icons.close, color: Colors.grey),
+                  Icon(Icons.close, color: Colors.red),
                   Icon(
                     Icons.question_mark,
                     color: Colors.grey,
@@ -243,14 +247,14 @@ class _CheckList extends State<CheckList> {
               ),
             ),
             Container(
-              width: 200,
+              width: 150,
               margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
                     Icons.check,
-                    color: Colors.grey,
+                    color: Colors.blue,
                   ),
                   Icon(Icons.close, color: Colors.grey),
                   Icon(
@@ -320,7 +324,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("방음",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.3)
+                        barGraph(0.5)
                       ],
                     ),
                     Row(
@@ -328,7 +332,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("청결",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.5)
+                        barGraph(0.8)
                       ],
                     ),
                     Row(
@@ -344,7 +348,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("안전",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.5)
+                        barGraph(0.8)
                       ],
                     ),
                   ],
@@ -411,22 +415,15 @@ Widget barGraph(var grade) {
   );
 }
 
-Widget Review(int num, var date, var name, var pic) {
-  List<String> roomImg = [
-    "assets/images/room1.jpg",
-    "assets/images/room2.jpg",
-    "assets/images/room3.jpg",
-    "assets/images/room4.jpg",
-    "assets/images/room5.jpg",
-  ];
+Widget Review(int num, var date, var name, List<String> pic,var direction,var floor,var fee,var adv,var disadv) {
   return Container(
     padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-    margin: EdgeInsets.fromLTRB(11, 0, 11, 0),
+    margin: EdgeInsets.fromLTRB(11, 5, 11, 0),
     decoration: BoxDecoration(
         border: Border(
             bottom: BorderSide(
       color: Colors.grey,
-      width: 1.5,
+      width: 1,
     ))),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -452,9 +449,9 @@ Widget Review(int num, var date, var name, var pic) {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    chosenTxt("남향"),
-                    chosenTxt("저층"),
-                    chosenTxt("500/35"),
+                    chosenTxt(direction),
+                    chosenTxt(floor),
+                    chosenTxt(fee),
                   ],
                 ),
               ),
@@ -464,13 +461,14 @@ Widget Review(int num, var date, var name, var pic) {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            (pic.length>0)?
             CarouselSlider(
-              items: roomImg.map((e) {
+              items: pic.map((e) {
                 return Builder(builder: (BuildContext context) {
                   return Container(
                     // width: MediaQuery.of(context).size.width + 100,
                     margin:
-                        EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                        EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
                     width: double.infinity,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
@@ -485,9 +483,11 @@ Widget Review(int num, var date, var name, var pic) {
               options: CarouselOptions(
                   autoPlay: false,
                   scrollDirection: Axis.horizontal,
+                  enableInfiniteScroll: false,
+                  viewportFraction:0.9,
                   height: 200),
-            ),
-            txtForRoom()
+            ):SizedBox(),
+            txtForRoom(adv,disadv)
           ],
         )
       ],
@@ -641,38 +641,44 @@ Widget setEmoji(int num, var name) {
   }
 }
 
-Widget txtForRoom() {
+Widget txtForRoom(var adv,var disadv) {
   return Container(
-    margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           '장점',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 17,
             fontWeight: FontWeight.w700,
             color: Colors.red
           ),
         ),
         SizedBox(height: 15,),
         Text(
-          '신축이라 깨끗하고 좋은데 가구상태나 도배는 깨끗하고 좋아요!'
+          adv,
+          style: TextStyle(
+            height: 1.5
+          ),
         ),
         Divider(
           height: 20,
-          color: Colors.grey,
+          color: Color.fromARGB(0, 158, 158, 158),
         ),
         Text(
           '단점',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 17,
             fontWeight: FontWeight.w700,
             color: Colors.blue
           ),
         ),SizedBox(height: 15,),
         Text(
-          '쓰레기 관리가 너무 안돼요ㅜㅜ 여름이 되니까 악취가 심한편입니다. 냄새 예민하신분들은 고려하셔야 할 것 같아요! 집 사이즈는 작지만'
+          disadv,
+          style: TextStyle(
+            height: 1.5
+          ),
         ),
       ],
     ),

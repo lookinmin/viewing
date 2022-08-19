@@ -122,14 +122,14 @@ class _MapState extends State<Map> {
                 }
                 function addOverlay(name,position,id) {
                   var content = 
-                '<div id="'+id+'" class="box" onclick="temp(this)">'+
-                    '<div class="address"><span class="title">'+name+'</span></div>'+
-                    '<div class="content">'+
-                        '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
-                        '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
-                        '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
-                    '</div>'+
-                '</div>';
+                  '<div id="'+id+'" class="box" onclick="temp(this)">'+
+                      '<div class="address"><span class="title">'+name+'</span></div>'+
+                      '<div class="content">'+
+                          '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
+                          '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
+                          '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
+                      '</div>'+
+                  '</div>';
                   let customOverlay = new kakao.maps.CustomOverlay({
                     position: position,
                     content: content,
@@ -137,10 +137,10 @@ class _MapState extends State<Map> {
                   });
                   overlays.push(customOverlay);
                   customOverlay.setMap(map);
-                }
+                };
                 function addViewOverlay(num,position,id){
                   var content = 
-                '<div id="'+id+'" class="review" onclick="temp2(this)">'+num+'</div>';
+                  '<div id="'+id+'" class="review" onclick="temp2(this)">'+num+'</div>';
                   let customOverlay = new kakao.maps.CustomOverlay({
                     position: position,
                     content: content,
@@ -167,7 +167,7 @@ class _MapState extends State<Map> {
                 addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268),0);
                 addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182),1);
                 addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524),2);
-                    ''',
+              ''',
               onTapMarker: (message) {
                 var temp = message.message.split(' ');
                 if (temp[0] == 'overlay') {
@@ -234,9 +234,9 @@ class _MapState extends State<Map> {
                     _mapController?.runJavascript('''
                       overlays.map(tmp=> tmp.setMap(null));
                       overlays=[];
-                      addViewOverlay(4,new kakao.maps.LatLng(36.620361,127.432697),0);
-                      addViewOverlay(8,new kakao.maps.LatLng(36.620306,127.430730),1);
-                      addViewOverlay(1,new kakao.maps.LatLng(36.621572,127.434432),2);
+                      addViewOverlay(3,new kakao.maps.LatLng(36.626660, 127.449461),0);
+                      addViewOverlay(1,new kakao.maps.LatLng(36.626610, 127.339042),1);
+                      addViewOverlay(2,new kakao.maps.LatLng(36.626570, 127.450607),2);
                         ''');
                   } else if (customZoom == 3) {
                     _mapController?.runJavascript('''
