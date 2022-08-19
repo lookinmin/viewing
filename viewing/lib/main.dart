@@ -10,6 +10,7 @@ import './mypage/mypage.dart';
 import './startpage/splash_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:kpostal/kpostal.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
 
 void main() {
   runApp(const Viewing());
@@ -150,83 +151,73 @@ class _HomeState extends State<Home> {
         ));
   }
 
-  FloatingActionButton floatingButton(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        showModalBottomSheet<void>(
-          context: context,
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-              side: BorderSide.none,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-          builder: (BuildContext context) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
-              child: Column(
-                children: <Widget>[
-                  //상단 x 버튼
-                  Row(
-                    children: [
-                      Expanded(child: Container()),
-                      IconButton(
-                        icon: Icon(
-                          Icons.close_rounded,
-                          color: Color.fromRGBO(255, 99, 99, 1),
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                  Flexible(flex: 5, child: writingPage(context, num: 1)),
-                  Flexible(flex: 5, child: writingPage(context, num: 2)),
-                ],
-              ),
-            );
-          },
-        ).then((value) {
-          setState(() {});
-        });
-      },
-      backgroundColor: Color.fromRGBO(255, 99, 99, 1),
-      child: const Icon(
-        Icons.edit_note_outlined,
-        color: Colors.white,
-      ),
-    );
-  }
-
-  InkWell writingPage(BuildContext context, {required int num}) {
-    return InkWell(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            border: Border(
-                top: BorderSide(
-                    color: Color.fromRGBO(255, 99, 99, 1), width: 2))),
-        child: Center(
-          child: Text(
-            num == 1 ? "게시판 글쓰기" : "방정보 글쓰기",
-            style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 16,
-                color: Color.fromRGBO(255, 99, 99, 1)),
-          ),
-        ),
-      ),
-      onTap: () {
-        if (num == 1) {
-          //게시판 글쓰기
+  Widget floatingButton(BuildContext context) {
+    return SpeedDial(
+    child: Icon(Icons.mode),
+    closedForegroundColor: Color.fromRGBO(255, 99, 99, 1),
+    openForegroundColor: Colors.white,
+    closedBackgroundColor: Colors.white,
+    openBackgroundColor: Color.fromRGBO(255, 99, 99, 1),
+    labelsBackgroundColor: Colors.white,
+    labelsStyle: TextStyle(
+      color: Colors.black
+    ),
+    speedDialChildren: <SpeedDialChild>[
+      SpeedDialChild(
+        child: Icon(Icons.edit_note),
+        foregroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(255, 99, 99, 1),
+        label: '게시판 글쓰기',
+        onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => WritingBoard()));
-        } else if (num == 2) {
-          //방정보 글쓰기
+        },
+      ),
+      SpeedDialChild(
+        child: Icon(Icons.post_add),
+        foregroundColor: Color.fromRGBO(255, 99, 99, 1),
+        backgroundColor: Colors.white,
+        label: '방정보 글쓰기',
+        onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => WritingRoom()));
-        }
-      },
-    );
+        },
+      ),
+    ],
+  );
   }
+
+  // InkWell writingPage(BuildContext context, {required int num}) {
+  //   return InkWell(
+  //     child: Container(
+  //       width: MediaQuery.of(context).size.width,
+  //       decoration: BoxDecoration(
+  //           border: Border(
+  //               top: BorderSide(
+  //                   color: Color.fromRGBO(255, 99, 99, 1), width: 2))),
+  //       child: Center(
+  //         child: Text(
+  //           num == 1 ? "게시판 글쓰기" : "방정보 글쓰기",
+  //           style: TextStyle(
+  //               fontWeight: FontWeight.w900,
+  //               fontSize: 16,
+  //               color: Color.fromRGBO(255, 99, 99, 1)),
+  //         ),
+  //       ),
+  //     ),
+  //     onTap: () {
+  //       if (num == 1) {
+  //         //게시판 글쓰기
+  //         Navigator.push(
+  //             context, MaterialPageRoute(builder: (context) => WritingBoard()));
+  //       } else if (num == 2) {
+  //         //방정보 글쓰기
+  //         Navigator.push(
+  //             context, MaterialPageRoute(builder: (context) => WritingRoom()));
+  //       }
+  //     },
+  //   );
+  // }
 }
 
 class MaingPage extends StatefulWidget {
