@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class recent extends StatefulWidget {
-  const recent({Key? key}) : super(key: key);
+class ModifyInfo extends StatefulWidget {
+  const ModifyInfo({Key? key}) : super(key: key);
 
   @override
-  State<recent> createState() => _recentState();
+  State<ModifyInfo> createState() => _ModifyInfoState();
 }
 
-class _recentState extends State<recent> {
+class _ModifyInfoState extends State<ModifyInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +20,7 @@ class _recentState extends State<recent> {
                 color: Colors.black),
           ),
           toolbarHeight: 50.0,
+          elevation: 1.0, // 그림자 제거
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(
             color: Colors.grey,
@@ -32,7 +33,10 @@ class _recentState extends State<recent> {
             children: [
               Column(
                 children: [
-                  ListTile(title: Text('닉네임 변경')),
+                  ListTile(
+                    title: Text('닉네임 변경'),
+                    trailing: Icon(Icons.chevron_right),
+                  ),
                   ListTile(
                     //leading: Icon(Icons.watch),
                     title: Text('비밀번호 변경'),

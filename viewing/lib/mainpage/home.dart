@@ -29,9 +29,9 @@ void main() {
 class MainHome extends StatelessWidget {
   MainHome({Key? key}) : super(key: key);
   List<String> eventImg = [
-    "/images/event1.png",
-    "/images/event2.png",
-    "/images/event3.png",
+    "assets/images/event1.png",
+    "assets/images/event2.png",
+    "assets/images/event3.png",
     "assets/coffee.png",
     "assets/coffee.png",
     "assets/coffee.png",
@@ -40,7 +40,8 @@ class MainHome extends StatelessWidget {
   ];
 
   final roomInfo = [
-    BuilidingInfo('assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
+    BuilidingInfo(
+        'assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000", "51,000"),
     BuilidingInfo('assets/coffee.png', '양지빌', "5,200,000", "320,000", "52,000"),
     BuilidingInfo('assets/coffee.png', '보성빌', "5,300,000", "330,000", "53,000"),
     BuilidingInfo('assets/coffee.png', '도담1', "5,000,000", "300,000", "50,000"),
@@ -58,47 +59,105 @@ class MainHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        children: [
-          //상단 이벤트 사진 -> 나중에 carousel로 바꾸기
-          Container(
-            height: 150,
-            margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-            child: CarouselSlider(
-              items: eventImg.map((e) {
-                return Builder(builder: (BuildContext context) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20.0),
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        e,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  );
-                });
-              }).toList(),
-              options: CarouselOptions(
-                  autoPlay: false,
-                  scrollDirection: Axis.horizontal,
-                  height: 150),
-            ),
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              //상단 이벤트 사진 -> 나중에 carousel로 바꾸기
+              Container(
+                height: 180,
+                margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                child: CarouselSlider(
+                  items: eventImg.map((e) {
+                    return Builder(builder: (BuildContext context) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            e,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      );
+                    });
+                  }).toList(),
+                  options: CarouselOptions(
+                      autoPlay: false,
+                      scrollDirection: Axis.horizontal,
+                      height: 150),
+                ),
+              ),
+              //관심 지역 설정
+              Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                  height: 200,
+                  child:
+                      likeLocation(address: "청주시 서원구 사창동", roomInfo: roomInfo)),
+              //중간 방 리스트
+              Container(
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                  height: 200,
+                  child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo)),
+              //hot 게시글
+              Container(height: 320, child: Board(board: boardInfo)),
+            ],
           ),
-          //중간 방 리스트
-          Flexible(
-            flex: 4,
-            child: RoomList(address: "청주시 서원구 사창동", roomInfo: roomInfo),
-          ),
-          //hot
-          Flexible(flex: 7, child: Board(board: boardInfo)),
-        ],
+        ),
       ),
     );
+  }
+}
+
+class likeLocation extends StatefulWidget {
+  likeLocation({Key? key, required this.address, required this.roomInfo})
+      : super(key: key);
+
+  final address;
+  final roomInfo;
+  @override
+  State<StatefulWidget> createState() => __likeLocateState();
+}
+
+class __likeLocateState extends State<likeLocation> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(3, 0, 5, 0),
+                    child: Icon(
+                      Icons.favorite,
+                      color: Color.fromRGBO(255, 99, 99, 1),
+                    ),
+                  ),
+                  Text(
+                    "관심지역 : " + widget.address,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: widget.roomInfo.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return RoomInfo(item: widget.roomInfo[index]);
+                    }))
+          ],
+        ));
   }
 }
 
@@ -123,12 +182,15 @@ class __RoomListState extends State<RoomList> {
             margin: EdgeInsets.only(left: 10),
             child: Row(
               children: [
-                Icon(
-                  Icons.near_me,
-                  color: Color.fromRGBO(255, 99, 99, 1),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(3, 0, 5, 0),
+                  child: Icon(
+                    Icons.near_me,
+                    color: Color.fromRGBO(255, 99, 99, 1),
+                  ),
                 ),
                 Text(
-                  widget.address,
+                  "내 주변 : " + widget.address,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
@@ -167,14 +229,8 @@ class _RoomInfo extends State<RoomInfo> {
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.9),
-                  spreadRadius: 0,
-                  blurRadius: 3,
-                  offset: Offset(0, 7), // changes position of shadow
-                )
-              ]),
+              border: Border.all(
+                  width: 1, color: Color.fromARGB(255, 204, 204, 204))),
           child: SizedBox(
             width: 240,
             child: Row(
@@ -323,9 +379,12 @@ class _BoardState extends State<Board> {
             margin: EdgeInsets.only(left: 10),
             child: Row(
               children: [
-                Icon(
-                  Icons.near_me,
-                  color: Color.fromRGBO(255, 99, 99, 1),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(3, 0, 5, 0),
+                  child: Icon(
+                    Icons.local_fire_department,
+                    color: Color.fromRGBO(255, 99, 99, 1),
+                  ),
                 ),
                 Text(
                   'HOT 게시판',
@@ -369,16 +428,9 @@ class _BoardListState extends State<BoardList> {
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 242, 242, 242),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.9),
-              spreadRadius: 0,
-              blurRadius: 3,
-              offset: Offset(0, 7), // changes position of shadow
-            )
-          ]),
+        color: Color.fromARGB(255, 242, 242, 242),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Container(
         padding: EdgeInsets.all(10),
         child: SizedBox(
