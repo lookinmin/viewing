@@ -39,6 +39,9 @@ class _MapState extends State<Map> {
     // TODO: implement initState
     super.initState();
     getCurrentLocation();
+    address.add({'lat': 36.624329, 'lng': 127.457268});
+    address.add({'lat': 36.620612, 'lng': 127.435182});
+    address.add({'lat': 36.635594, 'lng': 127.441524});
   }
 
   @override
@@ -109,59 +112,62 @@ class _MapState extends State<Map> {
 </style>
                     ''',
               customOverlay: '''
-        var overlays=[]
+                var overlays=[]
 
-        function temp(e) {
-          onTapMarker.postMessage('overlay '+e.id);
-        }
-        function temp2(e) {
-          onTapMarker.postMessage('review '+e.id);
-        }
-        function addOverlay(name,position,id) {
-          var content = 
-        '<div id="'+id+'" class="box" onclick="temp(this)">'+
-            '<div class="address"><span class="title">'+name+'</span></div>'+
-            '<div class="content">'+
-                '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
-                '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
-                '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
-            '</div>'+
-        '</div>';
-          let customOverlay = new kakao.maps.CustomOverlay({
-            position: position,
-            content: content,
-            yAnchor: 1
-          });
-          overlays.push(customOverlay);
-          customOverlay.setMap(map);
-        }
-        function addViewOverlay(num,position,id){
-          var content = 
-        '<div id="'+id+'" class="review" onclick="temp2(this)">'+num+'</div>';
-          let customOverlay = new kakao.maps.CustomOverlay({
-            position: position,
-            content: content,
-            yAnchor: 1
-          });
-          overlays.push(customOverlay);
-          customOverlay.setMap(map);
-        }
-        function setCenter(position) {            
-          map.setCenter(position);
-        }
-        kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-    
-          // 클릭한 위도, 경도 정보를 가져옵니다 
-          // var latlng = mouseEvent.latLng;
-          
-          // var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-          // message += '경도는 ' + latlng.getLng() + ' 입니다';
-          
-          // var resultDiv = document.getElementById('result'); 
-          // resultDiv.innerHTML = message;
-          onTapMarker.postMessage('onTapMap');
-        });
-                    ''',
+                function temp(e) {
+                  onTapMarker.postMessage('overlay '+e.id);
+                }
+                function temp2(e) {
+                  onTapMarker.postMessage('review '+e.id);
+                }
+                function addOverlay(name,position,id) {
+                  var content = 
+                  '<div id="'+id+'" class="box" onclick="temp(this)">'+
+                      '<div class="address"><span class="title">'+name+'</span></div>'+
+                      '<div class="content">'+
+                          '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
+                          '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
+                          '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
+                      '</div>'+
+                  '</div>';
+                  let customOverlay = new kakao.maps.CustomOverlay({
+                    position: position,
+                    content: content,
+                    yAnchor: 1
+                  });
+                  overlays.push(customOverlay);
+                  customOverlay.setMap(map);
+                };
+                function addViewOverlay(num,position,id){
+                  var content = 
+                  '<div id="'+id+'" class="review" onclick="temp2(this)">'+num+'</div>';
+                  let customOverlay = new kakao.maps.CustomOverlay({
+                    position: position,
+                    content: content,
+                    yAnchor: 1
+                  });
+                  overlays.push(customOverlay);
+                  customOverlay.setMap(map);
+                }
+                function setCenter(position) {            
+                  map.setCenter(position);
+                }
+                kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+            
+                  // 클릭한 위도, 경도 정보를 가져옵니다 
+                  // var latlng = mouseEvent.latLng;
+                  
+                  // var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+                  // message += '경도는 ' + latlng.getLng() + ' 입니다';
+                  
+                  // var resultDiv = document.getElementById('result'); 
+                  // resultDiv.innerHTML = message;
+                  onTapMarker.postMessage('onTapMap');
+                });
+                addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268),0);
+                addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182),1);
+                addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524),2);
+              ''',
               onTapMarker: (message) {
                 var temp = message.message.split(' ');
                 if (temp[0] == 'overlay') {
@@ -212,64 +218,56 @@ class _MapState extends State<Map> {
                       customZoom = 5;
                       break;
                     }
-                  case 12:
-                    {
-                      customZoom = 6;
-                      break;
-                    }
                   default:
                     {
                       customZoom = 6;
-                      _mapController
-                          ?.runJavascript('map.setLevel(12, {animate: false})');
                       break;
                     }
                 }
                 if (customZoom != pastZoom) {
                   if (customZoom == 1) {
                     _mapController?.runJavascript('''
-              overlays.map(tmp=> tmp.setMap(null));
-              overlays=[];
-                ''');
+                      overlays.map(tmp=> tmp.setMap(null));
+                      overlays=[];
+                        ''');
                   } else if (customZoom == 2) {
                     _mapController?.runJavascript('''
-              overlays.map(tmp=> tmp.setMap(null));
-              overlays=[];
-              addViewOverlay(4,new kakao.maps.LatLng(36.620361,127.432697),0);
-              addViewOverlay(8,new kakao.maps.LatLng(36.620306,127.430730),1);
-              addViewOverlay(1,new kakao.maps.LatLng(36.621572,127.434432),2);
-                ''');
+                      overlays.map(tmp=> tmp.setMap(null));
+                      overlays=[];
+                      addViewOverlay(3,new kakao.maps.LatLng(36.626660, 127.449461),0);
+                      addViewOverlay(1,new kakao.maps.LatLng(36.626610, 127.339042),1);
+                      addViewOverlay(2,new kakao.maps.LatLng(36.626570, 127.450607),2);
+                        ''');
                   } else if (customZoom == 3) {
                     _mapController?.runJavascript('''
-              overlays.map(tmp=> tmp.setMap(null));
-              overlays=[];
-              addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268),0);
-              addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182),1);
-              addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524),2);
-                ''');
+                      overlays.map(tmp=> tmp.setMap(null));
+                      overlays=[];
+                      addOverlay('개신동',new kakao.maps.LatLng(36.624329, 127.457268),0);
+                      addOverlay('가경동',new kakao.maps.LatLng(36.620612, 127.435182),1);
+                      addOverlay('복대동',new kakao.maps.LatLng(36.635594, 127.441524),2);
+                       ''');
                     address.clear();
                     address.add({'lat': 36.624329, 'lng': 127.457268});
                     address.add({'lat': 36.620612, 'lng': 127.435182});
                     address.add({'lat': 36.635594, 'lng': 127.441524});
                   } else if (customZoom == 4) {
                     _mapController?.runJavascript('''
-              overlays.map(tmp=> tmp.setMap(null));
-              overlays=[];
-              addOverlay('서원구',new kakao.maps.LatLng(36.5469, 127.4378),0);
-              addOverlay('흥덕구',new kakao.maps.LatLng(36.634850, 127.435109),1);
-              addOverlay('상당구',new kakao.maps.LatLng(36.643017, 127.520900),2);
-                ''');
+                      overlays.map(tmp=> tmp.setMap(null));
+                      overlays=[];
+                      addOverlay('서원구',new kakao.maps.LatLng(36.5469, 127.4378),0);
+                      addOverlay('흥덕구',new kakao.maps.LatLng(36.634850, 127.435109),1);
+                      addOverlay('상당구',new kakao.maps.LatLng(36.643017, 127.520900),2);
+                       ''');
                     address.clear();
                     address.add({'lat': 36.546900, 'lng': 127.437800});
                     address.add({'lat': 36.634850, 'lng': 127.435109});
                     address.add({'lat': 36.643017, 'lng': 127.520900});
                   } else if (customZoom == 5) {
                     _mapController?.runJavascript('''
-              overlays.map(tmp=> tmp.setMap(null));
-              overlays=[];
-              addOverlay('청주시',new kakao.maps.LatLng(36.644103, 127.482231),0);
-              
-                ''');
+                      overlays.map(tmp=> tmp.setMap(null));
+                      overlays=[];
+                      addOverlay('청주시',new kakao.maps.LatLng(36.644103, 127.482231),0);
+                       ''');
                     address.clear();
                     address.add({'lat': 36.644103, 'lng': 127.482231});
                   } else if (customZoom == 6) {}
@@ -337,10 +335,8 @@ class _MapState extends State<Map> {
                         icon: Icon(Icons.remove,
                             color: Color.fromARGB(255, 0, 0, 0)),
                         onPressed: () {
-                          if (zoom < 13) {
-                            _mapController?.runJavascript(
-                                'map.setLevel(map.getLevel() + 1, {animate: false})');
-                          }
+                          _mapController?.runJavascript(
+                              'map.setLevel(map.getLevel() + 1, {animate: false})');
                         },
                       ),
                     ),
@@ -357,14 +353,14 @@ class _MapState extends State<Map> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context,rootNavigator: true).push(
+                      Navigator.of(context, rootNavigator: true).push(
                         MaterialPageRoute(builder: (context) => Room()),
                       );
                     },
                     child: Container(
                       height: 150,
                       margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.fromLTRB(40, 25, 40, 25),
+                      padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20), //모서리를 둥글게
                           border: Border.all(color: Colors.black12, width: 3),
@@ -372,39 +368,49 @@ class _MapState extends State<Map> {
                       child: Row(
                         children: [
                           Flexible(
-                            flex: 2,
+                            flex: 5,
                             fit: FlexFit.tight,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
                                   //color: Colors.red,
-                                  child: Text("충대도담",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w800,
-                                      )),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 7),
-                                  //color: Colors.blue,
-                                  child: Text("충청북도 청주시 서원구 성봉로 242번길 31-21",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        //fontWeight: FontWeight.w800,
-                                        color: Colors.grey,
-                                      )),
-                                ),
-                                Text("충청북도 청주시 서원구 개신도 262-8",
+                                  child: Text(
+                                    "다솜빌",
                                     style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "충북 청주시 흥덕구 풍산로178번길 35",
+                                  style: TextStyle(
                                       fontSize: 14,
                                       //fontWeight: FontWeight.w800,
                                       color: Colors.grey,
-                                    )),
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                SizedBox(
+                                  height: 7,
+                                ),
+                                Text(
+                                  "충북 청주시 흥덕구 복대동 1893",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      //fontWeight: FontWeight.w800,
+                                      color: Colors.grey,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                               ],
                             ),
                           ),
                           Flexible(
+                              flex: 3,
                               fit: FlexFit.tight,
                               child: Column(
                                 mainAxisAlignment:
@@ -414,13 +420,13 @@ class _MapState extends State<Map> {
                                   Row(
                                     children: [
                                       Text(
-                                        ' 3.0',
+                                        ' 4.0',
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        ' (리뷰10)',
+                                        ' (리뷰3)',
                                         style: TextStyle(
                                             fontSize: 13,
                                             color: Color.fromARGB(
@@ -428,7 +434,7 @@ class _MapState extends State<Map> {
                                       ),
                                     ],
                                   ),
-                                  Container(child: setStar(3)),
+                                  Container(child: setStar(4)),
                                   Container(
                                     margin: EdgeInsets.only(top: 20),
                                     child: Row(
@@ -466,10 +472,6 @@ class _MapState extends State<Map> {
                         ],
                       ),
                     ),
-
-
-
-
                   ),
                 ),
               ),
@@ -491,7 +493,6 @@ dynamic json() async {
   var json = jsonDecode(uriResponse.body);
   return json;
 }
-
 
 Widget setStar(int num) {
   //평균별점 int로 받아서 노란별로 띄우기 응애
