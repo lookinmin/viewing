@@ -1,8 +1,10 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:viewing/writing/roomreviewthird.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:viewing/main.dart';
 
 class RoomReviewSecond extends StatefulWidget {
   const RoomReviewSecond({Key? key}) : super(key: key);
@@ -12,11 +14,10 @@ class RoomReviewSecond extends StatefulWidget {
 }
 
 class _RoomReviewSecondState extends State<RoomReviewSecond> {
-  var isSelected1 = [false, false, false, false, false];
-  var isSelected2 = [false, false, false, false, false];
-  var isSelected3 = [false, false, false, false, false];
-  var isSelected4 = [false, false, false, false, false];
-  var isSelected5 = [false, false, false, false, false];
+  String text = "보통이에요";
+  Icon icon = Icon(Icons.sentiment_neutral, color: Colors.yellow);
+  final goodText = TextEditingController();
+  final badText = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
         backgroundColor: Colors.white,
         title: Center(
             child: Text(
-          '리뷰쓰기(평점)',
+          '리뷰쓰기',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
         )),
       ),
@@ -34,26 +35,10 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              height: 100,
-              margin: EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
-                  border: Border(
-                bottom: BorderSide(
-                    width: 1.0, color: Color.fromARGB(255, 191, 190, 190)),
-              )),
-              child: Text('서원구 충대로1에 대해\n평가해주세요',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 20)),
-            ),
-            transportRate(),
-            buildingRate(),
-            aroundRate(),
-            indoorRate(),
-            infraRate(),
+            ratingBar(),
+            goodOrBad(context, '장점', goodText),
+            goodOrBad(context, '단점', badText),
+            uploadPic()
           ],
         ),
       ),
@@ -64,424 +49,160 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
               primary: Color.fromRGBO(255, 99, 99, 1),
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RoomReviewThird()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Home()));
             },
-            child: Text('다음')),
+            child: Text('작성완료')),
       ),
     );
   }
 
-  SizedBox infraRate() {
+  SizedBox uploadPic() {
     return SizedBox(
       height: 200,
       child: Column(
         children: [
-          Text('생활 및 입지 점수',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18)),
-          Text('학군 식당, 카페, 마트 등 인프라가 잘 갖추어져 있나요?',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16)),
           Container(
-            height: 100,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ToggleButtons(
-                    renderBorder: false,
-                    selectedColor: Color.fromRGBO(255, 99, 99, 1),
-                    focusColor: Color.fromRGBO(255, 99, 99, 1),
-                    onPressed: (int index) {
-                      setState(() {
-                        for (int buttonIndex = 0;
-                            buttonIndex < isSelected5.length;
-                            buttonIndex++) {
-                          if (buttonIndex == index) {
-                            isSelected5[buttonIndex] = true;
-                          } else {
-                            isSelected5[buttonIndex] = false;
-                          }
-                        }
-                      });
-                    },
-                    isSelected: isSelected5,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_neutral_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_satisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_satisfied_outlined,
-                          size: 40,
-                        ),
-                      )
-                    ],
-                  )
-                ]),
-          )
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              '사진을 올려주세요(선택)',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+            ),
+          ),
+          DottedBorder(
+            borderType: BorderType.RRect,
+            radius: Radius.circular(8),
+            strokeWidth: 3,
+            color: Color.fromARGB(255, 221, 221, 221),
+            child: Container(
+              height: 150,
+              width: 150,
+              child: Center(
+                  child: Icon(
+                Icons.add_a_photo,
+                size: 40,
+                color: Colors.blue,
+              )),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  SizedBox indoorRate() {
-    return SizedBox(
+  Container goodOrBad(
+      BuildContext context, String s, TextEditingController textCtrl) {
+    return Container(
       height: 200,
+      margin: EdgeInsets.only(bottom: 20),
       child: Column(
         children: [
-          Text('내부 점수',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18)),
-          Text('채광, 환기, 수납, 방음 등에 만족하시나요?',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16)),
           Container(
-            height: 100,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ToggleButtons(
-                    renderBorder: false,
-                    selectedColor: Color.fromRGBO(255, 99, 99, 1),
-                    focusColor: Color.fromRGBO(255, 99, 99, 1),
-                    onPressed: (int index) {
-                      setState(() {
-                        for (int buttonIndex = 0;
-                            buttonIndex < isSelected4.length;
-                            buttonIndex++) {
-                          if (buttonIndex == index) {
-                            isSelected4[buttonIndex] = true;
-                          } else {
-                            isSelected4[buttonIndex] = false;
-                          }
-                        }
-                      });
-                    },
-                    isSelected: isSelected4,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_neutral_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_satisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_satisfied_outlined,
-                          size: 40,
-                        ),
-                      )
-                    ],
-                  )
-                ]),
-          )
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              '$s (50자 이상)',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+            ),
+          ),
+          Container(
+            height: 150,
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 221, 221, 221),
+                borderRadius: BorderRadius.circular(8)),
+            padding: EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width,
+            child: TextField(
+              maxLines: 5,
+              maxLength: 1000,
+              controller: textCtrl,
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none, //검색 아이콘 추가
+                  contentPadding:
+                      EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
+                  hintText: '우리 집의 $s을 이야기해주세요'),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  SizedBox aroundRate() {
-    return SizedBox(
-      height: 200,
+  Container ratingBar() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('주변 및 환경 점수',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18)),
-          Text('치안, 공원 및 자연환경 등에 만족하시나요?',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16)),
           Container(
-            height: 100,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ToggleButtons(
-                    renderBorder: false,
-                    selectedColor: Color.fromRGBO(255, 99, 99, 1),
-                    focusColor: Color.fromRGBO(255, 99, 99, 1),
-                    onPressed: (int index) {
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(bottom: 10),
+              child: Text(
+                '청주시 서원구 충대로 1에 대한 별점을 매겨주세요',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              )),
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 221, 221, 221),
+                borderRadius: BorderRadius.circular(8)),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 15),
+                  child: RatingBar.builder(
+                    initialRating: 3,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {
                       setState(() {
-                        for (int buttonIndex = 0;
-                            buttonIndex < isSelected3.length;
-                            buttonIndex++) {
-                          if (buttonIndex == index) {
-                            isSelected3[buttonIndex] = true;
-                          } else {
-                            isSelected3[buttonIndex] = false;
-                          }
+                        if (rating <= 1) {
+                          text = "최악이에요";
+                          icon = Icon(
+                            Icons.sentiment_very_dissatisfied,
+                            color: Colors.black,
+                          );
+                        } else if (rating <= 2) {
+                          text = "별로예요";
+                          icon = Icon(Icons.sentiment_dissatisfied,
+                              color: Colors.red);
+                        } else if (rating <= 3) {
+                          text = "보통이에요";
+                          icon = Icon(Icons.sentiment_neutral,
+                              color: Colors.yellow);
+                        } else if (rating <= 4) {
+                          text = "만족해요";
+                          icon = Icon(Icons.sentiment_satisfied,
+                              color: Colors.green);
+                        } else {
+                          text = "아주 좋아요";
+                          icon = Icon(
+                            Icons.sentiment_very_satisfied,
+                            color: Colors.blue,
+                          );
                         }
                       });
                     },
-                    isSelected: isSelected3,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_neutral_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_satisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_satisfied_outlined,
-                          size: 40,
-                        ),
-                      )
-                    ],
-                  )
+                  ),
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      margin: EdgeInsets.only(right: 5), child: Text(text)),
+                  icon
                 ]),
-          )
-        ],
-      ),
-    );
-  }
-
-  SizedBox buildingRate() {
-    return SizedBox(
-      height: 200,
-      child: Column(
-        children: [
-          Text('건물 및 단지 점수',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18)),
-          Text('주차나 보안, 부대시설 등에 만족하시나요?',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16)),
-          Container(
-            height: 100,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ToggleButtons(
-                    renderBorder: false,
-                    selectedColor: Color.fromRGBO(255, 99, 99, 1),
-                    focusColor: Color.fromRGBO(255, 99, 99, 1),
-                    onPressed: (int index) {
-                      setState(() {
-                        for (int buttonIndex = 0;
-                            buttonIndex < isSelected2.length;
-                            buttonIndex++) {
-                          if (buttonIndex == index) {
-                            isSelected2[buttonIndex] = true;
-                          } else {
-                            isSelected2[buttonIndex] = false;
-                          }
-                        }
-                      });
-                    },
-                    isSelected: isSelected2,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_neutral_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_satisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_satisfied_outlined,
-                          size: 40,
-                        ),
-                      )
-                    ],
-                  )
-                ]),
-          )
-        ],
-      ),
-    );
-  }
-
-  SizedBox transportRate() {
-    return SizedBox(
-      height: 200,
-      child: Column(
-        children: [
-          Text('교통점수',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18)),
-          Text('버스, 지하철 등 교통수단 이용이 편리한가요?',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16)),
-          Container(
-            height: 100,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ToggleButtons(
-                    renderBorder: false,
-                    selectedColor: Color.fromRGBO(255, 99, 99, 1),
-                    focusColor: Color.fromRGBO(255, 99, 99, 1),
-                    onPressed: (int index) {
-                      setState(() {
-                        for (int buttonIndex = 0;
-                            buttonIndex < isSelected1.length;
-                            buttonIndex++) {
-                          if (buttonIndex == index) {
-                            isSelected1[buttonIndex] = true;
-                          } else {
-                            isSelected1[buttonIndex] = false;
-                          }
-                        }
-                      });
-                    },
-                    isSelected: isSelected1,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_dissatisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_neutral_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_satisfied_outlined,
-                          size: 40,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.sentiment_very_satisfied_outlined,
-                          size: 40,
-                        ),
-                      )
-                    ],
-                  )
-                ]),
-          )
+              ],
+            ),
+          ),
+          //
         ],
       ),
     );
