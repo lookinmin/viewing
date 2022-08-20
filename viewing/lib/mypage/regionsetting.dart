@@ -32,6 +32,8 @@ class _RegionSettingState extends State<RegionSetting> {
                 context,
                 MaterialPageRoute(
                   builder: (_) => KpostalView(
+                    useLocalServer: true,
+                    localPort: 7001,
                     callback: (Kpostal result) {
                       print(result.address);
                     },
