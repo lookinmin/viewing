@@ -109,9 +109,10 @@ class _MyPageState extends State<MyPageState> {
                     leading: Icon(Icons.place_outlined, size: 17),
                     title: Text('관심 지역 설정'),
                     trailing: Icon(Icons.chevron_right),
-                    onTap:() {
+                    onTap: () {
                       Navigator.of(context, rootNavigator: true).push(
-                        MaterialPageRoute(builder: (context) => RegionSetting()),
+                        MaterialPageRoute(
+                            builder: (context) => RegionSetting()),
                       );
                     },
                   ),
@@ -213,7 +214,8 @@ class _MyPageState extends State<MyPageState> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('앱 버전'),
-                        Text('v1.2(최신버전)', style: TextStyle(color: Colors.grey))
+                        Text('v1.0 (최신버전)',
+                            style: TextStyle(color: Colors.grey))
                       ],
                     ),
                   ),

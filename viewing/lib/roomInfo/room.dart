@@ -47,23 +47,34 @@ class Room extends StatelessWidget {
                       options: CarouselOptions(
                           autoPlay: false,
                           scrollDirection: Axis.horizontal,
-                          viewportFraction:0.8,
+                          viewportFraction: 0.8,
                           enlargeCenterPage: true,
                           height: 200),
                     ),
                   )),
-
               Container(
                 height: 185,
                 child: RoomGrade(
                     address: "흥덕구 풍산로178번길 35",
                     roomName: "개신동 다솜빌",
                     grade: "4"),
-              ),Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
+              ),
+              Divider(
+                color: Colors.grey,
+                thickness: 1.5,
+                indent: 5,
+                endIndent: 5,
+              ),
               Container(
                 height: 130,
                 child: CheckList(),
-              ),Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
+              ),
+              Divider(
+                color: Colors.grey,
+                thickness: 1.5,
+                indent: 5,
+                endIndent: 5,
+              ),
               RoomReviews(),
             ],
           ),
@@ -125,7 +136,13 @@ class _RoomReview extends State<RoomReviews> {
                 });
               },
             ),
-          ),Divider(color: Colors.grey,thickness: 0.5,indent: 25,endIndent: 25,),
+          ),
+          Divider(
+            color: Colors.grey,
+            thickness: 0.5,
+            indent: 25,
+            endIndent: 25,
+          ),
           Review(
               4,
               "2022.08.19",
@@ -135,20 +152,17 @@ class _RoomReview extends State<RoomReviews> {
               "저층",
               "300/30",
               "신축이라 가구상태나 도배가 깨끗하고 좋아요, 여름에 습하지 않아서 좋아요",
-              "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~ 그리고 주차장이 없는 것도 흠이에요"
-            ),
+              "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~ 그리고 주차장이 없는 것도 흠이에요"),
           Review(
               5,
               "2022.07.27",
               "익명",
-              ["assets/images/room1_2.jpg",
-              "assets/images/room1_3.jpg"],
+              ["assets/images/room1_2.jpg", "assets/images/room1_3.jpg"],
               "남향",
               "중층",
               "400/25",
               "방을 구할때 수압이 좋고 헬스장이 가깝고 제일 중요시하는데 수압도 좋고 헬스장도 자취방에서 3분거리에 있어서 좋아요. 그리고 벌레가 없다는 것도 장점이에요 지금까지 한번도 벌레를 본적이 없어요",
-              "아주 만족하고 살고 있지만 단점이라고 굳이 말하자면 방안이 조용할때 옆방 소리가 조금 들린다는거 뿐이에요~"
-            ),
+              "아주 만족하고 살고 있지만 단점이라고 굳이 말하자면 방안이 조용할때 옆방 소리가 조금 들린다는거 뿐이에요~"),
           Review(
               3,
               "2022.06.17",
@@ -158,8 +172,7 @@ class _RoomReview extends State<RoomReviews> {
               "저층",
               "300/27",
               "집주인분이 착하시고 주변에 편의점이나 버스정류장이 가까운게 좋아요",
-              "대로가 가까워서 창문을 열면 차소리가 많이 들려요 북향이라서 그런지 여름에는 조금 습하네요"
-            )
+              "대로가 가까워서 창문을 열면 차소리가 많이 들려요 북향이라서 그런지 여름에는 조금 습하네요")
         ],
       ),
     );
@@ -291,7 +304,10 @@ class _RoomGrade extends State<RoomGrade> {
             padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
             child: Row(
               children: [
-                Icon(Icons.where_to_vote,color: Color.fromARGB(255, 0, 72, 255),),
+                Icon(
+                  Icons.where_to_vote,
+                  color: Color.fromARGB(255, 0, 72, 255),
+                ),
                 Text(
                   widget.address,
                   style: TextStyle(fontSize: 14),
@@ -414,7 +430,8 @@ Widget barGraph(var grade) {
   );
 }
 
-Widget Review(int num, var date, var name, List<String> pic,var direction,var floor,var fee,var adv,var disadv) {
+Widget Review(int num, var date, var name, List<String> pic, var direction,
+    var floor, var fee, var adv, var disadv) {
   return Container(
     padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
     margin: EdgeInsets.fromLTRB(11, 5, 11, 0),
@@ -434,9 +451,7 @@ Widget Review(int num, var date, var name, List<String> pic,var direction,var fl
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               setEmoji(num, name),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
                   child: Text(
@@ -463,33 +478,33 @@ Widget Review(int num, var date, var name, List<String> pic,var direction,var fl
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            (pic.length>0)?
-            CarouselSlider(
-              items: pic.map((e) {
-                return Builder(builder: (BuildContext context) {
-                  return Container(
-                    // width: MediaQuery.of(context).size.width + 100,
-                    margin:
-                        EdgeInsets.fromLTRB(6, 5, 6, 10),
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        e,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  );
-                });
-              }).toList(),
-              options: CarouselOptions(
-                  autoPlay: false,
-                  scrollDirection: Axis.horizontal,
-                  enableInfiniteScroll: false,
-                  viewportFraction:0.96,
-                  height: 200),
-            ):SizedBox(),
-            txtForRoom(adv,disadv)
+            (pic.length > 0)
+                ? CarouselSlider(
+                    items: pic.map((e) {
+                      return Builder(builder: (BuildContext context) {
+                        return Container(
+                          // width: MediaQuery.of(context).size.width + 100,
+                          margin: EdgeInsets.fromLTRB(6, 5, 6, 10),
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.asset(
+                              e,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        );
+                      });
+                    }).toList(),
+                    options: CarouselOptions(
+                        autoPlay: false,
+                        scrollDirection: Axis.horizontal,
+                        enableInfiniteScroll: false,
+                        viewportFraction: 0.96,
+                        height: 200),
+                  )
+                : SizedBox(),
+            txtForRoom(adv, disadv)
           ],
         )
       ],
@@ -507,7 +522,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -536,7 +551,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -597,7 +612,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -625,7 +640,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -647,49 +662,43 @@ Widget setEmoji(int num, var name) {
   }
 }
 
-Widget txtForRoom(var adv,var disadv) {
+Widget txtForRoom(var adv, var disadv) {
   return Container(
     margin: EdgeInsets.fromLTRB(15, 15, 15, 25),
     padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
     decoration: BoxDecoration(
-      color: Color.fromRGBO(99, 99, 99, 0.05), //테두리
-      borderRadius: BorderRadius.circular(15)
-    ),
+        color: Color.fromRGBO(99, 99, 99, 0.05), //테두리
+        borderRadius: BorderRadius.circular(15)),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '장점.',
+          '장점',
           style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: Colors.red
-          ),
+              fontSize: 17, fontWeight: FontWeight.w700, color: Colors.red),
         ),
-        SizedBox(height: 15,),
+        SizedBox(
+          height: 15,
+        ),
         Text(
           adv,
-          style: TextStyle(
-            height: 1.5
-          ),
+          style: TextStyle(height: 1.5),
         ),
         Divider(
           height: 20,
           color: Color.fromARGB(0, 158, 158, 158),
         ),
         Text(
-          '단점.',
+          '단점',
           style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: Colors.blue
-          ),
-        ),SizedBox(height: 15,),
+              fontSize: 17, fontWeight: FontWeight.w700, color: Colors.blue),
+        ),
+        SizedBox(
+          height: 15,
+        ),
         Text(
           disadv,
-          style: TextStyle(
-            height: 1.5
-          ),
+          style: TextStyle(height: 1.5),
         ),
       ],
     ),

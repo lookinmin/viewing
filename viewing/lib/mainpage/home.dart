@@ -28,8 +28,7 @@ class MainHome extends StatelessWidget {
 
   final roomInfo = [
     BuilidingInfo(
-        'assets/images/room1_1.jpg', '개신 오피스빌', "4,000,000",
-        "370,000", "51,000"),
+        'assets/images/room1_1.jpg', '다솜빌', "4,000,000", "370,000", "51,000"),
     BuilidingInfo(
         'assets/images/vRoom1.jpeg', '양지빌', "3,000,000", "320,000", "52,000"),
     BuilidingInfo(
@@ -88,19 +87,18 @@ class MainHome extends StatelessWidget {
                   margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                   height: 200,
                   child:
-                      likeLocation(address: "청주시 서원구 개신동", roomInfo: roomInfo)),
+                      likeLocation(address: "청주시 흥덕구 복대동", roomInfo: roomInfo)),
               //중간 방 리스트
               Container(
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
                   height: 200,
                   child:
-                      RoomList(address: "청주시 흥덕구 복대동", roomInfo2: roomInfo2)),
+                      RoomList(address: "청주시 서원구 개신동ㅐ", roomInfo2: roomInfo2)),
               //hot 게시글
               Container(
                 height: 500,
                 child: Board(),
               )
-              
             ],
           ),
         ),
@@ -255,8 +253,8 @@ class _RoomInfo extends State<RoomInfo> {
                               child: Text(widget.item.buildingName,
                                   style: TextStyle(
                                       color: Color.fromRGBO(255, 99, 99, 1),
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 13))),
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700))),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -266,7 +264,7 @@ class _RoomInfo extends State<RoomInfo> {
                                     '보증금: ',
                                     style: TextStyle(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w500),
                                   )),
                               Flexible(
                                   flex: 6,
@@ -274,7 +272,7 @@ class _RoomInfo extends State<RoomInfo> {
                                     widget.item.deposit,
                                     style: TextStyle(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w500),
                                   ))
                             ],
                           ),
@@ -287,7 +285,7 @@ class _RoomInfo extends State<RoomInfo> {
                                     '월세: ',
                                     style: TextStyle(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w500),
                                   )),
                               Flexible(
                                   flex: 6,
@@ -295,7 +293,7 @@ class _RoomInfo extends State<RoomInfo> {
                                     widget.item.monthly,
                                     style: TextStyle(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w500),
                                   ))
                             ],
                           ),
@@ -308,7 +306,7 @@ class _RoomInfo extends State<RoomInfo> {
                                     '관리비: ',
                                     style: TextStyle(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w500),
                                   )),
                               Flexible(
                                   flex: 6,
@@ -316,7 +314,7 @@ class _RoomInfo extends State<RoomInfo> {
                                     widget.item.manageFee,
                                     style: TextStyle(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w500),
                                   ))
                             ],
                           ),
@@ -333,7 +331,7 @@ class _RoomInfo extends State<RoomInfo> {
                                             color: Color.fromRGBO(
                                                 248, 180, 0, 1.0),
                                             fontSize: 10,
-                                            fontWeight: FontWeight.w700)),
+                                            fontWeight: FontWeight.w500)),
                                   )),
                               Flexible(
                                   flex: 1,
@@ -364,36 +362,38 @@ class Board extends StatefulWidget {
 class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => print('게시판 클릭'),
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 10),
-            child: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(3, 0, 5, 0),
-                  child: Icon(
-                    Icons.local_fire_department,
-                    color: Color.fromRGBO(255, 99, 99, 1),
-                  ),
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 10),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(3, 0, 5, 0),
+                child: Icon(
+                  Icons.local_fire_department,
+                  color: Color.fromRGBO(255, 99, 99, 1),
                 ),
-                Text(
-                  'HOT 게시판',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
+              ),
+              Text(
+                'HOT 게시판',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
+            ],
           ),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: boardinfo.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return BoardInfo(item: boardinfo[index]);
-                  })),
-        ],
-      ),
+        ),
+        Expanded(
+            child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            BoardInfo(item: boardinfo[0]),
+            BoardInfo(item: boardinfo[1]),
+            BoardInfo(item: boardinfo[2])
+          ],
+        )),
+      ],
     );
   }
 }
@@ -410,11 +410,12 @@ class _BoardInfoState extends State<BoardInfo> {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PostPage()));
+          Navigator.of(context, rootNavigator: true).push(
+            MaterialPageRoute(builder: (context) => PostPage()),
+          );
         },
         child: Container(
-            margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
             // height:150,
             decoration: BoxDecoration(

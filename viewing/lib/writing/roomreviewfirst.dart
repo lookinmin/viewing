@@ -58,10 +58,7 @@ class _WritingRoomState extends State<WritingRoom> {
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         title: Center(
-            child: Text(
-          '리뷰쓰기(기본정보)',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
-        )),
+            child: Text('리뷰쓰기(기본정보)', style: TextStyle(color: Colors.black))),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -118,7 +115,7 @@ class _WritingRoomState extends State<WritingRoom> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '월세/전세/매매',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
@@ -129,7 +126,7 @@ class _WritingRoomState extends State<WritingRoom> {
             width: MediaQuery.of(context).size.width,
             child: TextField(
               decoration: InputDecoration(
-                hintText: '월세 30만원냈어요~',
+                hintText: '예시) 월세 30만원냈어요~',
                 border: InputBorder.none,
                 contentPadding:
                     EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
@@ -153,7 +150,7 @@ class _WritingRoomState extends State<WritingRoom> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '보증금',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
@@ -164,7 +161,7 @@ class _WritingRoomState extends State<WritingRoom> {
             width: MediaQuery.of(context).size.width,
             child: TextField(
               decoration: InputDecoration(
-                hintText: '보증금 300만원냈어요~',
+                hintText: '예시) 보증금 300만원냈어요~',
                 border: InputBorder.none,
                 contentPadding:
                     EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
@@ -186,37 +183,36 @@ class _WritingRoomState extends State<WritingRoom> {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 20),
-            child: Text(
-              '집 방향',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '집 방향',
+                  style: TextStyle(fontSize: 17),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '예시) 집이 남동향이라면 동과 남에 체크해주세요',
+                  style: TextStyle(color: Colors.blue, fontSize: 10),
+                )
+              ],
             ),
           ),
           Container(
             decoration: BoxDecoration(
                 color: Color.fromRGBO(99, 99, 99, 0.05),
                 borderRadius: BorderRadius.circular(8)),
-            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+            padding: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    dirCheckBox(houseDir[0]),
-                    dirCheckBox(houseDir[1]),
-                    dirCheckBox(houseDir[2]),
-                    dirCheckBox(houseDir[3]),
-                  ],
-                ),
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  margin: EdgeInsets.only(top: 5),
-                  child: Text(
-                    '예시) 집이 남동향이라면 동과 남에 체크해주세요',
-                    style: TextStyle(color: Colors.blue, fontSize: 10),
-                  ),
-                )
+                dirCheckBox(houseDir[0]),
+                dirCheckBox(houseDir[1]),
+                dirCheckBox(houseDir[2]),
+                dirCheckBox(houseDir[3]),
               ],
             ),
           )
@@ -260,7 +256,7 @@ class _WritingRoomState extends State<WritingRoom> {
           margin: EdgeInsets.only(bottom: 20),
           child: Text(
             '관리비',
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+            style: TextStyle(fontSize: 17),
           ),
         ),
         Container(
@@ -277,7 +273,7 @@ class _WritingRoomState extends State<WritingRoom> {
                 contentPadding:
                     EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
                 hintText:
-                    '102동 기준 공용 관리비 15만원 정도예요. 부대 시설 비용 다 포함입니다~. 전기세는 여름에 에어컨을 종일 틀고 20만원 정도 나왔어요.'),
+                    '예시) 102동 기준 공용 관리비 15만원 정도예요. 부대 시설 비용 다 포함입니다~. 전기세는 여름에 에어컨을 종일 틀고 20만원 정도 나왔어요.'),
             controller: manageFeeTxt,
           ),
         ),
@@ -295,7 +291,7 @@ class _WritingRoomState extends State<WritingRoom> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '거주층',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
@@ -351,7 +347,7 @@ class _WritingRoomState extends State<WritingRoom> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '거주 기간',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
@@ -407,7 +403,7 @@ class _WritingRoomState extends State<WritingRoom> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '거주 유형',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           SizedBox(
@@ -482,42 +478,39 @@ class _WritingRoomState extends State<WritingRoom> {
             ));
       },
       child: Container(
-        height: 120,
         margin: EdgeInsets.only(bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              flex: 2,
-              child: Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: Text(
-                  '주소지',
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
-                ),
+            Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: Text(
+                '주소지',
+                style: TextStyle(fontSize: 17),
               ),
             ),
-            Expanded(
-              flex: 5,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 221, 221, 221),
-                    borderRadius: BorderRadius.circular(8)),
-                padding: EdgeInsets.all(10),
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      address_got[0],
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    Text(
-                      address_got[1],
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ],
-                ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(99, 99, 99, 0.05),
+                  borderRadius: BorderRadius.circular(8)),
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    address_got[0],
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    address_got[1],
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ],
               ),
             )
           ],

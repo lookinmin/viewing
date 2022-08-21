@@ -108,12 +108,12 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '진위 여부(중요!)',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 221, 221),
+                  color: Color.fromRGBO(99, 99, 99, 0.05),
                   borderRadius: BorderRadius.circular(8)),
               padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width,
@@ -191,14 +191,14 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '사진을 올려주세요(선택)',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           DottedBorder(
             borderType: BorderType.RRect,
             radius: Radius.circular(8),
             strokeWidth: 3,
-            color: Color.fromARGB(255, 221, 221, 221),
+            color: Colors.grey,
             child: Container(
               height: 150,
               width: 150,
@@ -231,13 +231,13 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               '$s (50자 이상)',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
             height: 150,
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 221, 221, 221),
+                color: Color.fromRGBO(99, 99, 99, 0.05),
                 borderRadius: BorderRadius.circular(8)),
             padding: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
@@ -269,11 +269,11 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
               margin: EdgeInsets.only(bottom: 10),
               child: Text(
                 '청주시 서원구 충대로 1에 대한 별점을 매겨주세요',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+                style: TextStyle(fontSize: 17),
               )),
           Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 221, 221, 221),
+                color: Color.fromRGBO(99, 99, 99, 0.05),
                 borderRadius: BorderRadius.circular(8)),
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: Column(

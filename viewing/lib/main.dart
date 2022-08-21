@@ -23,9 +23,8 @@ class Viewing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // 투명색
-      statusBarIconBrightness:Brightness.dark 
-    ));
+        statusBarColor: Colors.transparent, // 투명색
+        statusBarIconBrightness: Brightness.dark));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -153,38 +152,36 @@ class _HomeState extends State<Home> {
 
   Widget floatingButton(BuildContext context) {
     return SpeedDial(
-    child: Icon(Icons.mode),
-    closedForegroundColor: Color.fromRGBO(255, 99, 99, 1),
-    openForegroundColor: Colors.white,
-    closedBackgroundColor: Colors.white,
-    openBackgroundColor: Color.fromRGBO(255, 99, 99, 1),
-    labelsBackgroundColor: Colors.white,
-    labelsStyle: TextStyle(
-      color: Colors.black
-    ),
-    speedDialChildren: <SpeedDialChild>[
-      SpeedDialChild(
-        child: Icon(Icons.edit_note),
-        foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(255, 99, 99, 1),
-        label: '게시판 글쓰기',
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => WritingBoard()));
-        },
-      ),
-      SpeedDialChild(
-        child: Icon(Icons.post_add),
-        foregroundColor: Color.fromRGBO(255, 99, 99, 1),
-        backgroundColor: Colors.white,
-        label: '방정보 글쓰기',
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => WritingRoom()));
-        },
-      ),
-    ],
-  );
+      child: Icon(Icons.mode),
+      closedForegroundColor: Color.fromRGBO(255, 99, 99, 1),
+      openForegroundColor: Colors.white,
+      closedBackgroundColor: Colors.white,
+      openBackgroundColor: Color.fromRGBO(255, 99, 99, 1),
+      labelsBackgroundColor: Colors.white,
+      labelsStyle: TextStyle(color: Colors.black),
+      speedDialChildren: <SpeedDialChild>[
+        SpeedDialChild(
+          child: Icon(Icons.edit_note),
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(255, 99, 99, 1),
+          label: '게시판 글쓰기',
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => WritingBoard()));
+          },
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.post_add),
+          foregroundColor: Color.fromRGBO(255, 99, 99, 1),
+          backgroundColor: Colors.white,
+          label: '방정보 글쓰기',
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => WritingRoom()));
+          },
+        ),
+      ],
+    );
   }
 
   // InkWell writingPage(BuildContext context, {required int num}) {
@@ -272,7 +269,10 @@ class AddressSearch extends StatelessWidget {
                       ),
                     ));
               },
-              child: Text('검색할 주소를 입력하세요',style: TextStyle(color: Colors.grey),),
+              child: Text(
+                '검색할 주소를 입력하세요',
+                style: TextStyle(color: Colors.grey),
+              ),
             ),
           ),
           Expanded(
@@ -283,19 +283,5 @@ class AddressSearch extends StatelessWidget {
         ]),
       ),
     );
-  }
-}
-
-class Setting extends StatelessWidget {
-  const Setting({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: TextButton(
-      child: const Text('Setting'),
-      // onPressed: () => Navigator.pushNamed(context, '/second'),
-      onPressed: () {},
-    ));
   }
 }
