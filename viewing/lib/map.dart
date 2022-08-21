@@ -63,50 +63,48 @@ class _MapState extends State<Map> {
               lng: 127.457268,
               customOverlayStyle: '''
 <style>
-.box {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                width: 160px;
-                height: 100px;
-                left:-80px;
-                top:-50px;
-                background: #FFFFFF;
-                border: 2px solid #FF6363;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
-                font-size : 12px
-            }
-            .address {
-                text-align: center;
-                border-bottom: 2px solid #FF6363;
-                width: 140px;
-                margin: 0px 10px;
-                flex-grow: 1;
-            }
-            .content{
-                display: flex;
-                flex-direction: column;
-                flex-grow: 6;
-                justify-content: space-between;
-            }
-            .fee{
-                padding: 3px 8px ;
-                display: flex;
-                justify-content: space-between;
-            }
-            .review{
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                border: solid red 1px;
-                color: #ffffff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                background-color: #FF6363;
-            }   
+        .box {
+            display: flex;
+            flex-direction: column;
+            width: 160px;
+            height: 100px;
+            background: #FFFFFF;
+            border: 2px solid #FF6363;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            font-size : 12px;
+            padding: 5px 0px;
+        }
+        .address {
+            text-align: center;
+            border-bottom: 2px solid #FF6363;
+            width: 140px;
+            margin: 0px 10px;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+        }
+        .fee{
+            padding: 8.5px 12px 0px 12px ;
+            display: flex;
+            justify-content: space-between;
+        }
+        .review{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: solid red 1px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            background-color: #FF6363;
+        }
+        .title{
+            margin-bottom: 5px;
+        }
 
 
 </style>
@@ -123,11 +121,11 @@ class _MapState extends State<Map> {
                 function addOverlay(name,position,id) {
                   var content = 
                   '<div id="'+id+'" class="box" onclick="temp(this)">'+
-                      '<div class="address"><span class="title">'+name+'</span></div>'+
+                      '<div class="address"><div class="title">'+name+'</div></div>'+
                       '<div class="content">'+
-                          '<div class="fee"><span>보증금 :</span><span>300</span><span>만원</span></div>'+
-                          '<div class="fee"><span>월세 :</span><span>30</span><span>만원</span></div>'+
-                          '<div class="fee"><span>관리비 :</span><span>10</span><span>만원</span></div>'+
+                          '<div class="fee"><span>보증금 :</span><span>300 만원</span></div>'+
+                          '<div class="fee"><span>월세 :</span><span>30 만원</span></div>'+
+                          '<div class="fee"><span>관리비 :</span><span>10 만원</span></div>'+
                       '</div>'+
                   '</div>';
                   let customOverlay = new kakao.maps.CustomOverlay({
@@ -343,6 +341,7 @@ class _MapState extends State<Map> {
                   ),
                 ],
               ),
+              SizedBox(width: 7.5,),
             ],
           ),
           Column(
@@ -442,19 +441,13 @@ class _MapState extends State<Map> {
                                       children: [
                                         Flexible(
                                           flex: 9,
-                                          child: InkWell(
-                                              onTap: () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Room())),
-                                              child: Text(' 클릭해서 리뷰보기',
+                                          child: Text(' 클릭해서 리뷰보기',
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                     color: Color.fromRGBO(
                                                         255, 99, 99, 1),
                                                     fontSize: 13,
-                                                  ))),
+                                                  ),),
                                         ),
                                         Flexible(
                                             flex: 1,

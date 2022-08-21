@@ -9,6 +9,7 @@ class RegionSetting extends StatefulWidget {
 }
 
 class _RegionSettingState extends State<RegionSetting> {
+  var address='청주시 서원구 개신동';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,19 +27,41 @@ class _RegionSettingState extends State<RegionSetting> {
         ),
       ),
         body: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: Text(
-                  '주소지',
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
-                ),
-              ),
-              InkWell(
-                onTap: () async {
+              ListTile(
+                    //dense: true,
+                    minLeadingWidth: 0,
+                    title:Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '현재 관심 지역',
+                          style: TextStyle(
+                            fontSize: 27,
+                            fontWeight: FontWeight.w700
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Icon(Icons.favorite,size: 25,color: Color.fromARGB(255, 255, 99, 99),),
+                            SizedBox(width: 5,),
+                            Text(address),
+                          ],
+                        )
+                    ],
+                    ),
+                  ),
+                  Divider(),
+                  ListTile(
+                    //dense: true,
+                    minLeadingWidth: 0,
+                    title: Text('관심 지역 설정'),
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () async {
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -50,28 +73,8 @@ class _RegionSettingState extends State<RegionSetting> {
                           },
                         ),
                       ));
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(99, 99, 99, 0.05),
-                      borderRadius: BorderRadius.circular(8)),
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 9,
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('주소를 검색하세요'),
-                        ),
-                      ),
-                      Expanded(flex: 1, child: Icon(Icons.search))
-                    ],
+                }
                   ),
-                ),
-              )
             ],
       ),
         )

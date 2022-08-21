@@ -109,8 +109,10 @@ class _MyPageState extends State<MyPageState> {
                     leading: Icon(Icons.place_outlined, size: 17),
                     title: Text('관심 지역 설정'),
                     trailing: Icon(Icons.chevron_right),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/RegionSetting');
+                    onTap:() {
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(builder: (context) => RegionSetting()),
+                      );
                     },
                   ),
                   ListTile(
