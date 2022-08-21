@@ -1,10 +1,23 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:viewing/main.dart';
+
+class btnClick {
+  bool btn1 = false;
+  bool btn2 = false;
+  bool btn3 = false;
+  Color color1 = Colors.grey;
+  Color color2 = Colors.grey;
+  Color color3 = Colors.grey;
+}
 
 class RoomReviewSecond extends StatefulWidget {
   const RoomReviewSecond({Key? key}) : super(key: key);
@@ -18,6 +31,32 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
   Icon icon = Icon(Icons.sentiment_neutral, color: Colors.yellow);
   final goodText = TextEditingController();
   final badText = TextEditingController();
+  var verifyingBtn = [btnClick(), btnClick(), btnClick()];
+
+  File? _image;
+  final picker = ImagePicker();
+
+  // 비동기 처리를 통해 카메라와 갤러리에서 이미지를 가져온다.
+  Future getImage(ImageSource imageSource) async {
+    final image = await picker.pickImage(source: imageSource);
+
+    setState(() {
+      _image = File(image!.path); // 가져온 이미지를 _image에 저장
+    });
+  }
+
+  // 이미지를 보여주는 위젯
+  Widget showImage() {
+    return Container(
+        color: const Color(0xffd0cece),
+        width: MediaQuery.of(context).size.width * 0.3,
+        height: MediaQuery.of(context).size.width * 0.3,
+        child: Center(
+            child: _image == null
+                ? Text('No image selected.')
+                : Image.file(File(_image!.path))));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +77,9 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
             ratingBar(),
             goodOrBad(context, '장점', goodText),
             goodOrBad(context, '단점', badText),
-            uploadPic()
+            confirmation(context),
+            // showImage(),
+            uploadPic(),
           ],
         ),
       ),
@@ -54,6 +95,89 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
             },
             child: Text('작성완료')),
       ),
+    );
+  }
+
+  Container confirmation(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              '진위 여부(중요!)',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+            ),
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 221, 221, 221),
+                  borderRadius: BorderRadius.circular(8)),
+              padding: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    certification('집주인 진위 여부', verifyingBtn[0]),
+                    certification('등기부등본 확인 유무', verifyingBtn[1]),
+                    certification('불법건축물 확인 유무', verifyingBtn[2]),
+                  ])),
+        ],
+      ),
+    );
+  }
+
+  Row certification(String s, btnClick verifyingBtn) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 5,
+          child: Text(s),
+        ),
+        Flexible(
+          flex: 5,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      verifyingBtn.btn1 = !verifyingBtn.btn1;
+                      verifyingBtn.btn1
+                          ? verifyingBtn.color1 = Colors.blue
+                          : verifyingBtn.color1 = Colors.grey;
+                    });
+                  },
+                  color: verifyingBtn.color1,
+                  icon: Icon(Icons.check)),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      verifyingBtn.btn2 = !verifyingBtn.btn2;
+                      verifyingBtn.btn2
+                          ? verifyingBtn.color2 = Colors.red
+                          : verifyingBtn.color2 = Colors.grey;
+                    });
+                  },
+                  color: verifyingBtn.color2,
+                  icon: Icon(Icons.close)),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      verifyingBtn.btn3 = !verifyingBtn.btn3;
+                      verifyingBtn.btn3
+                          ? verifyingBtn.color3 = Colors.yellow
+                          : verifyingBtn.color3 = Colors.grey;
+                    });
+                  },
+                  color: verifyingBtn.color3,
+                  icon: Icon(Icons.question_mark))
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -79,11 +203,15 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
               height: 150,
               width: 150,
               child: Center(
-                  child: Icon(
-                Icons.add_a_photo,
-                size: 40,
-                color: Colors.blue,
-              )),
+                  child: IconButton(
+                      iconSize: 40,
+                      onPressed: () {
+                        getImage(ImageSource.gallery);
+                      },
+                      icon: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.blue,
+                      ))),
             ),
           ),
         ],

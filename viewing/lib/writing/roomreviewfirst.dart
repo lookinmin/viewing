@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kpostal/kpostal.dart';
 import 'package:viewing/writing/roomreviewsecond.dart';
 
 void main() => runApp(WritingRoom());
@@ -48,6 +49,8 @@ class _WritingRoomState extends State<WritingRoom> {
   final monthlyTxt = TextEditingController();
   final manageFeeTxt = TextEditingController();
 
+  List<String> address_got = ['주소를 검색해주세요', ''];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +65,7 @@ class _WritingRoomState extends State<WritingRoom> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: firstPage(context),
       ),
       bottomNavigationBar: Container(
@@ -93,7 +96,7 @@ class _WritingRoomState extends State<WritingRoom> {
             ),
           ),
         ),
-        address(),
+        address(context),
         residenceType(context),
         residencePeriod(context),
         residenceFloor(context),
@@ -120,12 +123,17 @@ class _WritingRoomState extends State<WritingRoom> {
           ),
           Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 221, 221, 221),
+                color: Color.fromRGBO(99, 99, 99, 0.05),
                 borderRadius: BorderRadius.circular(8)),
             padding: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
             child: TextField(
-              decoration: InputDecoration(hintText: '월세 30만원냈어요~'),
+              decoration: InputDecoration(
+                hintText: '월세 30만원냈어요~',
+                border: InputBorder.none,
+                contentPadding:
+                    EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
+              ),
               controller: monthlyTxt,
               maxLines: 1,
             ),
@@ -150,7 +158,7 @@ class _WritingRoomState extends State<WritingRoom> {
           ),
           Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 221, 221, 221),
+                color: Color.fromRGBO(99, 99, 99, 0.05),
                 borderRadius: BorderRadius.circular(8)),
             padding: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
@@ -185,7 +193,7 @@ class _WritingRoomState extends State<WritingRoom> {
           ),
           Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 221, 221, 221),
+                color: Color.fromRGBO(99, 99, 99, 0.05),
                 borderRadius: BorderRadius.circular(8)),
             padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
             width: MediaQuery.of(context).size.width,
@@ -258,7 +266,7 @@ class _WritingRoomState extends State<WritingRoom> {
         Container(
           height: 100,
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 221, 221, 221),
+              color: Color.fromRGBO(99, 99, 99, 0.05),
               borderRadius: BorderRadius.circular(8)),
           padding: EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
@@ -292,7 +300,7 @@ class _WritingRoomState extends State<WritingRoom> {
           ),
           Container(
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 221, 221),
+                  color: Color.fromRGBO(99, 99, 99, 0.05),
                   borderRadius: BorderRadius.circular(8)),
               padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width,
@@ -348,7 +356,7 @@ class _WritingRoomState extends State<WritingRoom> {
           ),
           Container(
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 221, 221),
+                  color: Color.fromRGBO(99, 99, 99, 0.05),
                   borderRadius: BorderRadius.circular(8)),
               padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width,
@@ -457,30 +465,63 @@ class _WritingRoomState extends State<WritingRoom> {
     );
   }
 
-  Container address() {
-    return Container(
-      height: 200,
-      margin: EdgeInsets.only(bottom: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            flex: 2,
-            child: Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Text(
-                '주소지',
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+  GestureDetector address(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => KpostalView(
+                useLocalServer: true,
+                localPort: 7001,
+                callback: (Kpostal result) {
+                  print(result.address);
+                  address_got = [result.jibunAddress, result.roadAddress];
+                },
+              ),
+            ));
+      },
+      child: Container(
+        height: 120,
+        margin: EdgeInsets.only(bottom: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Text(
+                  '주소지',
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+                ),
               ),
             ),
-          ),
-          Expanded(
-              flex: 8,
+            Expanded(
+              flex: 5,
               child: Container(
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-              ))
-        ],
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 221, 221, 221),
+                    borderRadius: BorderRadius.circular(8)),
+                padding: EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      address_got[0],
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    Text(
+                      address_got[1],
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
