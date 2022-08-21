@@ -71,15 +71,13 @@ class _RoomInfo extends State<RoomInfo> {
             children: [
               Flexible(
                   flex: 5,
-                  child: Container(
-                      color: Colors.red,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
                             widget.item.image,
                             fit: BoxFit.cover,
                             width: 180,
-                          )))),
+                      ))),
               Flexible(
                   flex: 5,
                   child: Container(
@@ -208,7 +206,6 @@ class PostModel {
 }
 
 final postinfo = [
-  PostModel('assets/coffee.png', '개신 오피스빌', "5,100,000", "310,000",
+  PostModel('assets/images/room1_1.jpg', '개신 오피스빌', "4,000,000", "370,000",
       "51,000"), //BuilidingInfo
-  PostModel('assets/coffee.png', '충대도담', "3,400,000", "370,000", "57,000")
 ];

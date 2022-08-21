@@ -31,8 +31,9 @@ class BoardPage extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.search, color: Colors.grey),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SearchPage()));
+                  Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(builder: (context) => SearchPage()),
+                      );
                 }),
             IconButton(
                 icon: Icon(Icons.more_vert, color: Colors.grey),
@@ -205,7 +206,9 @@ class BoardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap:(){
-        Navigator.push(context,MaterialPageRoute(builder:(context)=>PostPage()));
+        Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(builder: (context) => PostPage()),
+                      );
       },
       child:Container(
         margin:EdgeInsets.fromLTRB(15, 5, 15, 10),
@@ -288,10 +291,10 @@ class BoardModel {
 
 const boardsList = [
   BoardModel("익명", "같이 볼링치러 가실 분~", "같이 볼링치러 가실 대학생 친구 구해요~ 저는 보통 100정도 나옵니다 !", 1, 2, "2022.08.19"),
-  BoardModel("익명", "일본어 스터디 모임 있을까요?.", "혹시 일본어 스터디 모임 있을까요? 예전에 배웠는데 안쓰니 기억이 안나서요ㅜㅜ 있으면 같이 스터디해요~", 0, 5, "2022.06.19"),
+  BoardModel("익명", "일본어 스터디 모임 있을까요?", "혹시 일본어 스터디 모임 있을까요? 예전에 배웠는데 안쓰니 기억이 안나서요ㅜㅜ 있으면 같이 스터디해요~", 0, 5, "2022.08.19"),
   BoardModel("익명", "동네 친구 하실 분~", "충북대 중문쪽 산책하고 코노가고 영화, 볼링, 카페 등등 좋아하시는 분 !", 10, 17, "2022.08.19"),
-  BoardModel("익명", "청소 업체 추천 받아요ㅜㅜ", "복대동 사창동 근처 원룸 거주청소 하시는 분이나 업체 추천 부탁드려요 !", 1, 3, "2022.08.19"),
-  BoardModel("익명", "정문~서문쪽 한 달 양도 받아요", "한 달정도 거주하면 좋을거같은데 댓글 부탁드려요~ 가격은 35~40까지 생각중입니다. 비흡연자이고 깔끔하게 사용할 수 있습니다.", 0, 2, "2022.08.19"),
+  BoardModel("익명", "청소 업체 추천 받아요ㅜㅜ", "복대동 사창동 근처 원룸 거주청소 하시는 분이나 업체 추천 부탁드려요 !", 1, 3, "2022.08.18"),
+  BoardModel("익명", "정문~서문쪽 한 달 양도 받아요", "한 달정도 거주하면 좋을거같은데 댓글 부탁드려요~ 가격은 35~40까지 생각중입니다. 비흡연자이고 깔끔하게 사용할 수 있습니다.", 0, 2, "2022.08.18"),
   BoardModel("익명", "콜라 사가실 분", "6캔 2500원이요 정문이에요", 1, 10, "2022.08.18"),
   BoardModel("익명", "사탕 공동구매 하실 분 2분 구해요", "맛있어서 사려고 하는데 양이 너무 많아서요 ㅠㅠ 3띵 하실 분들 계시나요... 제가 3등분으로 분류할게요...", 2, 5, "2022.08.18"),
 ];

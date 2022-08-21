@@ -11,7 +11,7 @@ class PostPage extends StatelessWidget {
       appBar: AppBar(
         iconTheme:IconThemeData(color:Colors.grey),
         title: const Text(
-          "Viewing 게시판",
+          "",
           style: TextStyle(
               color: Colors.black,
               letterSpacing: 2.0,

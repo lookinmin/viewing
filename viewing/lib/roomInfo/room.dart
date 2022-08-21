@@ -52,7 +52,6 @@ class Room extends StatelessWidget {
                           height: 200),
                     ),
                   )),
-                  Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
 
               Container(
                 height: 185,
@@ -112,7 +111,7 @@ class _RoomReview extends State<RoomReviews> {
           Container(
             width: double.infinity,
             height: 45,
-            padding: EdgeInsets.fromLTRB(18, 0, 260, 0),
+            padding: EdgeInsets.fromLTRB(25, 0, 260, 0),
             child: DropdownButton(
               value: _selectedValue,
               items: _valueList.map(
@@ -126,7 +125,7 @@ class _RoomReview extends State<RoomReviews> {
                 });
               },
             ),
-          ),Divider(color: Colors.grey,thickness: 1.5,indent: 5,endIndent: 5,),
+          ),Divider(color: Colors.grey,thickness: 0.5,indent: 25,endIndent: 25,),
           Review(
               4,
               "2022.08.19",
@@ -136,7 +135,7 @@ class _RoomReview extends State<RoomReviews> {
               "저층",
               "300/30",
               "신축이라 가구상태나 도배가 깨끗하고 좋아요, 여름에 습하지 않아서 좋아요",
-              "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~"
+              "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~ 그리고 주차장이 없는 것도 흠이에요"
             ),
           Review(
               5,
@@ -147,7 +146,7 @@ class _RoomReview extends State<RoomReviews> {
               "남향",
               "중층",
               "400/25",
-              "방을 구할때 화장실이 쾌적한지를 제일 중요시하는데 화장실이 깔끔하게 잘되어 있고 습하지도 않아서 좋아요",
+              "방을 구할때 수압이 좋고 헬스장이 가깝고 제일 중요시하는데 수압도 좋고 헬스장도 자취방에서 3분거리에 있어서 좋아요. 그리고 벌레가 없다는 것도 장점이에요 지금까지 한번도 벌레를 본적이 없어요",
               "아주 만족하고 살고 있지만 단점이라고 굳이 말하자면 방안이 조용할때 옆방 소리가 조금 들린다는거 뿐이에요~"
             ),
           Review(
@@ -197,7 +196,7 @@ class _CheckList extends State<CheckList> {
                   Icon(Icons.close, color: Colors.grey),
                   Icon(
                     Icons.question_mark,
-                    color: Colors.yellow,
+                    color: Color.fromARGB(255, 0, 179, 33),
                   )
                 ],
               ),
@@ -254,7 +253,7 @@ class _CheckList extends State<CheckList> {
                 children: [
                   Icon(
                     Icons.check,
-                    color: Colors.blue,
+                    color: Color.fromARGB(221, 0, 140, 255),
                   ),
                   Icon(Icons.close, color: Colors.grey),
                   Icon(
@@ -282,7 +281,7 @@ class _RoomGrade extends State<RoomGrade> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(13, 10, 0, 10),
             child: Text(
               widget.roomName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -292,7 +291,7 @@ class _RoomGrade extends State<RoomGrade> {
             padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
             child: Row(
               children: [
-                Icon(Icons.where_to_vote),
+                Icon(Icons.where_to_vote,color: Color.fromARGB(255, 0, 72, 255),),
                 Text(
                   widget.address,
                   style: TextStyle(fontSize: 14),
@@ -403,7 +402,7 @@ Widget barGraph(var grade) {
           width: 130.0,
           lineHeight: 10.0,
           percent: grade,
-          progressColor: Colors.red,
+          progressColor: Color.fromARGB(255, 255, 99, 99),
         ),
       ),
       SizedBox(
@@ -428,35 +427,38 @@ Widget Review(int num, var date, var name, List<String> pic,var direction,var fl
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            setEmoji(num, name),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
-                child: Text(
-                  date,
-                  style: TextStyle(fontSize: 14),
+        Padding(
+          padding: EdgeInsets.fromLTRB(8, 5, 8, 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              setEmoji(num, name),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
+                  child: Text(
+                    date,
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
-              ),
-              Container(
-                width: 190,
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    chosenTxt(direction),
-                    chosenTxt(floor),
-                    chosenTxt(fee),
-                  ],
+                Container(
+                  width: 190,
+                  margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      chosenTxt(direction),
+                      chosenTxt(floor),
+                      chosenTxt(fee),
+                    ],
+                  ),
                 ),
-              ),
-            ]),
-          ],
+              ]),
+            ],
+          ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -468,10 +470,10 @@ Widget Review(int num, var date, var name, List<String> pic,var direction,var fl
                   return Container(
                     // width: MediaQuery.of(context).size.width + 100,
                     margin:
-                        EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
+                        EdgeInsets.fromLTRB(6, 5, 6, 10),
                     width: double.infinity,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                       child: Image.asset(
                         e,
                         fit: BoxFit.fill,
@@ -484,7 +486,7 @@ Widget Review(int num, var date, var name, List<String> pic,var direction,var fl
                   autoPlay: false,
                   scrollDirection: Axis.horizontal,
                   enableInfiniteScroll: false,
-                  viewportFraction:0.9,
+                  viewportFraction:0.96,
                   height: 200),
             ):SizedBox(),
             txtForRoom(adv,disadv)
@@ -505,6 +507,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -533,6 +536,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -593,6 +597,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -620,6 +625,7 @@ Widget setEmoji(int num, var name) {
           size: 55,
         ),
         Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -643,12 +649,17 @@ Widget setEmoji(int num, var name) {
 
 Widget txtForRoom(var adv,var disadv) {
   return Container(
-    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
+    margin: EdgeInsets.fromLTRB(15, 15, 15, 25),
+    padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+    decoration: BoxDecoration(
+      color: Color.fromRGBO(99, 99, 99, 0.05), //테두리
+      borderRadius: BorderRadius.circular(15)
+    ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '장점',
+          '장점.',
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w700,
@@ -667,7 +678,7 @@ Widget txtForRoom(var adv,var disadv) {
           color: Color.fromARGB(0, 158, 158, 158),
         ),
         Text(
-          '단점',
+          '단점.',
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w700,

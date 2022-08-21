@@ -9,6 +9,7 @@ class RegionSetting extends StatefulWidget {
 }
 
 class _RegionSettingState extends State<RegionSetting> {
+  var address='청주시 서원구 개신동';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,24 +26,60 @@ class _RegionSettingState extends State<RegionSetting> {
           color: Colors.grey,
         ),
       ),
-      body: Container(
-        child: TextButton(
-          onPressed: () async {
-            await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => KpostalView(
-                    useLocalServer: true,
-                    localPort: 7001,
-                    callback: (Kpostal result) {
-                      print(result.address);
-                    },
+        body: Container(
+          padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                    //dense: true,
+                    minLeadingWidth: 0,
+                    title:Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '현재 관심 지역',
+                          style: TextStyle(
+                            fontSize: 27,
+                            fontWeight: FontWeight.w700
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Icon(Icons.favorite,size: 25,color: Color.fromARGB(255, 255, 99, 99),),
+                            SizedBox(width: 5,),
+                            Text(address),
+                          ],
+                        )
+                    ],
+                    ),
                   ),
-                ));
-          },
-          child: Text('Search!'),
-        ),
+                  Divider(),
+                  ListTile(
+                    //dense: true,
+                    minLeadingWidth: 0,
+                    title: Text('관심 지역 설정'),
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () async {
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => KpostalView(
+                          useLocalServer: true,
+                          localPort: 7001,
+                          callback: (Kpostal result) {
+                            print(result.address);
+                          },
+                        ),
+                      ));
+                }
+                  ),
+            ],
       ),
+        )
     );
   }
 }
+
+
