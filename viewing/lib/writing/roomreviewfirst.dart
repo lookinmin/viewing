@@ -57,8 +57,7 @@ class _WritingRoomState extends State<WritingRoom> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
-        title: Center(
-            child: Text('리뷰쓰기(기본정보)', style: TextStyle(color: Colors.black))),
+        title: Text('리뷰쓰기(기본정보)', style: TextStyle(color: Colors.black)),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -493,25 +492,33 @@ class _WritingRoomState extends State<WritingRoom> {
               decoration: BoxDecoration(
                   color: Color.fromRGBO(99, 99, 99, 0.05),
                   borderRadius: BorderRadius.circular(8)),
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    address_got[0],
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    address_got[1],
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+              child: address_got[1] == ''
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(flex: 8, child: Text('주소를 검색하세요')),
+                        Expanded(child: Icon(Icons.search)),
+                      ],
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          address_got[0],
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          address_got[1],
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ],
+                    ),
             )
           ],
         ),

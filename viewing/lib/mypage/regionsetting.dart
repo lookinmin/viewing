@@ -59,6 +59,9 @@ class _RegionSettingState extends State<RegionSetting> {
                         ),
                         Text(address),
                       ],
+                    ),
+                    SizedBox(
+                      height: 10,
                     )
                   ],
                 ),

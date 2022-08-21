@@ -28,7 +28,7 @@ class MainHome extends StatelessWidget {
 
   final roomInfo = [
     BuilidingInfo(
-        'assets/images/room1_1.jpg', '다솜빌', "4,000,000", "370,000", "51,000"),
+        'assets/images/room1_1.jpg', '다솜빌', "3,300,000", "270,000", "50,000"),
     BuilidingInfo(
         'assets/images/vRoom1.jpeg', '양지빌', "3,000,000", "320,000", "52,000"),
     BuilidingInfo(
@@ -93,7 +93,7 @@ class MainHome extends StatelessWidget {
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
                   height: 200,
                   child:
-                      RoomList(address: "청주시 서원구 개신동ㅐ", roomInfo2: roomInfo2)),
+                      RoomList(address: "청주시 서원구 개신동", roomInfo2: roomInfo2)),
               //hot 게시글
               Container(
                 height: 500,

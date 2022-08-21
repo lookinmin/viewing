@@ -63,11 +63,10 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
-        title: Center(
-            child: Text(
+        title: Text(
           '리뷰쓰기',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
-        )),
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

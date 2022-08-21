@@ -339,7 +339,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("방음",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.5)
+                        barGraph(0.3)
                       ],
                     ),
                     Row(
@@ -347,7 +347,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("청결",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.8)
+                        barGraph(0.4)
                       ],
                     ),
                     Row(
@@ -355,7 +355,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("시설",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.7)
+                        barGraph(0.4)
                       ],
                     ),
                     Row(
@@ -363,7 +363,7 @@ class _RoomGrade extends State<RoomGrade> {
                         Text("안전",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14)),
-                        barGraph(0.8)
+                        barGraph(0.3)
                       ],
                     ),
                   ],
@@ -396,7 +396,9 @@ Widget switchImg(String grade) {
         child: Image.asset("assets/images/rating.png"));
   } else if (num <= 4 && num > 3) {
     return SizedBox(
-        width: 100, height: 100, child: Image.asset("assets/images/star.png"));
+        width: 100,
+        height: 100,
+        child: Image.asset("assets/images/ratingStar.png"));
   } else if (num <= 5 && num > 4) {
     return SizedBox(
         width: 100, height: 100, child: Image.asset("assets/images/star.png"));
@@ -417,7 +419,7 @@ Widget barGraph(var grade) {
         child: LinearPercentIndicator(
           width: 130.0,
           lineHeight: 10.0,
-          percent: grade,
+          percent: grade * 2,
           progressColor: Color.fromARGB(255, 255, 99, 99),
         ),
       ),
