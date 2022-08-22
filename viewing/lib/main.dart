@@ -86,7 +86,20 @@ class _HomeState extends State<Home> {
               ),
               (currentIdx != 2 && currentIdx != 3)
                   ? Flexible(
-                      flex: 1, fit: FlexFit.tight, child: AddressSearch())
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(top: 10),
+                              margin: EdgeInsets.only(left: 10),
+                              child: Image.asset(
+                                  'assets/images/logo2-5white.png')),
+                          AddressSearch()
+                        ],
+                      ))
+                  // logo2-5white
                   : Container(),
               Expanded(
                 flex: 10,
@@ -237,51 +250,45 @@ class AddressSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.fromLTRB(5, 10, 0, 10),
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      width: MediaQuery.of(context).size.width * 0.78,
       height: 50,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
-                  spreadRadius: 0,
-                  blurRadius: 2,
-                  offset: Offset(0, 7))
-            ]),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Flexible(
-            flex: 8,
-            child: TextButton(
-              onPressed: () async {
-                await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => KpostalView(
-                        useLocalServer: true,
-                        localPort: 7001,
-                        callback: (Kpostal result) {
-                          print(result.address);
-                        },
-                      ),
-                    ));
-              },
-              child: Text(
-                '검색할 주소를 입력하세요',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 0,
+                blurRadius: 2,
+                offset: Offset(0, 7))
+          ]),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        TextButton(
+          onPressed: () async {
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => KpostalView(
+                    useLocalServer: true,
+                    localPort: 7001,
+                    callback: (Kpostal result) {
+                      print(result.address);
+                    },
+                  ),
+                ));
+          },
+          child: Text(
+            '검색할 주소를 입력하세요',
+            style: TextStyle(color: Colors.grey),
           ),
-          Expanded(
-              child: Icon(
-            Icons.search,
-            color: Color.fromRGBO(255, 99, 99, 1),
-          ))
-        ]),
-      ),
+        ),
+        Icon(
+          Icons.search,
+          color: Color.fromRGBO(255, 99, 99, 1),
+        )
+      ]),
     );
   }
 }
