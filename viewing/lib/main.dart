@@ -88,18 +88,22 @@ class _HomeState extends State<Home> {
                   ? Flexible(
                       flex: 1,
                       fit: FlexFit.tight,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(top: 10),
-                              margin: EdgeInsets.only(left: 10),
-                              child: Image.asset(
-                                  'assets/images/logo2-5white.png')),
-                          AddressSearch()
-                        ],
-                      ))
-                  // logo2-5white
+                      child: currentIdx == 0
+                          ? Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  flex: 3,
+                                  child: Container(
+                                      padding: EdgeInsets.only(top: 5),
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: Image.asset(
+                                          'assets/images/logo_pink.png')),
+                                ),
+                                Expanded(flex: 9, child: AddressSearch())
+                              ],
+                            )
+                          : AddressSearch())
                   : Container(),
               Expanded(
                 flex: 10,
@@ -252,8 +256,6 @@ class AddressSearch extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(5, 10, 0, 10),
       padding: EdgeInsets.symmetric(horizontal: 20),
-      width: MediaQuery.of(context).size.width * 0.78,
-      height: 50,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
