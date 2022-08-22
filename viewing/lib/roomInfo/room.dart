@@ -155,7 +155,7 @@ class _RoomReview extends State<RoomReviews> {
               "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~ 그리고 주차장이 없는 것도 흠이에요"),
           Review(
               5,
-              "2022.07.27",
+              "2022.08.18",
               "익명",
               ["assets/images/room1_2.jpg", "assets/images/room1_3.jpg"],
               "남향",
@@ -165,7 +165,7 @@ class _RoomReview extends State<RoomReviews> {
               "아주 만족하고 살고 있지만 단점이라고 굳이 말하자면 방안이 조용할때 옆방 소리가 조금 들린다는거 뿐이에요~"),
           Review(
               3,
-              "2022.06.17",
+              "2022.08.12",
               "익명",
               [],
               "북향",
