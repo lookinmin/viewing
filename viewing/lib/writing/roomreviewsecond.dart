@@ -301,12 +301,53 @@ class _RoomReviewSecondState extends State<RoomReviewSecond> {
     );
   }
 
-  Row certification(String s, btnClick verifyingBtn) {
+  Row certification(String s, btnClick verifyingBtn,) {
     return Row(
       children: [
         Expanded(
           flex: 5,
-          child: Text(s),
+          child: Row(
+            children: [
+              Text(s),
+              SizedBox(width: 5,),
+              IconButton(onPressed: (){
+                showModalBottomSheet<void>(
+                      context: context,
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide.none,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      builder: (BuildContext context) {
+                        return StatefulBuilder(
+                            builder: (BuildContext context, setState) =>
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Column(
+                                      children: [
+                                        Text('등기부등본 확인이 필요한 이유!',style: TextStyle(
+                                          fontSize: 22
+                                        ),),
+                                        Divider(height: 20,thickness: 1,color: Color.fromRGBO(95, 95, 95, 0.5),),
+                                        Text('등기부등본은 해당 매물의 신분증이라 보시면 됩니다. 거래하고자 하는 부동산이 과연 안전한 매물인지 확인할 수 있습니다. 해당 부동산에 대한 변동사항이 언제 어떻게 발생했고 현 매물의 상황 및권리 관계부터 대출 상황까지 자세히 나와있습니다. 따라서 부동산 등기부등본 열람은 필수입니다!',style: TextStyle(
+                                          height: 1.5,
+                                          fontSize: 13
+                                        ),),
+                                      ],
+                                    ),
+                                  ),
+                                ));
+                      },
+                    ).then((value) {
+                      setState(() {});
+                    });
+              },constraints: BoxConstraints(),padding:EdgeInsets.zero,icon:Icon(Icons.help),iconSize: 14,color: Color.fromARGB(75, 95, 95, 95),)
+            ],
+          ),
         ),
         Flexible(
           flex: 5,
