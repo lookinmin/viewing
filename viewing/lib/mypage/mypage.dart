@@ -123,7 +123,10 @@ class _MyPageState extends State<MyPageState> {
                     title: Text('내가 쓴 게시글'),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
-                      Navigator.pushNamed(context, '/myPost');
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                            builder: (context) => myPost()),
+                      );
                     },
                   ),
                   ListTile(

@@ -155,7 +155,7 @@ class _RoomReview extends State<RoomReviews> {
               "저층이라 그런지 여름이나 겨울에 너무 덥거나 너무 추워요 방음이 조금 안되는게 흠이네요~ 그리고 주차장이 없는 것도 흠이에요"),
           Review(
               5,
-              "2022.07.27",
+              "2022.08.18",
               "익명",
               ["assets/images/room1_2.jpg", "assets/images/room1_3.jpg"],
               "남향",
@@ -165,7 +165,7 @@ class _RoomReview extends State<RoomReviews> {
               "아주 만족하고 살고 있지만 단점이라고 굳이 말하자면 방안이 조용할때 옆방 소리가 조금 들린다는거 뿐이에요~"),
           Review(
               3,
-              "2022.06.17",
+              "2022.08.12",
               "익명",
               [],
               "북향",
@@ -188,13 +188,17 @@ class _CheckList extends State<CheckList> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(18, 0, 10, 0),
-              child: Text(
-                "집주인 진위 여부",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                textAlign: TextAlign.left,
-              ),
+            Row(
+              children: [
+                SizedBox(width: 18,),
+                Text(
+                    "집주인 진위 여부",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(width: 3,),
+                  Icon(Icons.help,size: 14,color: Color.fromARGB(75, 95, 95, 95),)
+              ],
             ),
             Container(
               width: 150,
@@ -219,13 +223,52 @@ class _CheckList extends State<CheckList> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(18, 0, 10, 0),
-              child: Text(
-                "등기부등본 확인 유무",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                textAlign: TextAlign.left,
-              ),
+            Row(
+              children: [
+                SizedBox(width: 18,),
+                Text(
+                    "등기부등본 확인 유무",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(width: 3,),
+                  IconButton(onPressed: () {
+                                  showModalBottomSheet<void>(
+                      context: context,
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide.none,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      builder: (BuildContext context) {
+                        return StatefulBuilder(
+                            builder: (BuildContext context, setState) =>
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Column(
+                                      children: [
+                                        Text('등기부등본 확인이 필요한 이유!',style: TextStyle(
+                                          fontSize: 22
+                                        ),),
+                                        Divider(height: 20,thickness: 1,color: Color.fromRGBO(95, 95, 95, 0.5),),
+                                        Text('등기부등본은 해당 매물의 신분증이라 보시면 됩니다. 거래하고자 하는 부동산이 과연 안전한 매물인지 확인할 수 있습니다. 해당 부동산에 대한 변동사항이 언제 어떻게 발생했고 현 매물의 상황 및권리 관계부터 대출 상황까지 자세히 나와있습니다. 따라서 부동산 등기부등본 열람은 필수입니다!',style: TextStyle(
+                                          height: 1.5,
+                                          fontSize: 13
+                                        ),),
+                                      ],
+                                    ),
+                                  ),
+                                ));
+                      },
+                    ).then((value) {
+                      setState(() {});
+                    });
+                  },constraints: BoxConstraints(),padding:EdgeInsets.zero,icon:Icon(Icons.help),iconSize: 14,color: Color.fromARGB(75, 95, 95, 95),)
+              ],
             ),
             Container(
               width: 150,
@@ -250,13 +293,17 @@ class _CheckList extends State<CheckList> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(18, 0, 10, 0),
-              child: Text(
-                "불법건축물 확인 유무",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                textAlign: TextAlign.left,
-              ),
+            Row(
+              children: [
+                SizedBox(width: 18,),
+                Text(
+                    "불법건축물 확인 유무",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(width: 3,),
+                  Icon(Icons.help,size: 14,color: Color.fromARGB(75, 95, 95, 95),)
+              ],
             ),
             Container(
               width: 150,
